@@ -1,0 +1,61 @@
+name: Copilot Agent PR Review
+
+on:
+  pull_request_target:
+    types: [opened, ready_for_review, reopened, synchronize]
+
+concurrency:
+  group: ${{ github.workflow }}-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  request-copilot-review:
+    if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Request Copilot code review
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const author = pr.user.login;
+            const isCloudAgent = author === 'copilot-swe-agent[bot]' || author === 'Copilot';
+
+            try {
+              await github.request('POST /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers', {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+                reviewers: ['copilot-pull-request-reviewer'],
+                headers: { 'X-GitHub-Api-Version': '2022-11-28' }
+              });
+              core.info(`Requested Copilot code review on PR #${pr.number} (author: ${author})`);
+            } catch (err) {
+              core.warning(`Could not request Copilot review: ${err.message}`);
+            }
+
+            const isFirstRun = ['opened', 'ready_for_review', 'reopened'].includes(context.payload.action);
+            if (!isFirstRun) return;
+
+            const cloudAgentLine = isCloudAgent
+              ? '2. @copilot (the authoring agent) MUST address every Copilot review comment with either a code change or an explicit reply.'
+              : '2. The PR author MUST address every Copilot review comment or explain why it does not apply.';
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              body: [
+                '### 🔁 Copilot review contract',
+                '',
+                '1. Copilot code review has been requested on this PR.',
+                cloudAgentLine,
+                '3. Maintainers MUST NOT merge this PR until all Copilot review threads are **Resolved or answered**.',
+                '4. Required CI checks must be green.',
+              ].join('\n')
+            });

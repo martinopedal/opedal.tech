@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Martin Opedal — Lead Cloud Solution Architect at Microsoft. Azure Landing Zones, AKS, Terraform, security, and sovereign cloud." />
+  <title>Martin Opedal — opedal.tech</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ====== NAV ====== -->
+  <nav>
+    <a class="nav-brand" href="/">opedal.tech</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#oss">Open Source</a></li>
+      <li><a href="#speaking">Speaking</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <header id="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Lead Cloud Solution Architect · Microsoft</span>
+      <h1>Martin Opedal</h1>
+      <p class="hero-tagline">
+        I help organisations land securely on Azure — Landing Zones, AKS, Terraform,
+        and the governance layer that holds it all together.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#work">See what I build</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/martin-opedal" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== ABOUT ====== -->
+  <section id="about">
+    <div class="container">
+      <h2>About</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a Lead Cloud Solution Architect at Microsoft, focused on Azure Landing Zones,
+            AKS Automatic, Terraform, IaC security, and sovereign cloud deployments.
+            Before this I ran datacenters for nearly a decade — experience that shaped
+            how I think about reliability and security from the hardware layer up.
+          </p>
+          <p>
+            Most of what I ship is built with GitHub Copilot. I steer the architecture
+            and review the output; the agent writes most of the code.
+            I believe AI should be held to the same review standards as human contributors.
+          </p>
+          <p>
+            On the side I co-founded two craft breweries. Turns out fermentation and
+            infrastructure have more in common than you'd think — both need the right
+            environment, the right controls, and patience.
+          </p>
+        </div>
+        <div class="about-tags">
+          <span class="tag">Azure Landing Zones</span>
+          <span class="tag">AKS</span>
+          <span class="tag">Terraform</span>
+          <span class="tag">IaC Security</span>
+          <span class="tag">GitHub Copilot</span>
+          <span class="tag">Sovereign Cloud</span>
+          <span class="tag">ALZ Checklist</span>
+          <span class="tag">Container Apps</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Azure Policy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== WORK ====== -->
+  <section id="work" class="alt-bg">
+    <div class="container">
+      <h2>What I Work On</h2>
+      <div class="card-grid">
+
+        <div class="card">
+          <div class="card-icon">🏗️</div>
+          <h3>Azure Landing Zones</h3>
+          <p>
+            End-to-end ALZ Corp deployments with Terraform and Bicep. 135+ automated
+            checklist validations via Azure Resource Graph. Security and compliance
+            built in from day one, not bolted on.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">☸️</div>
+          <h3>AKS &amp; Kubernetes</h3>
+          <p>
+            AKS Automatic clusters with ALZ Corp networking. BYO VNet, Application
+            Gateway for Containers, NGINX, Istio — multiple ingress and egress patterns
+            documented with full Terraform parity.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <h3>IaC Security</h3>
+          <p>
+            Terraform modules built to run inside ALZ Corp landing zones: no public IPs,
+            central firewall egress, managed identity everywhere. PSRule and azqr
+            integrated into CI pipelines.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🤖</div>
+          <h3>AI-Assisted Development</h3>
+          <p>
+            Multi-agent GitHub Copilot workflows for code review, issue triage, and
+            PR management. Squad patterns that keep AI output reviewable and
+            production-quality.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🏃</div>
+          <h3>GitHub Runners</h3>
+          <p>
+            GitHub-hosted and self-hosted runners with Azure VNet integration, Container
+            Apps, and ALZ Corp firewall egress. GHE.com EU data residency patterns.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>Azure Assessment</h3>
+          <p>
+            Automated Azure assessments bundling azqr, PSRule, AzGovViz, and ALZ graph
+            queries into a single portable runner with unified JSON and HTML reports.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== OPEN SOURCE ====== -->
+  <section id="oss">
+    <div class="container">
+      <h2>Open Source</h2>
+      <p class="section-intro">
+        Terraform modules, ARG queries, and tooling that came out of real customer engagements.
+      </p>
+      <div class="repo-grid">
+
+        <a class="repo-card" href="https://github.com/martinopedal/azure-analyzer" target="_blank" rel="noopener">
+          <div class="repo-header">
+            <span class="repo-lang powershell">PowerShell</span>
+          </div>
+          <h3>azure-analyzer</h3>
+          <p>Automated Azure assessment bundling azqr, PSRule, AzGovViz and ALZ graph queries. Unified JSON + HTML reports.</p>
+          <span class="repo-stars">⭐ 14</span>
+        </a>
+
+        <a class="repo-card" href="https://github.com/martinopedal/alz-graph-queries" target="_blank" rel="noopener">
+          <div class="repo-header">
+            <span class="repo-lang powershell">PowerShell</span>
+          </div>
+          <h3>alz-graph-queries</h3>
+          <p>135 Azure Resource Graph queries for the ALZ checklist. Takes automated coverage from 49 to 135 items.</p>
+          <span class="repo-stars">⭐ 7</span>
+        </a>
+
+        <a class="repo-card" href="https://github.com/martinopedal/terraform-azapi-aks-automatic" target="_blank" rel="noopener">
+          <div class="repo-header">
+            <span class="repo-lang terraform">HCL</span>
+          </div>
+          <h3>terraform-azapi-aks-automatic</h3>
+          <p>AKS Automatic with ALZ Corp networking. BYO VNet, multiple ingress (AGC/NGINX/Istio) and egress options.</p>
+          <span class="repo-stars">⭐ 1</span>
+        </a>
+
+        <a class="repo-card" href="https://github.com/martinopedal/linkedin-auto-poster" target="_blank" rel="noopener">
+          <div class="repo-header">
+            <span class="repo-lang python">Python</span>
+          </div>
+          <h3>linkedin-auto-poster</h3>
+          <p>AI-powered LinkedIn post generator. Fetches RSS feeds, scores relevance, drafts in your voice, publishes via PR approval.</p>
+          <span class="repo-stars">⭐ 5</span>
+        </a>
+
+        <a class="repo-card" href="https://github.com/martinopedal/ghec-vnet-runners-azure" target="_blank" rel="noopener">
+          <div class="repo-header">
+            <span class="repo-lang terraform">HCL</span>
+          </div>
+          <h3>ghec-vnet-runners-azure</h3>
+          <p>GitHub-hosted runners with Azure VNet integration for GHE.com with EU data residency.</p>
+          <span class="repo-stars">⭐ 1</span>
+        </a>
+
+        <a class="repo-card" href="https://github.com/martinopedal" target="_blank" rel="noopener">
+          <div class="repo-header">
+            <span class="repo-lang all">All repos →</span>
+          </div>
+          <h3>See everything on GitHub</h3>
+          <p>Terraform modules, ARG queries, MCP servers, and CI/CD tooling from real customer engagements.</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SPEAKING ====== -->
+  <section id="speaking" class="alt-bg">
+    <div class="container">
+      <h2>Speaking &amp; Writing</h2>
+      <div class="speaking-grid">
+        <div class="speaking-card">
+          <span class="speaking-icon">🎤</span>
+          <h3>NIC Conference</h3>
+          <p>
+            Regular speaker at the Nordic Infrastructure Conference (NIC) on topics
+            including Terraform, GitHub Copilot, and IaC security.
+          </p>
+        </div>
+        <div class="speaking-card">
+          <span class="speaking-icon">✍️</span>
+          <h3>LinkedIn</h3>
+          <p>
+            I write about Landing Zones, AKS, and Kubernetes on LinkedIn.
+            Deep technical content from real-world Azure engagements.
+          </p>
+          <a href="https://www.linkedin.com/in/martin-opedal" target="_blank" rel="noopener" class="inline-link">Follow on LinkedIn →</a>
+        </div>
+        <div class="speaking-card">
+          <span class="speaking-icon">🤝</span>
+          <h3>AVM Contribution</h3>
+          <p>
+            Official Azure Verified Module contributor. The
+            <a href="https://github.com/martinopedal/terraform-azurerm-avm-ptn-cicd-agents-and-runners" target="_blank" rel="noopener" class="inline-link">avm-ptn-cicd-agents-and-runners</a>
+            pattern module covers self-hosted ADO agents and GitHub runners with PAT and UAMI auth.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CONTACT ====== -->
+  <section id="contact">
+    <div class="container contact-inner">
+      <h2>Get in Touch</h2>
+      <p>
+        Open to conversations about Azure architecture, IaC patterns, and AI-assisted development.
+        Best reached on LinkedIn or GitHub.
+      </p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/martin-opedal" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/martinopedal" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Martin Opedal · Built with GitHub Pages · <a href="https://github.com/martinopedal/opedal.tech" target="_blank" rel="noopener">Source</a></p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

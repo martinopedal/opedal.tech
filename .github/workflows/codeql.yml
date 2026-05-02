@@ -1,0 +1,112 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "30 1 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codeql-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [actions]
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: Wait for API rate limit if exhausted
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          rl=$(gh api /rate_limit 2>/dev/null || echo '{}')
+          remaining=$(printf '%s' "$rl" | jq -r '.resources.core.remaining // 5000')
+          reset=$(printf '%s' "$rl" | jq -r '.resources.core.reset // 0')
+          now=$(date +%s)
+          if [ "$remaining" -lt 500 ] && [ "$reset" -gt "$now" ]; then
+            wait=$(( reset - now + 15 ))
+            if [ "$wait" -gt 1200 ]; then wait=1200; fi
+            echo "::notice::Rate limit low ($remaining left); waiting ${wait}s for reset"
+            sleep "$wait"
+          fi
+      - uses: github/codeql-action/init@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.2
+        with:
+          languages: ${{ matrix.language }}
+      - uses: github/codeql-action/autobuild@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.2
+      - name: Analyze (no upload) - attempt 1
+        id: analyze1
+        continue-on-error: true
+        uses: github/codeql-action/analyze@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.2
+        with:
+          category: "/language:${{matrix.language}}"
+          upload: never
+          output: sarif-results
+      - name: Wait for rate-limit reset before retry
+        if: steps.analyze1.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          rl=$(gh api /rate_limit 2>/dev/null || echo '{}')
+          remaining=$(printf '%s' "$rl" | jq -r '.resources.core.remaining // 5000')
+          reset=$(printf '%s' "$rl" | jq -r '.resources.core.reset // 0')
+          now=$(date +%s)
+          if [ "$remaining" -lt 500 ] && [ "$reset" -gt "$now" ]; then
+            wait=$(( reset - now + 15 ))
+            if [ "$wait" -gt 900 ]; then wait=900; fi
+            echo "::notice::Analyze failed; waiting ${wait}s for rate-limit reset before retry"
+            sleep "$wait"
+          else
+            sleep 30
+          fi
+      - name: Analyze (no upload) - attempt 2
+        if: steps.analyze1.outcome == 'failure'
+        uses: github/codeql-action/analyze@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.2
+        with:
+          category: "/language:${{matrix.language}}"
+          upload: never
+          output: sarif-results
+      - name: Upload SARIF (attempt 1)
+        id: upload1
+        continue-on-error: true
+        uses: github/codeql-action/upload-sarif@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.2
+        with:
+          sarif_file: sarif-results
+          category: "/language:${{matrix.language}}"
+      - name: Backoff before retry 2
+        if: steps.upload1.outcome == 'failure'
+        run: sleep 45
+      - name: Upload SARIF (attempt 2)
+        id: upload2
+        if: steps.upload1.outcome == 'failure'
+        continue-on-error: true
+        uses: github/codeql-action/upload-sarif@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.2
+        with:
+          sarif_file: sarif-results
+          category: "/language:${{matrix.language}}"
+      - name: Backoff before retry 3
+        if: steps.upload1.outcome == 'failure' && steps.upload2.outcome == 'failure'
+        run: sleep 120
+      - name: Upload SARIF (attempt 3, final)
+        if: steps.upload1.outcome == 'failure' && steps.upload2.outcome == 'failure'
+        uses: github/codeql-action/upload-sarif@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.2
+        with:
+          sarif_file: sarif-results
+          category: "/language:${{matrix.language}}"
