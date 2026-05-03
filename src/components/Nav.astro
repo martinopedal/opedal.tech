@@ -1,0 +1,34 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="site-nav">
+  <a class="nav-brand" href="/">opedal.tech</a>
+
+  <!--
+    CSS-only hamburger menu.
+    The hidden checkbox acts as a toggle; the label triggers it.
+    No JavaScript needed — works with prefers-reduced-motion.
+  -->
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+  <label for="nav-toggle" class="hamburger" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+
+  <ul class="nav-links" role="list">
+    {currentPath === '/' ? (
+      <>
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#oss">Open Source</a></li>
+        <li><a href="#speaking">Speaking</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </>
+    ) : (
+      <li><a href="/">Home</a></li>
+    )}
+    <li><a href="/blog" class={currentPath.startsWith('/blog') ? 'nav-blog' : ''}>Blog</a></li>
+  </ul>
+</nav>
