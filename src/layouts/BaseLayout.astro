@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalUrl = Astro.url.href,
+  ogImage = '/og-default.png',
+} = Astro.props;
+
+const currentYear = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- CSP: no inline scripts, no external CDN, same-origin only -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self'; script-src 'none'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; object-src 'none';"
+    />
+
+    <!-- Canonical & Open Graph -->
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- RSS feed discovery -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="opedal.tech blog"
+      href="/rss.xml"
+    />
+
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <slot />
+    <footer>
+      <div class="container">
+        <p>
+          &copy; {currentYear} Martin Opedal &middot; Built with Astro &middot;
+          <a
+            href="https://github.com/martinopedal/opedal.tech"
+            target="_blank"
+            rel="noopener"
+            aria-label="View source code on GitHub">Source</a
+          >
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

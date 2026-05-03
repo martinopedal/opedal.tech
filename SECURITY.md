@@ -14,5 +14,5 @@ Do NOT open a public issue for security vulnerabilities.
 - SHA-pinned GitHub Actions (never tag-only pins)
 - Dependabot enabled for GitHub Actions dependency updates
 - CodeQL scanning on push, PR, and weekly schedule
-- Content Security Policy headers configured in GitHub Pages
+- Content Security Policy (CSP) enforced via `<meta http-equiv="Content-Security-Policy">` in every page — no inline scripts, no external CDN
 - HTTPS enforced via GitHub Pages (no HTTP)

@@ -28,7 +28,7 @@ Verify by navigating to the Actions tab and checking **Deploy to GitHub Pages**.
 ✅ Require status checks to pass before merging
    Required checks:
      - Analyze (actions)          ← CodeQL workflow
-     - Deploy to GitHub Pages     ← pages.yml workflow
+     - Build Astro site           ← pages.yml build job
 ✅ Require branches to be up to date before merging
 ✅ Require linear history (no merge commits)
 ✅ Include administrators (enforce_admins)

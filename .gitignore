@@ -1,0 +1,18 @@
+# Astro build output
+dist/
+
+# Node.js dependencies
+node_modules/
+
+# Astro generated types
+.astro/
+
+# Editor & OS
+.DS_Store
+*.local
+.vscode/settings.json
+
+# Environment variables (never commit)
+.env
+.env.*
+!.env.example

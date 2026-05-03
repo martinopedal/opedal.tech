@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+---
+
+<BaseLayout
+  title="Blog — opedal.tech"
+  description="Thoughts on Azure Landing Zones, AKS, Terraform, IaC security, and AI-assisted development."
+>
+  <Nav />
+
+  <div class="blog-hero">
+    <h1>Blog</h1>
+    <p>Thoughts on Azure, Terraform, IaC security, and AI-assisted development.</p>
+  </div>
+
+  <main>
+    {posts.length === 0 ? (
+      <div class="blog-empty">
+        <p>No posts yet. Check back soon.</p>
+      </div>
+    ) : (
+      <div class="blog-list">
+        {posts.map((post) => {
+          const formattedDate = post.data.pubDate.toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+          return (
+            <a href={`/blog/${post.slug}`} class="blog-card">
+              <div class="blog-card-meta">
+                <time class="blog-date" datetime={post.data.pubDate.toISOString()}>
+                  {formattedDate}
+                </time>
+                {post.data.tags.map((tag) => (
+                  <span class="blog-tag">{tag}</span>
+                ))}
+              </div>
+              <h2>{post.data.title}</h2>
+              <p class="blog-excerpt">{post.data.description}</p>
+            </a>
+          );
+        })}
+      </div>
+    )}
+  </main>
+</BaseLayout>

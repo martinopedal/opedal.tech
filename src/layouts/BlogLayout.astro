@@ -1,0 +1,55 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  tags: string[];
+  canonicalUrl?: string;
+}
+
+const { title, description, pubDate, updatedDate, tags, canonicalUrl } =
+  Astro.props;
+
+const formattedPub = pubDate.toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const formattedUpdated = updatedDate?.toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} — opedal.tech`} description={description} canonicalUrl={canonicalUrl}>
+  <Nav />
+
+  <nav class="post-nav">
+    <a href="/blog">&larr; All posts</a>
+  </nav>
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime={pubDate.toISOString()}>{formattedPub}</time>
+      {updatedDate && (
+        <span>&middot; Updated <time datetime={updatedDate.toISOString()}>{formattedUpdated}</time></span>
+      )}
+    </div>
+    <h1>{title}</h1>
+    {tags.length > 0 && (
+      <div class="post-tags">
+        {tags.map((tag) => <span class="blog-tag">{tag}</span>)}
+      </div>
+    )}
+  </header>
+
+  <article class="post-content prose">
+    <slot />
+  </article>
+</BaseLayout>
