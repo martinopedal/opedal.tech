@@ -37,7 +37,7 @@ Enable GitHub Pages deployment so the site is served from \`opedal.tech\`.
 
 ## Verify
 
-- Trigger the **Deploy to GitHub Pages** workflow (Actions tab) or push to \`main\`
+- Trigger the **Build Astro site** workflow (Actions tab) or push to \`main\`
 - Site loads at \`https://martinopedal.github.io/opedal.tech\` before DNS
 - Site loads at \`https://opedal.tech\` once DNS is configured
 
@@ -65,7 +65,7 @@ Configure branch protection rules for \`main\` to enforce CI gates and linear hi
 ✅ Require status checks to pass before merging
    Required checks:
      - Analyze (actions)          ← CodeQL workflow
-     - Deploy to GitHub Pages     ← pages.yml workflow
+     - Build Astro site           ← pages.yml build job
 ✅ Require branches to be up to date before merging
 ✅ Require linear history (no merge commits)
 ✅ Include administrators (enforce_admins)

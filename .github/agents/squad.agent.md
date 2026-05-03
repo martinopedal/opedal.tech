@@ -8,8 +8,10 @@ The squad coordinates GitHub Copilot coding agent tasks for building and maintai
 ## Scope
 
 - Personal website for Martin Opedal at opedal.tech
-- Stack: static HTML + CSS, GitHub Pages, GitHub Actions CI
-- No build system, no npm, no Jekyll — plain HTML/CSS/vanilla JS
+- Stack: **Astro 5** (static output), Node 22, GitHub Pages, GitHub Actions CI
+- Blog: Markdown content collections in `src/content/blog/`
+- Build: `npm run build` → `dist/` (deployed by `pages.yml`)
+- Zero client-side JS — CSP `script-src 'none'` enforced
 
 ---
 
@@ -62,7 +64,7 @@ Do not merge until all review threads are **Resolved**.
 | Check | Workflow |
 |-------|----------|
 | `Analyze (actions)` | `codeql.yml` — CodeQL on GitHub Actions workflows |
-| `Deploy to GitHub Pages` | `pages.yml` — validates and deploys the static site |
+| `Build Astro site` | `pages.yml` — Astro build (`npm ci` + `npm run build`) |
 
 ---
 
@@ -74,6 +76,7 @@ Branch: main
    - Required approving reviews: 0 (solo-maintained)
 ✅ Require status checks to pass before merging
    - Required: Analyze (actions)
+   - Required: Build Astro site
 ✅ Require linear history (no merge commits)
 ✅ Include administrators (enforce_admins = true)
 ❌ Require signed commits (breaks Dependabot / API commits)
@@ -85,10 +88,20 @@ Branch: main
 
 ## Pages Deployment
 
-- Source: `main` branch, root (`/`)
+- Build: `npm ci` + `npm run build` → `dist/`
+- Source: GitHub Actions (deploys `dist/` to Pages environment)
 - Custom domain: `opedal.tech`
 - HTTPS: enforced
 - Deploy triggered on push to `main`
+
+## Astro-specific rules
+
+- Blog posts: create `src/content/blog/my-post.md` with frontmatter `title`, `description`, `pubDate`, `tags`
+- Do NOT use `define:vars` in Astro components — it requires loosening the CSP `script-src 'none'`
+- No inline scripts anywhere — copyright year is set at build time in `BaseLayout.astro`
+- CSS changes go in `src/styles/global.css`
+- Component changes go in `src/components/`
+- Layout changes go in `src/layouts/BaseLayout.astro` or `src/layouts/BlogLayout.astro`
 
 ---
 
@@ -116,12 +129,13 @@ Never abandon a branch without closing the PR and explaining why.
 
 ## Security Invariants
 
-- No secrets in HTML source
-- No inline JavaScript event handlers (use `addEventListener`)
+- No secrets in source code
+- No inline scripts — `script-src 'none'` CSP enforced in `BaseLayout.astro`
+- No `define:vars` in Astro components (would require loosening CSP)
 - No third-party analytics that collect PII
 - All outbound links: `target="_blank" rel="noopener"`
 - HTTPS only — never reference HTTP resources
-- SHA-pin all GitHub Actions
+- SHA-pin all GitHub Actions with version comment
 
 ---
 
