@@ -23,6 +23,41 @@
 
 ## Learnings
 
+### 2026-05-13: Certifications overhaul — Microsoft Learn official titles (PR #46)
+
+**Context:**
+Certifications section used abbreviated names ("AZ Solutions Architect Expert", "Cybersecurity Architect Expert") instead of official Microsoft Learn product titles. Missing Azure Administrator Associate (active). Included Azure AI Fundamentals (not renewed in recent cycle).
+
+**Solution:**
+Replaced with verbatim Microsoft Learn titles for ATS matching. Order: Microsoft Expert (by latest renewal) → Microsoft Associate (by latest renewal) → vendor certs (Terraform, ITIL). Signals seniority first.
+
+**Active certifications (9 total):**
+
+Microsoft (7 active):
+- Microsoft Certified: Cybersecurity Architect Expert (renewed 2026-04-08)
+- Microsoft Certified: Azure Solutions Architect Expert (renewed 2025-11-24)
+- Microsoft Certified: DevOps Engineer Expert (renewed 2025-11-24)
+- Microsoft 365 Certified: Administrator Expert (renewed 2025-11-24)
+- Microsoft Certified: Azure Network Engineer Associate (renewed 2026-04-08)
+- Microsoft Certified: Azure Administrator Associate (renewed 2025-11-24)
+- Microsoft Certified: Azure Security Engineer Associate (renewed 2025-11-24)
+
+Vendor-neutral:
+- HashiCorp Certified: Terraform Associate
+- ITIL Foundation
+
+**Changes:**
+- Replaced abbreviated names with official product titles
+- Added Azure Administrator Associate (active, renewed 2025-11-24)
+- Removed Azure AI Fundamentals (not renewed in recent cycle)
+- Added `current_as_of` year field for Microsoft certs
+- Reordered: Expert → Associate, by latest renewal date
+
+**Key learning:**
+Microsoft Learn product titles are the ATS ground truth for certification names. Copy verbatim (e.g., "Microsoft Certified: Azure Solutions Architect Expert" not "AZ Solutions Architect Expert"). Vendor certs use official issuer titles (e.g., "HashiCorp Certified: Terraform Associate", "ITIL Foundation"). Order by seniority (Expert first) then by latest renewal date to signal currency.
+
+---
+
 ### 2026-05-13: Skills + Competencies overhaul — LinkedIn taxonomy as ground truth (PR #43)
 
 **Context:**
