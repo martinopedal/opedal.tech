@@ -170,15 +170,14 @@ This allows the security contact link in `SECURITY.md` to work.
 
 ---
 
-## 6. Squad Labels
+## 6. Issue Labels (optional)
 
-Create these labels in **Issues → Labels → New label** (or the auto-label workflow
-will create `squad` automatically on the first issue):
+Create these labels in **Issues → Labels → New label** as needed. GitHub creates a
+default set on repo creation; the only addition worth making is `copilot`:
 
 | Label | Color | Description |
 |-------|-------|-------------|
-| `squad` | `#0075ca` | Squad-tracked issue |
-| `copilot` | `#8957e5` | Assigned to GitHub Copilot coding agent |
+| `copilot` | `#8957e5` | Assigned to the GitHub Copilot coding agent |
 | `enhancement` | `#a2eeef` | New feature or section |
 | `content` | `#fef3c7` | Text/copy update |
 | `bug` | `#d73a4a` | Something broken |
@@ -188,12 +187,12 @@ will create `squad` automatically on the first issue):
 
 ---
 
-## 7. Copilot Code Review (optional but recommended)
+## 7. Copilot Code Review (optional)
 
 **Settings → Copilot → Code review → Enable automatic code review**
 
-This makes `copilot-pull-request-reviewer` available as a reviewer target —
-required for the `copilot-agent-pr-review.yml` workflow to request reviews.
+Makes `copilot-pull-request-reviewer` available as a reviewer target if you want
+Copilot reviews requested automatically on every PR.
 
 ---
 
@@ -202,5 +201,5 @@ required for the `copilot-agent-pr-review.yml` workflow to request reviews.
 Once all steps above are complete:
 - `https://opedal.tech` is live over HTTPS
 - All PRs require CI green before merge
-- Squad labels and Copilot agent are wired up
-- Dependabot keeps Actions up to date
+- Dependabot keeps GitHub Actions and npm packages up to date
+- Secret scanning, push protection, and private vulnerability reporting are on

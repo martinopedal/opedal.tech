@@ -15,9 +15,9 @@ When you're the only reviewer for your own code, the bottleneck isn't writing â€
 
 AI-assisted development doesn't solve this problem by itself. In fact, naive use makes it worse: you can generate more code than you can review, accumulating technical debt faster than ever.
 
-## What actually works: squad patterns
+## What actually works: multi-agent review patterns
 
-The approach I've settled on is treating GitHub Copilot as a **squad member**, not a code generator. Concretely:
+The approach I've settled on is treating GitHub Copilot as a **team member**, not a code generator. Concretely:
 
 1. **Issue-first**: I write a detailed issue with acceptance criteria before any code is generated.
 2. **Agent creates a PR**: Copilot Coding Agent opens a pull request against the issue.
