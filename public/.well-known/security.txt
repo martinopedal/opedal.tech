@@ -1,0 +1,6 @@
+Contact: mailto:hello@opedal.tech
+Contact: https://github.com/martinopedal/opedal.tech/security/advisories/new
+Expires: 2027-05-13T00:00:00Z
+Preferred-Languages: en, nb
+Canonical: https://opedal.tech/.well-known/security.txt
+Policy: https://github.com/martinopedal/opedal.tech/blob/main/SECURITY.md

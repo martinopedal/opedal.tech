@@ -4,3 +4,12 @@
 *.png   binary
 *.woff2 binary
 *.pdf   binary
+
+# Append-only Squad coordination files merge cleanly with `merge=union`,
+# which keeps lines from both sides. Decisions, agent histories, session
+# logs, and the orchestration log are append-only by convention, so this
+# is the safe and correct strategy.
+.squad/decisions.md          merge=union
+.squad/agents/*/history.md   merge=union
+.squad/log/**                merge=union
+.squad/orchestration-log/**  merge=union
