@@ -13,9 +13,6 @@ max_retries = 1
 # User agent
 user_agent = "lychee/0.x (opedal.tech CI link checker)"
 
-# Base path for resolving relative links
-base = "dist"
-
 # Schemes to check (skip mailto:, tel:, etc.)
 scheme = ["http", "https"]
 
