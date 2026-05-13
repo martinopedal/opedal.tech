@@ -47,27 +47,27 @@ jobs:
       # '/' once a CNAME is present and a custom domain is configured).
       - name: Setup Pages
         id: pages
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
       - name: Build Astro site
         env:
           GITHUB_PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: npm run build
       - name: Upload artifact
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: dist/
 
       - name: Attest build provenance
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
         with:
           subject-path: 'dist/**'
 
   deploy:
     name: Deploy to GitHub Pages
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 5
