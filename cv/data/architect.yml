@@ -256,16 +256,21 @@ skills:
 # `kind` is a typed bucket so the LaTeX template can pick an icon
 # (\faCloud for cloud certs, \faCog for everything else). On /cv the kind
 # is rendered as a small superscript label.
+#
+# Certifications listed below are ACTIVE as of the latest renewal cycle.
+# Source of truth: Martin's Microsoft Learn dashboard + HashiCorp + AXELOS.
+# Order: Microsoft Expert (by latest renewal) → Microsoft Associate (by latest renewal)
+# → vendor certs (Terraform, ITIL).
 certifications:
-  - { name: AZ Solutions Architect Expert,         kind: cloud }
-  - { name: Cybersecurity Architect Expert,        kind: cloud }
-  - { name: Azure Security Engineer Associate,     kind: cloud }
-  - { name: Azure Network Engineer Associate,      kind: cloud }
-  - { name: DevOps Engineer Expert,                kind: cloud }
-  - { name: M365 Administrator Expert,             kind: cloud }
-  - { name: Azure AI Fundamentals,                 kind: cloud }
-  - { name: Terraform Associate (HashiCorp),       kind: tooling }
-  - { name: ITIL Foundation,                       kind: tooling }
+  - { name: "Microsoft Certified: Cybersecurity Architect Expert",        kind: cloud, current_as_of: 2026 }
+  - { name: "Microsoft Certified: Azure Solutions Architect Expert",      kind: cloud, current_as_of: 2025 }
+  - { name: "Microsoft Certified: DevOps Engineer Expert",                kind: cloud, current_as_of: 2025 }
+  - { name: "Microsoft 365 Certified: Administrator Expert",              kind: cloud, current_as_of: 2025 }
+  - { name: "Microsoft Certified: Azure Network Engineer Associate",      kind: cloud, current_as_of: 2026 }
+  - { name: "Microsoft Certified: Azure Administrator Associate",         kind: cloud, current_as_of: 2025 }
+  - { name: "Microsoft Certified: Azure Security Engineer Associate",     kind: cloud, current_as_of: 2025 }
+  - { name: "HashiCorp Certified: Terraform Associate",                   kind: tooling }
+  - { name: "ITIL Foundation",                                            kind: tooling }
 
 # Speaking credibility for the /speaking section on /cv and the homepage line.
 # Verifiable, factual, no embellishment.
