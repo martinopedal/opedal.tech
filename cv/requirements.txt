@@ -1,0 +1,7 @@
+# CV build dependencies - SHA256 hash-pinned for OSSF Scorecard compliance
+pyyaml==6.0.3 \
+    --hash=sha256:01179a4a8559ab5de078078f37e5c1a30d76bb88519906844fd7bdea1b7729ff
+jinja2==3.1.6 \
+    --hash=sha256:0b67bc6ce71a28fa60e2f1a945d30b1f35dcf5cfe6dfdd9c03d7c4b093b18f61
+markupsafe==3.0.3 \
+    --hash=sha256:c06e2a9a7c2c45bb80c29ff2c4e055cba0686fa39dc29a67ad0be2fab61c1b11
