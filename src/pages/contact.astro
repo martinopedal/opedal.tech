@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Contact from '../components/Contact.astro';
+
+const title = 'Contact · opedal.tech';
+const description = 'Reach out about Azure architecture, Landing Zones, IaC, AKS, or AI-assisted development. Email, LinkedIn, or GitHub.';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://opedal.tech',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Contact',
+      item: 'https://opedal.tech/contact/',
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <Fragment slot="head-extra">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <Nav />
+
+  <main class="contact-page">
+    <Contact />
+  </main>
+</BaseLayout>
