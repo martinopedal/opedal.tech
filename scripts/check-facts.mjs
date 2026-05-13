@@ -128,6 +128,50 @@ function checkFile(filePath, derivedFacts) {
         }
       }
     }
+
+    // Pattern 4: Brewery names — must be in the approved list
+    const breweryNamePattern = /\b(cervisiam|krecher)\b/gi;
+    const breweryMatches = line.matchAll(breweryNamePattern);
+    for (const match of breweryMatches) {
+      const nameFound = match[1].toLowerCase();
+      const validNames = derivedFacts.brewery_names.map(n => n.toLowerCase());
+      if (!validNames.includes(nameFound)) {
+        errors.push({
+          line: lineNumber,
+          text: line.trim(),
+          claim: `brewery name "${match[1]}"`,
+          expected: derivedFacts.brewery_names,
+        });
+      }
+    }
+
+    // Pattern 5: Cervisiam + exit claims — FAIL if "sold" or "exited" near Cervisiam (still active)
+    // Must check that the exit verb applies to Cervisiam, not to Krecher in the same sentence
+    const cervisiamExitPattern = /cervisiam\s+(is|was)?\s*(sold|exited|closed|ended)/i;
+    if (cervisiamExitPattern.test(line)) {
+      errors.push({
+        line: lineNumber,
+        text: line.trim(),
+        claim: 'Cervisiam sold/exited/ended claim',
+        expected: ['Cervisiam is still active per facts.yml'],
+      });
+    }
+
+    // Pattern 6: Krecher end year — if krecher_end_year is set, verify any year mention
+    if (derivedFacts.krecher_end_year && /krecher/i.test(line)) {
+      const yearMatch = line.match(/\b(20\d{2})\b/);
+      if (yearMatch) {
+        const claimedYear = parseInt(yearMatch[1], 10);
+        if (claimedYear !== derivedFacts.krecher_end_year) {
+          errors.push({
+            line: lineNumber,
+            text: line.trim(),
+            claim: `Krecher end year ${claimedYear}`,
+            expected: [derivedFacts.krecher_end_year],
+          });
+        }
+      }
+    }
   });
 
   return errors;
@@ -147,13 +191,22 @@ function main() {
     years_at_microsoft: currentYear - facts.career.microsoft_start_year,
     years_at_teknograd: 2020 - facts.career.teknograd_start_year, // 2011–2020 from architect.yml
     breweries_cofounded: facts.ventures.breweries_cofounded,
+    brewery_names: facts.ventures.brewery_names || [],
+    bar_names: facts.ventures.bar_names || [],
+    cervisiam_status: facts.ventures.cervisiam_status,
+    krecher_status: facts.ventures.krecher_status,
+    krecher_end_year: facts.ventures.krecher_end_year || null,
   };
 
   console.log('📊 Derived facts:');
   console.log(`   - Years with Azure/M365/Entra: ${derivedFacts.years_with_azure_entra_m365}`);
   console.log(`   - Years at Microsoft: ${derivedFacts.years_at_microsoft}`);
   console.log(`   - Years at Teknograd: ${derivedFacts.years_at_teknograd}`);
-  console.log(`   - Breweries co-founded: ${derivedFacts.breweries_cofounded}\n`);
+  console.log(`   - Breweries co-founded: ${derivedFacts.breweries_cofounded}`);
+  console.log(`   - Brewery names: ${derivedFacts.brewery_names.join(', ')}`);
+  console.log(`   - Bar names: ${derivedFacts.bar_names.join(', ')}`);
+  console.log(`   - Cervisiam status: ${derivedFacts.cervisiam_status}`);
+  console.log(`   - Krecher status: ${derivedFacts.krecher_status}${derivedFacts.krecher_end_year ? ` (ended ${derivedFacts.krecher_end_year})` : ''}\n`);
 
   // Walk src/ and check files
   const files = walkDir(SRC_DIR, ['.astro', '.md']);
