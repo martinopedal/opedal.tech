@@ -961,6 +961,10 @@ section h2 {
   gap: 0.75rem;
 }
 
+.repo-rows-trailer {
+  margin-top: 1.5rem;
+}
+
 .repo-row {
   display: grid;
   grid-template-columns: auto 1fr;
