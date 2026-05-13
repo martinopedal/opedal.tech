@@ -4,6 +4,7 @@ import { link } from '../utils/link';
 import Nav from '../components/Nav.astro';
 import yaml from 'js-yaml';
 import fs from 'node:fs';
+import { safeJsonLd } from '../utils/jsonld';
 
 // Load CV data at build time
 const cvPath = 'cv/data/architect.yml';
@@ -45,7 +46,7 @@ const profilePageSchema = {
 
 <BaseLayout title={title} description={description}>
   <Fragment slot="head-extra">
-    <script type="application/ld+json" set:html={JSON.stringify(profilePageSchema)} />
+    <script type="application/ld+json" set:html={safeJsonLd(profilePageSchema)} />
   </Fragment>
 
   <Nav />

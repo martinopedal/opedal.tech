@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import { link } from '../utils/link';
+import { safeJsonLd } from '../utils/jsonld';
 
 const title = 'Work · opedal.tech';
 const description = 'Evidence trail of platform-engineering work across Azure Landing Zones, GitHub runners, AKS Automatic, Terraform AVM patterns, and AI platforms in regulated industries.';
@@ -29,7 +30,7 @@ const breadcrumbSchema = {
 
 <BaseLayout title={title} description={description}>
   <Fragment slot="head-extra">
-    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={safeJsonLd(breadcrumbSchema)} />
   </Fragment>
 
   <Nav />
