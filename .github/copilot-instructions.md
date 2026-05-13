@@ -9,7 +9,7 @@ Built with **Astro** (static output) — Markdown-authored blog, component-based
 
 - **Framework**: Astro (static output, `npm run build` → `dist/`)
 - **Content**: Markdown blog posts in `src/content/blog/`
-- **Styles**: Plain CSS in `src/styles/global.css` (GitHub dark palette)
+- **Styles**: Plain CSS in `src/styles/global.css` (warm earth — Architect Charcoal palette)
 - **Hosted**: GitHub Pages, deployed via `.github/workflows/pages.yml`
 - **Custom domain**: `opedal.tech` (CNAME file present)
 - **Node version**: 22 (in CI via `actions/setup-node`)
@@ -66,12 +66,30 @@ tags: ["Azure", "Terraform"]
 
 ## Design rules
 
-- Color scheme: dark (#0d1117 base, #161b22 alt — GitHub dark palette)
-- Accent: `#2f81f7` (GitHub blue)
-- Responsive: mobile-first, CSS-only hamburger nav on mobile
-- No external fonts, no CDN dependencies — fully self-contained for speed
-- All images must have `alt` attributes
-- `prefers-reduced-motion` respected — transitions disabled for users who prefer it
+- **Color scheme: warm earth dark** (Architect Charcoal — *not* GitHub blue)
+  - `--color-bg: #14110f` (warm near-black base)
+  - `--color-surface: #1c1814` (card resting)
+  - `--color-elevated: #261f19` (card hover/active)
+- **Accents (two-tone):**
+  - `--color-accent: #d4a584` (peach — links, focus rings, primary accents)
+  - `--color-accent-strong: #d97757` (terracotta — emphasis, button hover, metrics, /work arrows, skip-link)
+  - `--color-accent-glow: rgba(217, 119, 87, .15)` (warm radial halos, button glows)
+- **Shadows:** `--shadow-warm-sm` and `--shadow-warm-md` are terracotta-tinted (no neutral grey shadows).
+- **Typography:**
+  - Body, About prose, hero tagline, h2/h3 headings: system sans (`--font`)
+  - JetBrains Mono (self-hosted, `/fonts/jetbrains-mono-variable.woff2`) for *all* technical labels: nav links, dates, language pills, repo names, footer, `.section-label`, `.cv-period`, `.cv-job h3`, hero `h1` name treatment
+  - `--font-mono` stack: `'JetBrains Mono', 'SFMono-Regular', Consolas, ...`
+- **Do not** reintroduce a GitHub-blue accent (`#2f81f7`) or GitHub-grey surfaces (`#0d1117`, `#161b22`). The warm palette is the brand commitment, locked in by `feat/design-stepup`.
+- **Hero h1** is plain solid `--color-text` set in mono — no `linear-gradient` + `background-clip: text` tricks.
+- **Card hover lift** (`.repo-row`, `.blog-card`, `.work-row`): 2px `translateY` + `--color-elevated` background + `--shadow-warm-md`. Property-scoped transitions, cancelled by `prefers-reduced-motion: reduce`.
+- **Magnetic primary button** (`.btn-primary`): 1px lift + warm glow + 1px inset terracotta ring on hover, only inside `@media (prefers-reduced-motion: no-preference)`.
+- **Section atmosphere alternation** on the homepage: `#hero` (radial halo), `#about` (bg), `#work` (surface), `#oss` (bg + inset accent line), `#speaking` (surface).
+- Responsive: mobile-first, CSS-only hamburger nav on mobile (mobile dropdown is fully opaque `var(--color-surface)`).
+- No external fonts, no CDN dependencies — fully self-contained for speed.
+- All images must have `alt` attributes.
+- Eyebrow (`.section-label`) text must add a category and never echo the H2 word-for-word.
+- All new colors go through CSS variables — no magic hex literals scattered through the code.
+- `prefers-reduced-motion` respected — transitions and hover lifts disabled for users who prefer it.
 
 ## Content rules
 
