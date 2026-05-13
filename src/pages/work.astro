@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
+import { link } from '../utils/link';
 
 const title = 'Work · opedal.tech';
 const description = 'Evidence trail of platform-engineering work across Azure Landing Zones, GitHub runners, AKS Automatic, Terraform AVM patterns, and AI platforms in regulated industries.';
@@ -54,7 +55,7 @@ const breadcrumbSchema = {
             <a href="https://github.com/martinopedal/alz-graph-queries" target="_blank" rel="noopener noreferrer">alz-graph-queries</a>: automated ALZ checklist validation via Azure Resource Graph queries that take coverage from 49 to 135 items
           </li>
           <li>
-            <a href="/blog/azure-landing-zones-2025/">Azure Landing Zones 2025</a>: blog post on ALZ governance patterns, network topology, and compliance automation
+            <a href={link('blog/azure-landing-zones-2025/')}>Azure Landing Zones 2025</a>: blog post on ALZ governance patterns, network topology, and compliance automation
           </li>
         </ul>
       </section>
@@ -132,7 +133,7 @@ const breadcrumbSchema = {
         </p>
         <ul class="evidence">
           <li>
-            <a href="/blog/building-with-github-copilot/">Building with GitHub Copilot</a>: blog post on Copilot adoption patterns, prompt engineering, and productivity gains
+            <a href={link('blog/building-with-github-copilot/')}>Building with GitHub Copilot</a>: blog post on Copilot adoption patterns, prompt engineering, and productivity gains
           </li>
           <li>
             Tier-1 Nordic bank: GitHub Copilot Enterprise rollout with Copilot Knowledge indexing over internal documentation, custom instructions, and usage tracking via Azure Log Analytics.
