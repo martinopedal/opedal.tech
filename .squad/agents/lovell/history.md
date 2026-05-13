@@ -49,4 +49,7 @@ Speaking credibility (from `cv/data/architect.yml`):
 
 - **PR B shipped:** `/work` route live in PR #12. Evidence-trail page backs work areas with annotated rows + evidence links (`→ See [repo]` / `→ Read [post]` / `→ Watch [talk]`). Replaced card grid design per consensus direction.
 - **Section markers:** thin mono labels + thin accent rule under each `h2`. Language-specific 2px left borders on repo rows (terraform `#844fba`, python `#3fb950`, powershell `#5391fe`, etc.).
+- **PR #44 shipped:** `/about/` route implements duck verdict (homepage portrait → dedicated page). Pattern: `astro:assets` `<Image>` component reuses across multiple routes without asset duplication. Timeline rendering: vertical `<ol>` with absolute-positioned accent dots (`:before` pseudo-elements) and left border rail. Duck-verdict-as-spec process: opus-4.7-xhigh graded homepage at 4/10, cited Simon Willison / Dan Luu / Julia Evans peer-tier sites as rationale for portrait-free homepage.
+- **Fact-check workflow:** Garman's `check-facts.mjs` validates numeric claims against `cv/data/architect.yml`. Fails CI on unverified durations. Pattern: remove specific year claims not in allowed fact list (e.g., "five years" → "while I ran Teknograd's Azure practice").
+- **Merge conflict coordination:** Connell's PR #40 merged first (About prose rewrite). Subsequent PRs updated About again before my PR. Resolved via `git fetch origin && git rebase origin/main` → conflict resolution → `git push --force-with-lease`.
 
