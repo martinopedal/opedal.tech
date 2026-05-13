@@ -1,8 +1,9 @@
 ((= Jinja2 template for architect CV - renders 1page or multipage via mode parameter =))
+% hipstercv.sty loads hyperref without options; pre-pass `hidelinks` before \documentclass to avoid option clash.
+\PassOptionsToPackage{hidelinks}{hyperref}
 \documentclass[grey]{hipstercv}
 \usepackage[utf8]{inputenc}
 \usepackage[default]{raleway}
-\usepackage[hidelinks]{hyperref}
 ((* if mode == '1page' *))
 \usepackage[margin=0.7cm, a4paper]{geometry}
 ((* else *))
