@@ -116,3 +116,229 @@ Set via `Environment()` parameters with `trim_blocks=True` and `lstrip_blocks=Tr
 **What:** PR C will handle: OpenSSF Scorecard, `actionlint`, `step-security/harden-runner` audit mode, `actions/attest-build-provenance`, `actions/dependency-review-action` — queued after PR B merges.
 
 **Why:** Scope discipline — no specialist drift into security tooling not on PR B's surface. Garman's PR C spawn (currently running) references this decision for scope boundaries.
+
+
+# Reed — Live contrast audit
+
+**By:** Reed (Visual Designer)  
+**What:** Two surgical token fixes to address "hard to read" user feedback — bump text-dim luminance and flip btn-primary text to dark.  
+**Why:** User feedback: colors hard to read. WCAG audit revealed one AA failure (btn-primary white-on-terracotta at 3.12:1) and text-dim hovering just below AAA.
+
+## Pages audited
+
+- **https://martinopedal.github.io/opedal.tech/** — Homepage renders fine for primary text. Hero tagline, section intros, card descriptions, and contact copy all use `--color-text-dim` on either `--color-bg` or `--color-surface`. Visually readable but on the edge—especially on alt-bg sections.
+- **https://martinopedal.github.io/opedal.tech/blog/** — Blog hero tagline in text-dim. Blog cards show dates and excerpts in text-dim on surface. Same pattern.
+- **https://martinopedal.github.io/opedal.tech/cv/** — CV page heavy with muted body copy (summary, job descriptions, engagement text). All use text-dim. Surface cards dominate.
+- **https://martinopedal.github.io/opedal.tech/work/** — Similar pattern to homepage—work row descriptions in text-dim on surface cards.
+
+**Key observation:** The site uses `--color-text-dim` extensively for body copy in cards and sections. On `--color-surface` (alt-bg sections), the current 6.35:1 ratio is AA-compliant but not AAA. User perception of "hard to read" is likely caused by this borderline contrast on the warmer, lighter surface background.
+
+## Failure list (current palette)
+
+| Pair | BG | FG | Ratio | WCAG |
+|------|----|----|------:|------|
+| text on bg | #14110f | #e8e2d8 | 14.60:1 | ✅ AAA |
+| text on surface | #1f1b18 | #e8e2d8 | 13.27:1 | ✅ AAA |
+| text-dim on bg | #14110f | #a39d92 | 6.98:1 | ✅ AA (borderline AAA) |
+| **text-dim on surface** | #1f1b18 | #a39d92 | 6.35:1 | ✅ AA, ❌ AAA |
+| accent on bg | #14110f | #d97757 | 6.02:1 | ✅ AA |
+| accent on surface | #1f1b18 | #d97757 | 5.48:1 | ✅ AA |
+| accent-hover on bg | #14110f | #e59677 | 8.02:1 | ✅ AAA |
+| accent-hover on surface | #1f1b18 | #e59677 | 7.30:1 | ✅ AAA |
+| **white on accent (btn-primary)** | #d97757 | #ffffff | 3.12:1 | ❌ **FAIL AA** |
+
+**Critical failures:**
+1. `.btn-primary` white text on terracotta fails AA (3.12:1 < 4.5:1) — this is the "View open source" and "Email me" CTA buttons.
+2. `--color-text-dim` on `--color-surface` at 6.35:1 is technically AA-passing but sits below AAA, contributing to perceived difficulty.
+
+## Proposed token changes
+
+| Token | Before | After | New ratio on bg | New ratio on surface |
+|-------|--------|-------|----------------:|---------------------:|
+| `--color-text-dim` | #a39d92 | **#ada79d** | 7.87:1 (AAA ✅) | 7.16:1 (AAA ✅) |
+| `.btn-primary { color }` | #ffffff | **#14110f** | n/a | n/a |
+| `.btn-primary:hover { color }` | #ffffff | **#14110f** | n/a | n/a |
+
+**Rationale:**
+- **`#ada79d`** is the minimum brightness bump that achieves AAA (7:1+) on both bg and surface while preserving the warm taupe character. Visually indistinguishable warmth shift, measurable legibility gain.
+- **`#14110f`** (existing `--color-bg`) as btn-primary text flips the button to dark-on-terracotta, achieving 6.02:1 contrast. This maintains the warm Architect Charcoal feel (dark brown on terracotta = classic warm aesthetic) without requiring a new token.
+
+## Implementation notes for Kranz
+
+Update `src/styles/global.css`:
+
+### 1. Token change (line 17)
+```css
+/* Before */
+--color-text-dim:    #a39d92;  /* Muted text */
+
+/* After */
+--color-text-dim:    #ada79d;  /* Muted text — AAA on both bg and surface */
+```
+
+### 2. Button text color (lines 216-226)
+```css
+/* Before */
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #fff;
+}
+
+/* After */
+.btn-primary {
+  background: var(--accent);
+  color: var(--color-bg);  /* Dark warm text for AA compliance */
+  border: 1px solid var(--accent);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--color-bg);  /* Keep dark on hover too */
+}
+```
+
+### Summary of CSS changes
+- Line 17: `#a39d92` → `#ada79d`
+- Line 218: `color: #fff;` → `color: var(--color-bg);`
+- Line 225: `color: #fff;` → `color: var(--color-bg);`
+
+## Non-color findings (spot-check)
+
+1. **Section markers (`.section-label`)** — 0.7rem at 600 weight with 0.15em letter-spacing on warm charcoal. Legible but tight. Consider bumping to 0.75rem or 650 weight if user feedback persists.
+
+2. **Prose line-height** — `.prose` at 1.8 line-height is generous and readable. No change needed.
+
+3. **Code blocks** — System mono stack at 0.875rem. JetBrains Mono not yet loaded (per decisions.md, self-hosted woff2 planned). Once added, verify weight 400–500 renders crisply on dark backgrounds.
+
+4. **Button hit-area** — `.btn` padding of `0.65rem 1.4rem` creates adequate 44px+ touch target vertically. Acceptable.
+
+5. **Focus-visible ring** — No explicit `:focus-visible` styles found in global.css. Browsers apply default outline (typically blue). Consider adding `outline: 2px solid var(--accent); outline-offset: 2px;` to `:focus-visible` for better cohesion with the terracotta palette. (Non-blocking for this audit.)
+
+6. **Mobile nav background** — Line 724 uses `rgba(13, 17, 23, 0.98)` (GitHub dark) instead of the Architect Charcoal bg. Minor visual inconsistency on mobile nav dropdown. Consider `rgba(20, 17, 15, 0.98)` to match.
+
+## Verification
+
+After implementation, all text pairs will pass WCAG AA minimum. `--color-text-dim` and `--color-text` will both hit AAA on both background surfaces. The terracotta accent remains recognizably terracotta (no hue shift). The warm Architect Charcoal direction is preserved.
+
+
+# Design Iteration — Kranz decisions (2026-05-13)
+
+**By:** Kranz (Site Redesign Specialist), responding to maintainer feedback post PR B merge
+
+## Tag column removal (About section)
+
+**Decision:** Drop the `.about-tags` column entirely. Full-width prose only.
+
+**Rationale:**
+- Maintainer flagged the tag tree as "weird/wonky"
+- Research of senior-engineer sites (Julia Evans, Dan Abramov, Sindre Sorhus, Lee Robinson) shows they skip keyword boxes entirely — prose-first
+- The About prose already names "Azure Landing Zones, AKS Automatic, Terraform, IaC security, sovereign cloud deployments" naturally
+- Duplication is awkward; prose reads better solo
+
+**Eliminated generic terms:** Container Apps, ALZ Checklist, GitHub Actions, Azure Policy (maintainer specifically called out)
+
+**Kept if ever revisiting:** Azure Landing Zones, AKS Automatic, Terraform, IaC Security, Sovereign Cloud, GitHub Copilot (6 distinctive terms max)
+
+## Em dash removal (site-wide UI)
+
+**Decision:** Replace all ` — ` (space-emdash-space) in UI surfaces with colons, hyphens, or middle dots.
+
+**Before:** 44 em dashes across components, pages, layouts  
+**After:** 0 em dashes (verified via grep)
+
+**Pattern:**
+- Title separators: ` — ` → ` · ` (Martin Opedal · opedal.tech)
+- List descriptions: ` — ` → `: ` (repo-name: description)
+- Prose separators: ` — ` → `: ` or sentence rewrite
+- Comments: ` — ` → ` - `
+
+**Scope:** Components, pages, layouts. Blog post markdown content untouched (author's authentic voice).
+
+## Color palette refresh (Architect Charcoal)
+
+**Decision:** Replace GitHub Dark blues (#2f81f7) with Architect Charcoal (warm near-black + terracotta).
+
+**New palette:**
+- Base: `#14110f` (warm near-black, from `#0d1117` cold)
+- Surface: `#1f1b18` (warm, from `#161b22` cold)
+- Text: `#e8e2d8` (warm, from `#e6edf3` cold)
+- Text dim: `#a39d92` (warm, from `#8b949e` cold)
+- Accent: `#d97757` (terracotta, from `#2f81f7` blue)
+- Accent hover: `#e59677` (lighter terracotta, from `#58a6ff` blue)
+
+**Rationale:**
+- Maintainer said GitHub blue too close to Microsoft Azure brand
+- Warmth distinguishes from cold MS blues
+- Matches "datacenters + breweries" tactile identity (warm, grounded, organic)
+- Terracotta distinctive, senior-architect signal
+
+**Changes:**
+- `:root` CSS custom properties + legacy vars for compatibility
+- Hero h1 gradient: `#2f81f7→#58a6ff` → `#d97757→#e59677`
+- `theme-color` meta: `#0d1117` → `#14110f`
+- Nav background RGBA: `rgba(13,17,23,0.92)` → `rgba(20,17,15,0.92)`
+
+## Nav cleanup (5 items max)
+
+**Decision:** Reduce nav from 8 items to 5 max.
+
+**Old structure:**
+- Homepage: About / Work / Open Source / Speaking / Contact (5 section anchors) + Work / CV / Blog (3 page links) = 8 total
+- Other pages: Home + Work / CV / Blog = 4 total
+
+**New structure:**
+- Homepage: Home / Work / CV / Blog / Contact (5 items, Contact anchor only on homepage)
+- Other pages: Home / Work / CV / Blog (4 items)
+
+**Rationale:** Section anchors (About, Open Source, Speaking) reachable by scrolling on homepage. Dedicated page links (Work, CV, Blog) provide cross-page navigation. Contact anchor kept on homepage only for quick access to email CTA.
+
+## Hero CTA alignment
+
+**Decision:** Change label from "View open source" to "See selected work" (destination remains `/work`).
+
+**Rationale:** The label said "open source" but `/work` page is broader (includes ALZ, AKS, IaC, CI/CD, AI, Copilot, Speaking). "See selected work" matches destination.
+
+## Future palette swap pattern
+
+The new CSS uses `--color-*` variables (e.g., `--color-bg`, `--color-accent`) with legacy compatibility aliases (`--bg`, `--accent`). Future palette swaps should:
+
+1. Update the 8 `--color-*` variables in `:root`
+2. Update hero gradient (if accent changes)
+3. Update `theme-color` meta (if base changes)
+4. Update nav RGBA background (if base changes)
+5. Test build and verify no hardcoded hex colors leaked
+
+This pattern makes palette swaps surgical and traceable.
+
+## Scope boundaries respected
+
+Per charter, did NOT touch:
+- `cv/` (Aaron)
+- `.github/workflows/` (Aaron / Garman)
+- `public/fonts/`, `public/og-default.png`, `THIRD_PARTY_NOTICES.md` (Garman)
+- Blog post markdown content in `src/content/blog/*.md` (maintainer's voice)
+
+**One-PR cross-surface grant:** Em dash scrub authorized on `src/pages/cv.astro` and `src/pages/work.astro` (Bales and Lovell surfaces) as text-only substitution. No layout or styling changes.
+
+## Verification
+
+Build succeeded:
+- `npm run build` exits 0
+- `dist/index.html` contains eyebrow "Lead Cloud Solution Architect · Microsoft"
+- `dist/index.html`, `dist/cv/index.html`, `dist/blog/index.html` all load CSS and emit JSON-LD
+- 6 HTML pages generated (index, cv, work, blog index, 2 blog posts)
+
+All acceptance gates passed:
+- Em dash count (UI surfaces): 0 (target: 0)
+- Generic terms removed: PASS
+- No inline `<style>` blocks: PASS
+- `.about-tags` / `.tag` classes removed: PASS
+
