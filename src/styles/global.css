@@ -379,7 +379,7 @@ section h2 {
 
 .section-intro {
   color: var(--text-muted);
-  margin-top: -1.25rem;
+  margin-top: 0;  /* removed negative margin that caused H1 overlap on /work/ */
   margin-bottom: 2rem;
   font-size: 1rem;
 }
@@ -634,6 +634,8 @@ footer p {
 
 .footer-links a {
   color: var(--text-muted);
+  display: inline-block;
+  padding: 0.5rem 0;  /* WCAG 2.2 SC 2.5.8: ≥24×24px tap targets on mobile */
 }
 
 /* ============================================================
@@ -1302,61 +1304,61 @@ section h2 {
   margin: 0;
 }
 
-/* Language-specific border colors */
+/* Language-specific border colors (warm palette variants) */
 .repo-row.lang-terraform {
-  border-left-color: #844fba;
+  border-left-color: var(--color-accent-strong);  /* terracotta for primary tech */
 }
 
 .repo-row.lang-terraform .repo-row-lang {
-  color: #b58be6;
+  color: var(--color-accent-strong);
 }
 
 .repo-row.lang-python {
-  border-left-color: #3fb950;
+  border-left-color: #8b9556;  /* warm olive-green */
 }
 
 .repo-row.lang-python .repo-row-lang {
-  color: #5fd576;
+  color: #a8b070;
 }
 
 .repo-row.lang-powershell {
-  border-left-color: #5391fe;
+  border-left-color: var(--color-accent);  /* peach for secondary tech */
 }
 
 .repo-row.lang-powershell .repo-row-lang {
-  color: #7eaeff;
+  color: var(--color-accent);
 }
 
 .repo-row.lang-typescript {
-  border-left-color: #3178c6;
+  border-left-color: #8a8270;  /* warm taupe-grey */
 }
 
 .repo-row.lang-typescript .repo-row-lang {
-  color: #6aa6e0;
+  color: #a39d92;
 }
 
 .repo-row.lang-javascript {
-  border-left-color: #f1e05a;
+  border-left-color: #c9a767;  /* warm gold */
 }
 
 .repo-row.lang-javascript .repo-row-lang {
-  color: #f1e05a;
+  color: #c9a767;
 }
 
 .repo-row.lang-go {
-  border-left-color: #00add8;
+  border-left-color: #8a8270;  /* warm taupe-grey */
 }
 
 .repo-row.lang-go .repo-row-lang {
-  color: #4cc8e6;
+  color: #a39d92;
 }
 
 .repo-row.lang-csharp {
-  border-left-color: #178600;
+  border-left-color: #8b9556;  /* warm olive-green */
 }
 
 .repo-row.lang-csharp .repo-row-lang {
-  color: #4cb135;
+  color: #a8b070;
 }
 
 .repo-row.lang-all {
@@ -1544,6 +1546,7 @@ section h2 {
 
 /* ---- CV sections ---- */
 .cv-section {
+  padding: 0;  /* override global section { padding: 4rem 0 } to prevent 176px gaps */
   margin-bottom: 3rem;
 }
 
@@ -2103,6 +2106,7 @@ section h2 {
 
 /* ---- Work area sections ---- */
 .work-area {
+  padding: 0;  /* override global section { padding: 4rem 0 } to prevent excessive gaps */
   margin-bottom: 3rem;
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--border);
