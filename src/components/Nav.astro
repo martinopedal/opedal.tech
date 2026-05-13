@@ -22,7 +22,7 @@ const currentPath = Astro.url.pathname;
     <li><a href={link('')}>Home</a></li>
     <li><a href={link('work')}>Work</a></li>
     <li><a href={link('cv')}>CV</a></li>
-    <li><a href={link('blog')} class={currentPath.startsWith('/blog') ? 'nav-blog' : ''}>Blog</a></li>
-    <li><a href={link('contact')} class={currentPath.startsWith('/contact') ? 'nav-contact-active' : ''}>Contact</a></li>
+    <li><a href={link('blog')} class={currentPath.startsWith('/blog') ? 'nav-blog' : undefined}>Blog</a></li>
+    <li><a href={link('contact')} class={currentPath.startsWith('/contact') ? 'nav-contact-active' : undefined}>Contact</a></li>
   </ul>
 </nav>

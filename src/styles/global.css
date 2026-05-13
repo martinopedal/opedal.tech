@@ -1019,32 +1019,64 @@ section h2 {
   border-left-color: #844fba;
 }
 
+.repo-row.lang-terraform .repo-row-lang {
+  color: #b58be6;
+}
+
 .repo-row.lang-python {
   border-left-color: #3fb950;
+}
+
+.repo-row.lang-python .repo-row-lang {
+  color: #5fd576;
 }
 
 .repo-row.lang-powershell {
   border-left-color: #5391fe;
 }
 
+.repo-row.lang-powershell .repo-row-lang {
+  color: #7eaeff;
+}
+
 .repo-row.lang-typescript {
   border-left-color: #3178c6;
+}
+
+.repo-row.lang-typescript .repo-row-lang {
+  color: #6aa6e0;
 }
 
 .repo-row.lang-javascript {
   border-left-color: #f1e05a;
 }
 
+.repo-row.lang-javascript .repo-row-lang {
+  color: #f1e05a;
+}
+
 .repo-row.lang-go {
   border-left-color: #00add8;
+}
+
+.repo-row.lang-go .repo-row-lang {
+  color: #4cc8e6;
 }
 
 .repo-row.lang-csharp {
   border-left-color: #178600;
 }
 
+.repo-row.lang-csharp .repo-row-lang {
+  color: #4cb135;
+}
+
 .repo-row.lang-all {
   border-left-color: var(--accent);
+}
+
+.repo-row.lang-all .repo-row-lang {
+  color: var(--accent);
 }
 
 /* ---- Work rows (trimmed homepage version) ---- */
@@ -1735,6 +1767,19 @@ section h2 {
 /* ---- Work page container ---- */
 .work-page {
   padding: 4rem 0;
+}
+
+.work-back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.work-back-link:hover {
+  color: var(--color-accent-strong);
 }
 
 /* ---- Work area sections ---- */
