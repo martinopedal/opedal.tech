@@ -230,6 +230,32 @@ const profilePageSchema = {
         </div>
       </section>
 
+      <!-- Open Source -->
+      {data.open_source && data.open_source.length > 0 && (
+        <section class="cv-section">
+          <span class="section-label">Open Source</span>
+          <h2>Open Source</h2>
+          {data.open_source.map((group) => (
+            <div class="cv-oss-group">
+              <h3 class="cv-oss-group-label">{group.group}</h3>
+              <div class="cv-oss-repos">
+                {group.repos.map((repo) => (
+                  <div class="cv-oss-repo">
+                    <h4>
+                      <a href={repo.url} target="_blank" rel="noopener noreferrer">
+                        {repo.name}
+                      </a>
+                      <span class="cv-oss-lang">{repo.lang}</span>
+                    </h4>
+                    <p>{repo.summary}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
+
       {data.education && data.education.length > 0 && (
         <section class="cv-section">
           <span class="section-label">Academic Background</span>
