@@ -1,23 +1,36 @@
 ---
+import { Image } from 'astro:assets';
+import portrait from '../assets/martin-opedal.jpg';
 ---
 <section id="about">
   <div class="container">
     <span class="section-label">Profile</span>
     <h2>About</h2>
-    <div class="about-text">
-      <p>
-        I ran datacenters for nine years before joining Microsoft. That decade
-        shaped how I think about reliability from the hardware up.
-      </p>
-      <p>
-        Now I architect Azure Landing Zones, AKS Automatic, and AI Foundry
-        deployments for Nordic enterprises. I use Terraform daily. The modules
-        I ship come from real customer engagements, not theory.
-      </p>
-      <p>
-        I co-founded two craft breweries. Fermentation and infrastructure both
-        need the right controls and patience.
-      </p>
+    <div class="about-grid">
+      <Image
+        src={portrait}
+        alt="Portrait of Martin Opedal, Lead Cloud Solution Architect at Microsoft"
+        widths={[200, 320, 400]}
+        sizes="(min-width: 768px) 220px, 160px"
+        class="about-photo"
+        loading="eager"
+        decoding="async"
+      />
+      <div class="about-text">
+        <p>
+          I ran datacenters for nine years before joining Microsoft. That decade
+          shaped how I think about reliability from the hardware up.
+        </p>
+        <p>
+          Now I architect Azure Landing Zones, AKS Automatic, and AI Foundry
+          deployments for Nordic enterprises. I use Terraform daily. The modules
+          I ship come from real customer engagements, not theory.
+        </p>
+        <p>
+          I co-founded two craft breweries. Fermentation and infrastructure both
+          need the right controls and patience.
+        </p>
+      </div>
     </div>
   </div>
 </section>
