@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { link } from '../../utils/link';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 
@@ -34,7 +35,7 @@ const posts = allPosts.sort(
             day: 'numeric',
           });
           return (
-            <a href={`/blog/${post.slug}`} class="blog-card">
+            <a href={link(`blog/${post.slug}`)} class="blog-card">
               <div class="blog-card-meta">
                 <time class="blog-date" datetime={post.data.pubDate.toISOString()}>
                   {formattedDate}

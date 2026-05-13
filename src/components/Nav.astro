@@ -1,9 +1,10 @@
 ---
+import { link } from '../utils/link';
 const currentPath = Astro.url.pathname;
 ---
 
 <nav class="site-nav">
-  <a class="nav-brand" href="/">opedal.tech</a>
+  <a class="nav-brand" href={link('')}>opedal.tech</a>
 
   <!--
     CSS-only hamburger menu.
@@ -18,10 +19,10 @@ const currentPath = Astro.url.pathname;
   </label>
 
   <ul class="nav-links" role="list">
-    <li><a href="/">Home</a></li>
-    <li><a href="/work">Work</a></li>
-    <li><a href="/cv">CV</a></li>
-    <li><a href="/blog" class={currentPath.startsWith('/blog') ? 'nav-blog' : ''}>Blog</a></li>
-    {currentPath === '/' && <li><a href="#contact">Contact</a></li>}
+    <li><a href={link('')}>Home</a></li>
+    <li><a href={link('work')}>Work</a></li>
+    <li><a href={link('cv')}>CV</a></li>
+    <li><a href={link('blog')} class={currentPath.startsWith('/blog') ? 'nav-blog' : ''}>Blog</a></li>
+    {currentPath === '/' && <li><a href={link('#contact')}>Contact</a></li>}
   </ul>
 </nav>

@@ -7,6 +7,7 @@
     { "persistent_name": "Kranz",  "universe": "apollo-mocr", "created_at": "2026-05-13", "legacy_named": false, "status": "active" },
     { "persistent_name": "Lovell", "universe": "apollo-mocr", "created_at": "2026-05-13", "legacy_named": false, "status": "active" },
     { "persistent_name": "Garman", "universe": "apollo-mocr", "created_at": "2026-05-13", "legacy_named": false, "status": "active" },
+    { "persistent_name": "Reed",   "universe": "apollo-mocr", "created_at": "2026-05-13", "legacy_named": false, "status": "active" },
     { "persistent_name": "Scribe", "universe": "exempt",      "created_at": "2026-05-13", "legacy_named": false, "status": "active" },
     { "persistent_name": "Ralph",  "universe": "exempt",      "created_at": "2026-05-13", "legacy_named": false, "status": "active" }
   ]
