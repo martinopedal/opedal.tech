@@ -8,12 +8,36 @@ const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const posts = allPosts.sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
 );
+
+// Breadcrumb schema for the blog index. SERP-friendly trail: Home -> Blog.
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://opedal.tech/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Blog',
+      item: 'https://opedal.tech/blog/',
+    },
+  ],
+};
 ---
 
 <BaseLayout
   title="Blog · opedal.tech"
   description="Thoughts on Azure Landing Zones, AKS, Terraform, IaC security, and AI-assisted development."
 >
+  <Fragment slot="head-extra">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
   <Nav />
 
   <div class="blog-hero">
