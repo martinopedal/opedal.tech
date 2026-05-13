@@ -23,6 +23,48 @@
 
 ## Learnings
 
+### 2026-05-13: Open Source Section LaTeX Compilation (PR #23) — INCOMPLETE
+
+**Context:**
+PR #23 (feat/cv-site-open-source-alignment) added an Open Source section to the CV template with repo listings in itemize environments. The `architect-1page.pdf` build fails with "! LaTeX Error: Something's wrong--perhaps a missing \item." at line 226-227. The multipage variant compiles successfully.
+
+**Three fixes attempted (all unsuccessful):**
+1. **f15b4fa**: Replaced literal UTF-8 em dash (—, U+2014) with LaTeX native `---` in list items
+   - Rationale: UTF-8 characters inside \item blocks can confuse pdflatex in fragile contexts
+   - Result: Error persists
+2. **847d1cc**: Removed brace wrapping from `{\tiny ... \begin{itemize}...\end{itemize} }` → `\tiny \begin{itemize}...\end{itemize}`
+   - Rationale: List environments inside braced font groups can have scoping issues
+   - Result: Error persists
+3. **8d0485a**: Moved font size command inside itemize: `\begin{itemize} \tiny \item ... \end{itemize}`
+   - Rationale: Font size changes before `\begin{itemize}` can disrupt list initialization
+   - Result: Error persists (line number shifted from 227 to 226, confirming structural change but not solving root cause)
+
+**Current hypothesis:**
+The 1page variant uses:
+- Minipage width: `0.55\textwidth` (vs. `0.52\textwidth` for multipage)
+- Font size: `\tiny` (vs. `\scriptsize` for multipage)
+- Content: Long repo summaries (80-100 characters)
+- List margin: `leftmargin=1em`
+
+The combination of narrow minipage + extremely small font + left margin + long text may be creating a layout constraint that LaTeX cannot satisfy, triggering the "Missing \item" error as a symptom of box overflow or impossible line breaking.
+
+**Multipage works because:**
+- Slightly narrower minipage (0.52) but larger font (\scriptsize) results in better character-per-line ratio
+- OR the larger font provides more flexibility for line breaking
+
+**Next steps for investigation:**
+- Test with `leftmargin=0.5em` instead of `1em` to give more horizontal space
+- Test with minipage width `0.58\textwidth` or `0.60\textwidth`
+- Test with `\scriptsize` instead of `\tiny` on 1page variant (trade vertical space for horizontal flexibility)
+- Examine the `.log` file from CI for overfull/underfull box warnings that might reveal the layout constraint
+
+**Outstanding question:**
+Why does LaTeX report "Missing \item" when the line clearly contains `\item`? This error message is misleading — it's likely a symptom of a deeper layout/box problem that prevents the list from rendering at all.
+
+**Status:** Blocked on CI. Need more diagnostic information from the full LaTeX .log file to understand the root cause.
+
+---
+
 ### 2026-05-13: CV Workflow Stuck Job + Refactor
 
 **Root Cause:**
