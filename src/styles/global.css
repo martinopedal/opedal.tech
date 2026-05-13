@@ -16,8 +16,8 @@
   --color-text:        #e8e2d8;  /* Warm text */
   --color-text-dim:    #ada79d;  /* Muted text — AAA on both bg and surface */
   --color-border:      #2a2520;  /* Border color */
-  --color-accent:      #d97757;  /* Terracotta accent */
-  --color-accent-hover:#e59677;  /* Lighter terracotta */
+  --color-accent:      #d4a584;  /* Sand/clay accent — AAA on bg and surface */
+  --color-accent-hover:#e0b89a;  /* Lighter sand for hover states */
   
   /* Legacy variable names kept for compatibility */
   --bg:           var(--color-bg);
@@ -865,7 +865,7 @@ section h2 {
   display: flex;
   align-items: center;
   min-width: 80px;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -879,8 +879,9 @@ section h2 {
 
 .repo-row-content p {
   font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.5;
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.6;
   margin: 0;
 }
 
