@@ -14,7 +14,7 @@
   --color-bg:          #14110f;  /* Warm near-black base */
   --color-surface:     #1f1b18;  /* Warm surface */
   --color-text:        #e8e2d8;  /* Warm text */
-  --color-text-dim:    #a39d92;  /* Muted text */
+  --color-text-dim:    #ada79d;  /* Muted text — AAA on both bg and surface */
   --color-border:      #2a2520;  /* Border color */
   --color-accent:      #d97757;  /* Terracotta accent */
   --color-accent-hover:#e59677;  /* Lighter terracotta */
@@ -215,14 +215,14 @@ a:hover {
 
 .btn-primary {
   background: var(--accent);
-  color: #fff;
+  color: var(--color-bg);  /* Dark warm text for AA compliance */
   border: 1px solid var(--accent);
 }
 
 .btn-primary:hover {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
-  color: #fff;
+  color: var(--color-bg);  /* Keep dark on hover too */
 }
 
 .btn-ghost {
@@ -721,7 +721,7 @@ footer a:hover {
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(13, 17, 23, 0.98);
+    background: rgba(20, 17, 15, 0.98);  /* Match Architect Charcoal bg */
     border-bottom: 1px solid var(--border);
     flex-direction: column;
     gap: 0;

@@ -1,4 +1,5 @@
 ---
+import { link } from '../utils/link';
 ---
 <header id="hero">
   <div class="hero-inner">
@@ -9,7 +10,7 @@
       and the governance layer that holds it all together.
     </p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="/work">See selected work</a>
+      <a class="btn btn-primary" href={link('work')}>See selected work</a>
       <a class="btn btn-ghost" href="mailto:hello@opedal.tech">Email me</a>
     </div>
   </div>

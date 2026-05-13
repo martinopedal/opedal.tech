@@ -16,6 +16,7 @@
 | Kranz | 🏗️ Site Redesign Specialist | apollo-mocr | `src/components/{Hero,OpenSource,Work,Speaking,Contact,Nav}.astro`, `src/pages/index.astro` recomposition, the bulk of `src/styles/global.css` (section markers, repo rows, work rows, language borders) |
 | Lovell | 📝 `/work` Route Specialist | apollo-mocr | `src/pages/work.astro` (annotated evidence rows for every work area), corresponding CSS section in `src/styles/global.css` |
 | Garman | 🧪 Typography + Verification Specialist | apollo-mocr | `public/fonts/jetbrains-mono-variable.woff2` + `@font-face` rule, `public/og-default.png` slot, final `npm run build`, `pdftotext` keyword grep, link audit, redaction grep, hardening verification |
+| Reed | 🎨 Visual Designer (vision-capable) | apollo-mocr | Read-only on `src/`; advisory reviewer. Drops design specs in `.squad/decisions/inbox/reed-*.md`. One-PR direct CSS edits on `src/styles/global.css` require coordinator grant. |
 | Scribe | 📋 Memory, decisions, session logs | exempt | `.squad/orchestration-log/**`, `.squad/log/**`, `.squad/decisions.md` (merge from inbox), cross-agent history updates |
 | Ralph | 🔄 Work Monitor | exempt | Issue/PR scan, work-check cycle, idle-watch |
 

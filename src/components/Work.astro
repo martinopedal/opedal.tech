@@ -1,4 +1,5 @@
 ---
+import { link } from '../utils/link';
 ---
 <section id="work" class="alt-bg">
   <div class="container">
@@ -13,7 +14,7 @@
           checklist validations via Azure Resource Graph. Security and compliance
           built in from day one, not bolted on.
         </p>
-        <a class="work-row-link" href="/work#landing-zones">See deployment patterns</a>
+        <a class="work-row-link" href={link('work#landing-zones')}>See deployment patterns</a>
       </div>
 
       <div class="work-row">
@@ -23,7 +24,7 @@
           Gateway for Containers, NGINX, Istio with multiple ingress and egress patterns
           documented with full Terraform parity.
         </p>
-        <a class="work-row-link" href="/work#aks">See AKS patterns</a>
+        <a class="work-row-link" href={link('work#aks')}>See AKS patterns</a>
       </div>
 
       <div class="work-row">
@@ -33,7 +34,7 @@
           central firewall egress, managed identity everywhere. PSRule and azqr
           integrated into CI pipelines.
         </p>
-        <a class="work-row-link" href="/work#iac-security">See security patterns</a>
+        <a class="work-row-link" href={link('work#iac-security')}>See security patterns</a>
       </div>
 
       <div class="work-row">
@@ -42,7 +43,7 @@
           GitHub-hosted and self-hosted runners with Azure VNet integration, Container
           Apps, and ALZ Corp firewall egress. GHE.com EU data residency patterns.
         </p>
-        <a class="work-row-link" href="/work#cicd">See runner patterns</a>
+        <a class="work-row-link" href={link('work#cicd')}>See runner patterns</a>
       </div>
 
     </div>
