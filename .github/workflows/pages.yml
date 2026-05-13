@@ -95,7 +95,7 @@ jobs:
       - name: Run lychee link checker
         uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411 # v2.8.0
         with:
-          args: --base dist/ --config lychee.toml --no-progress dist/
+          args: --no-progress --root-dir "${{ github.workspace }}/dist" --config lychee.toml "${{ github.workspace }}/dist"
           fail: true
 
       - name: Upload report

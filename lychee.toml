@@ -16,7 +16,7 @@ user_agent = "lychee/0.x (opedal.tech CI link checker)"
 # Schemes to check (skip mailto:, tel:, etc.)
 scheme = ["http", "https"]
 
-# Don't fail on these domains — they aggressively block crawlers
+# Don't fail on these domains, they aggressively block crawlers
 exclude = [
   "^https?://(www\\.)?linkedin\\.com",
   "^https?://(www\\.)?twitter\\.com",
