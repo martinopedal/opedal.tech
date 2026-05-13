@@ -37,6 +37,23 @@ Verify by navigating to the Actions tab and checking **Deploy to GitHub Pages**.
 ❌ Allow deletions
 ```
 
+> **Note (drift):** as of the last audit the live protection on `main` only requires **1 approving review** with `enforce_admins=false`, no required status checks, and no linear-history requirement. To bring the live settings in line with the table above, run:
+>
+> ```bash
+> gh api -X PUT repos/martinopedal/opedal.tech/branches/main/protection \
+>   -F required_status_checks.strict=true \
+>   -F 'required_status_checks.contexts[]=Analyze (actions)' \
+>   -F 'required_status_checks.contexts[]=Build Astro site' \
+>   -F enforce_admins=true \
+>   -F required_pull_request_reviews.required_approving_review_count=0 \
+>   -F required_linear_history=true \
+>   -F restrictions= \
+>   -F allow_force_pushes=false \
+>   -F allow_deletions=false
+> ```
+>
+> Side effect: with `enforce_admins=true`, future admin-merges (like `gh pr merge --admin`) will need every required check to be green first. The `Build Astro site` check runs on PRs only after the workflow change in commit history is in place.
+
 ---
 
 ## 3. Configure Domeneshop DNS → GitHub Pages
@@ -153,15 +170,14 @@ This allows the security contact link in `SECURITY.md` to work.
 
 ---
 
-## 6. Squad Labels
+## 6. Issue Labels (optional)
 
-Create these labels in **Issues → Labels → New label** (or the auto-label workflow
-will create `squad` automatically on the first issue):
+Create these labels in **Issues → Labels → New label** as needed. GitHub creates a
+default set on repo creation; the only addition worth making is `copilot`:
 
 | Label | Color | Description |
 |-------|-------|-------------|
-| `squad` | `#0075ca` | Squad-tracked issue |
-| `copilot` | `#8957e5` | Assigned to GitHub Copilot coding agent |
+| `copilot` | `#8957e5` | Assigned to the GitHub Copilot coding agent |
 | `enhancement` | `#a2eeef` | New feature or section |
 | `content` | `#fef3c7` | Text/copy update |
 | `bug` | `#d73a4a` | Something broken |
@@ -171,12 +187,12 @@ will create `squad` automatically on the first issue):
 
 ---
 
-## 7. Copilot Code Review (optional but recommended)
+## 7. Copilot Code Review (optional)
 
 **Settings → Copilot → Code review → Enable automatic code review**
 
-This makes `copilot-pull-request-reviewer` available as a reviewer target —
-required for the `copilot-agent-pr-review.yml` workflow to request reviews.
+Makes `copilot-pull-request-reviewer` available as a reviewer target if you want
+Copilot reviews requested automatically on every PR.
 
 ---
 
@@ -185,5 +201,5 @@ required for the `copilot-agent-pr-review.yml` workflow to request reviews.
 Once all steps above are complete:
 - `https://opedal.tech` is live over HTTPS
 - All PRs require CI green before merge
-- Squad labels and Copilot agent are wired up
-- Dependabot keeps Actions up to date
+- Dependabot keeps GitHub Actions and npm packages up to date
+- Secret scanning, push protection, and private vulnerability reporting are on

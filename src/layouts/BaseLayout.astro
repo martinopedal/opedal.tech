@@ -6,16 +6,68 @@ interface Props {
   description: string;
   canonicalUrl?: string;
   ogImage?: string;
+  ogType?: 'website' | 'article';
 }
 
 const {
   title,
   description,
   canonicalUrl = Astro.url.href,
-  ogImage = '/og-default.png',
+  ogImage,
+  ogType = 'website',
 } = Astro.props;
 
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).toString() : undefined;
 const currentYear = new Date().getFullYear();
+
+// Sitewide Person schema. Lives in BaseLayout so every page emits it.
+// JSON-LD <script type="application/ld+json"> blocks are CSP-exempt
+// because the browser parses them as data, not executable script.
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Martin Opedal',
+  url: 'https://opedal.tech',
+  jobTitle: 'Lead Cloud Solution Architect',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Microsoft',
+    url: 'https://www.microsoft.com',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Oslo',
+    addressCountry: 'NO',
+  },
+  nationality: {
+    '@type': 'Country',
+    name: 'Norway',
+  },
+  sameAs: [
+    'https://www.linkedin.com/in/martin-opedal',
+    'https://github.com/martinopedal',
+  ],
+  knowsLanguage: ['en', 'nb'],
+  knowsAbout: [
+    'Microsoft Azure',
+    'Azure Landing Zones',
+    'Azure Kubernetes Service',
+    'Kubernetes',
+    'Terraform',
+    'Bicep',
+    'Infrastructure as Code',
+    'Cloud Security',
+    'Sovereign Cloud',
+    'Platform Engineering',
+    'GitHub Actions',
+    'GitHub Copilot',
+    'Azure Policy',
+    'Azure Resource Graph',
+    'Cloud Architecture',
+    'DevOps',
+  ],
+  description,
+};
 ---
 
 <!doctype html>
@@ -24,9 +76,11 @@ const currentYear = new Date().getFullYear();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="author" content="Martin Opedal" />
+    <meta name="theme-color" content="#0d1117" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- CSP: no inline scripts, no external CDN, same-origin only -->
+    <!-- CSP: no inline scripts, no external CDN, same-origin only. JSON-LD is exempt. -->
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; style-src 'self'; script-src 'none'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; object-src 'none';"
@@ -37,9 +91,13 @@ const currentYear = new Date().getFullYear();
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="opedal.tech" />
+    <meta property="og:locale" content="en_US" />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
 
     <!-- RSS feed discovery -->
     <link
@@ -48,6 +106,11 @@ const currentYear = new Date().getFullYear();
       title="opedal.tech blog"
       href="/rss.xml"
     />
+
+    <!-- Sitewide Person schema for search engines and AI scrapers. -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+    <slot name="head-extra" />
 
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -61,7 +124,7 @@ const currentYear = new Date().getFullYear();
           <a
             href="https://github.com/martinopedal/opedal.tech"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             aria-label="View source code on GitHub">Source</a
           >
         </p>
