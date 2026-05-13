@@ -2087,6 +2087,20 @@ section h2 {
   color: var(--color-accent-strong);
 }
 
+/* ---- Work page header (unified rhythm with /cv/ and /about/) ---- */
+.work-page h1 {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin-bottom: var(--space-5);  /* 24px gap to intro paragraph */
+}
+
+.work-page .section-intro {
+  margin-top: 0;  /* override global .section-intro negative margin */
+  margin-bottom: var(--space-7);  /* 48px gap to first work-area */
+}
+
 /* ---- Work area sections ---- */
 .work-area {
   margin-bottom: 3rem;
