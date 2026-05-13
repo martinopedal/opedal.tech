@@ -23,4 +23,7 @@
 
 ## Learnings
 
-(append as work progresses)
+- **PR B shipped:** CV pipeline and `/work` route live in PR #12. Coordinator made 3 emergency LaTeX fixes to Aaron's surface during this session to unblock failing CI (hyperref option clash, brace closure, special char escaping via Jinja finalize). These patterns should be known for future CV variants.
+- **Jinja2 custom delimiters:** custom delimiters (`((*`, `(((`, `((=`) are now canonical for LaTeX templates in this repo. Prevents brace collision with LaTeX syntax.
+- **PassOptionsToPackage pattern:** when reusing LaTeX packages already loaded by class files, wrap option setting in `\PassOptionsToPackage{…}{package}` before `\documentclass`.
+
