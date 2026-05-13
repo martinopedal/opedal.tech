@@ -19,3 +19,14 @@ node_modules/
 
 # Squad coordination state (private orchestration; not for the public repo)
 .squad/
+
+# CV pipeline artifacts (Python cache, LaTeX build intermediates)
+cv/__pycache__/
+cv/architect/build/
+cv/**/*.aux
+cv/**/*.log
+cv/**/*.out
+cv/**/*.fls
+cv/**/*.fdb_latexmk
+cv/**/*.synctex.gz
+cv/**/*.j2.from-git

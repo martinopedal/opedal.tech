@@ -12,5 +12,8 @@
     "@astrojs/sitemap": "^3.7.2",
     "@astrojs/rss": "^4.0.18",
     "js-yaml": "^4.1.0"
+  },
+  "overrides": {
+    "fast-xml-parser": "^5.8.0"
   }
 }

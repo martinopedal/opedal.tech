@@ -34,7 +34,7 @@ const breadcrumbSchema = {
 
   <Nav />
 
-  <section class="work-page">
+  <section id="main-content" class="work-page" tabindex="-1">
     <div class="container">
       <span class="section-label">Work</span>
       <h2>What I Work On</h2>
@@ -42,7 +42,7 @@ const breadcrumbSchema = {
         Platform-engineering work that came out of real customer engagements. Every claim links to a repo, blog post, or talk.
       </p>
 
-      <section class="work-area">
+      <section class="work-area" id="landing-zones">
         <h3>Azure Landing Zones at Scale</h3>
         <p class="work-claim">
           End-to-end ALZ Corp deployments with automated compliance validation and 135+ checklist queries.
@@ -60,7 +60,7 @@ const breadcrumbSchema = {
         </ul>
       </section>
 
-      <section class="work-area">
+      <section class="work-area" id="cicd">
         <h3>GitHub Runners on Azure (Private Networking)</h3>
         <p class="work-claim">
           GitHub-hosted and self-hosted runners with Azure VNet integration, Container Apps, and ALZ Corp firewall egress.
@@ -78,7 +78,7 @@ const breadcrumbSchema = {
         </ul>
       </section>
 
-      <section class="work-area">
+      <section class="work-area" id="aks">
         <h3>AKS Automatic with azapi</h3>
         <p class="work-claim">
           AKS Automatic clusters with ALZ Corp networking, BYO VNet, and multiple ingress patterns documented with full Terraform parity.
@@ -93,7 +93,7 @@ const breadcrumbSchema = {
         </ul>
       </section>
 
-      <section class="work-area">
+      <section class="work-area" id="iac-security">
         <h3>Terraform AVM Patterns</h3>
         <p class="work-claim">
           Official Azure Verified Modules (AVM) pattern modules built to run inside ALZ Corp landing zones with network isolation.
@@ -114,9 +114,6 @@ const breadcrumbSchema = {
           Azure AI Foundry and Azure OpenAI deployments for Tier-1 Nordic banks, defense contractors, and government bodies with sovereign cloud requirements.
         </p>
         <ul class="evidence">
-          <li>
-            Tier-1 Nordic bank: Azure OpenAI with private endpoints, customer-managed keys, and Azure AI Content Safety integration. 48M+ NOK consultant portfolio delivered.
-          </li>
           <li>
             Defense contractor: Azure AI Foundry proof-of-concept with Azure Machine Learning private link, VNet-isolated compute, and data exfiltration prevention.
           </li>
