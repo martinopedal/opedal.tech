@@ -39,17 +39,23 @@ jobs:
       - name: Install Python dependencies
         run: pip install pyyaml jinja2
 
-      - name: Compile CV PDFs with LaTeX
-        uses: xu-cheng/latex-action@e2f99d4b3685b0da93f97e1b86ad8fab81105098 # v3
-        with:
-          root_file: build.py
-          working_directory: .
-          compiler: python3
-          args: cv/build.py
+      - name: Install LaTeX (texlive + latexmk)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            texlive-xetex \
+            latexmk
+
+      - name: Build CV PDFs
+        run: python3 cv/build.py
 
       - name: Upload PDFs as artifacts (PR only)
         if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
         with:
           name: cv-pdfs
           path: public/cv/architect-*.pdf
@@ -76,13 +82,19 @@ jobs:
       - name: Install Python dependencies
         run: pip install pyyaml jinja2
 
-      - name: Compile CV PDFs with LaTeX
-        uses: xu-cheng/latex-action@e2f99d4b3685b0da93f97e1b86ad8fab81105098 # v3
-        with:
-          root_file: build.py
-          working_directory: .
-          compiler: python3
-          args: cv/build.py
+      - name: Install LaTeX (texlive + latexmk)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            texlive-xetex \
+            latexmk
+
+      - name: Build CV PDFs
+        run: python3 cv/build.py
 
       - name: Commit PDFs back to main
         uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403 # v5
