@@ -772,8 +772,9 @@ footer a:hover {
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(20, 17, 15, 0.98);  /* Match Architect Charcoal bg */
+    background: var(--color-surface);  /* fully opaque to avoid see-through dropdown */
     border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
     flex-direction: column;
     gap: 0;
     padding: 0.5rem 0;
