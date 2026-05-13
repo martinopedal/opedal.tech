@@ -6,6 +6,7 @@ interface Props {
   description: string;
   canonicalUrl?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: 'website' | 'article';
 }
 
@@ -13,12 +14,32 @@ const {
   title,
   description,
   canonicalUrl = Astro.url.href,
-  ogImage,
+  ogImage = '/og-default.png',
+  ogImageAlt = 'opedal.tech — Martin Opedal, Lead Cloud Solution Architect at Microsoft',
   ogType = 'website',
 } = Astro.props;
 
-const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).toString() : undefined;
+// og-default.png ships at 1200x630 (the standard OG aspect). Custom per-page
+// overrides should match these dimensions or override the meta tags below.
+const ogImageUrl = new URL(ogImage, Astro.site).toString();
 const currentYear = new Date().getFullYear();
+
+// Sitewide WebSite schema. Helps search engines and AI scrapers identify the
+// site as a single entity, which is required for Google's Knowledge Graph
+// matching alongside the Person schema below.
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'opedal.tech',
+  alternateName: 'Martin Opedal',
+  url: 'https://opedal.tech/',
+  inLanguage: ['en', 'nb'],
+  author: {
+    '@type': 'Person',
+    name: 'Martin Opedal',
+    url: 'https://opedal.tech/',
+  },
+};
 
 // Sitewide Person schema. Lives in BaseLayout so every page emits it.
 // JSON-LD <script type="application/ld+json"> blocks are CSP-exempt
@@ -111,9 +132,14 @@ const personSchema = {
     <meta property="og:site_name" content="opedal.tech" />
     <meta property="og:locale" content="en_US" />
     {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
-    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <!-- RSS feed discovery -->
     <link
@@ -128,6 +154,9 @@ const personSchema = {
 
     <!-- Sitewide Person schema for search engines and AI scrapers. -->
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+    <!-- Sitewide WebSite schema for search engines (Knowledge Graph signals). -->
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 
     <slot name="head-extra" />
 

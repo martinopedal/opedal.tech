@@ -55,6 +55,33 @@ const articleSchema = {
     '@id': articleUrl,
   },
 };
+
+// BreadcrumbList helps Google show breadcrumb trails in SERPs instead of
+// raw URLs. Three levels: Home -> Blog -> current post.
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://opedal.tech/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Blog',
+      item: 'https://opedal.tech/blog/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: title,
+      item: articleUrl,
+    },
+  ],
+};
 ---
 
 <BaseLayout
@@ -73,6 +100,7 @@ const articleSchema = {
       <meta property="article:tag" content={tag} />
     ))}
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   </Fragment>
 
   <Nav />
