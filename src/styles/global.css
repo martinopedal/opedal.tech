@@ -413,10 +413,39 @@ section h2 {
 /* ============================================================
    ABOUT
    ============================================================ */
+.about-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.about-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .about-text p {
   color: var(--text-muted);
   margin-bottom: 1rem;
   max-width: 680px;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    flex-direction: row;
+    align-items: start;
+    gap: 2.5rem;
+  }
+
+  .about-photo {
+    width: 220px;
+    height: 220px;
+  }
 }
 
 /* ============================================================
