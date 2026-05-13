@@ -29,6 +29,8 @@ const currentPath = Astro.url.pathname;
     ) : (
       <li><a href="/">Home</a></li>
     )}
+    <li><a href="/work">Work</a></li>
+    <li><a href="/cv">CV</a></li>
     <li><a href="/blog" class={currentPath.startsWith('/blog') ? 'nav-blog' : ''}>Blog</a></li>
   </ul>
 </nav>

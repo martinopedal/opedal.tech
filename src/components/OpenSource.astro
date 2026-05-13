@@ -2,65 +2,121 @@
 ---
 <section id="oss">
   <div class="container">
+    <span class="section-label">Open Source</span>
     <h2>Open Source</h2>
     <p class="section-intro">
       Terraform modules, ARG queries, and tooling that came out of real customer engagements.
     </p>
-    <div class="repo-grid">
 
-      <a class="repo-card" href="https://github.com/martinopedal/azure-analyzer" target="_blank" rel="noopener noreferrer">
-        <div class="repo-header">
-          <span class="repo-lang powershell">PowerShell</span>
-        </div>
-        <h3>azure-analyzer</h3>
-        <p>Automated Azure assessment bundling azqr, PSRule, AzGovViz and ALZ graph queries. Unified JSON + HTML reports.</p>
-        <span class="repo-stars">⭐ 14</span>
-      </a>
-
-      <a class="repo-card" href="https://github.com/martinopedal/alz-graph-queries" target="_blank" rel="noopener noreferrer">
-        <div class="repo-header">
-          <span class="repo-lang powershell">PowerShell</span>
-        </div>
-        <h3>alz-graph-queries</h3>
-        <p>135 Azure Resource Graph queries for the ALZ checklist. Takes automated coverage from 49 to 135 items.</p>
-        <span class="repo-stars">⭐ 7</span>
-      </a>
-
-      <a class="repo-card" href="https://github.com/martinopedal/terraform-azapi-aks-automatic" target="_blank" rel="noopener noreferrer">
-        <div class="repo-header">
-          <span class="repo-lang terraform">HCL</span>
-        </div>
-        <h3>terraform-azapi-aks-automatic</h3>
-        <p>AKS Automatic with ALZ Corp networking. BYO VNet, multiple ingress (AGC/NGINX/Istio) and egress options.</p>
-        <span class="repo-stars">⭐ 1</span>
-      </a>
-
-      <a class="repo-card" href="https://github.com/martinopedal/linkedin-auto-poster" target="_blank" rel="noopener noreferrer">
-        <div class="repo-header">
-          <span class="repo-lang python">Python</span>
-        </div>
-        <h3>linkedin-auto-poster</h3>
-        <p>AI-powered LinkedIn post generator. Fetches RSS feeds, scores relevance, drafts in your voice, publishes via PR approval.</p>
-        <span class="repo-stars">⭐ 5</span>
-      </a>
-
-      <a class="repo-card" href="https://github.com/martinopedal/ghec-vnet-runners-azure" target="_blank" rel="noopener noreferrer">
-        <div class="repo-header">
-          <span class="repo-lang terraform">HCL</span>
-        </div>
-        <h3>ghec-vnet-runners-azure</h3>
-        <p>GitHub-hosted runners with Azure VNet integration for GHE.com with EU data residency.</p>
-        <span class="repo-stars">⭐ 1</span>
-      </a>
-
-      <a class="repo-card" href="https://github.com/martinopedal" target="_blank" rel="noopener noreferrer">
-        <div class="repo-header">
-          <span class="repo-lang all">All repos →</span>
-        </div>
-        <h3>See everything on GitHub</h3>
-        <p>Terraform modules, ARG queries, MCP servers, and CI/CD tooling from real customer engagements.</p>
-      </a>
-
+    <div class="repo-group">
+      <h3 class="repo-group-label">Azure Governance & Assessment</h3>
+      <div class="repo-rows">
+        <a class="repo-row lang-powershell" href="https://github.com/martinopedal/azure-analyzer" target="_blank" rel="noopener noreferrer">
+          <span class="repo-row-lang">PowerShell</span>
+          <div class="repo-row-content">
+            <h3>azure-analyzer</h3>
+            <p>Bundled assessment runner that unifies azqr, PSRule, AzGovViz, and 135 ALZ graph queries into one portable JSON + HTML report</p>
+          </div>
+        </a>
+        <a class="repo-row lang-powershell" href="https://github.com/martinopedal/alz-graph-queries" target="_blank" rel="noopener noreferrer">
+          <span class="repo-row-lang">PowerShell</span>
+          <div class="repo-row-content">
+            <h3>alz-graph-queries</h3>
+            <p>Automated ALZ checklist validation — 135 Azure Resource Graph queries that take coverage from 49 to 135 items</p>
+          </div>
+        </a>
+      </div>
     </div>
+
+    <div class="repo-group">
+      <h3 class="repo-group-label">GitHub Runners & Private Networking</h3>
+      <div class="repo-rows">
+        <a class="repo-row lang-terraform" href="https://github.com/martinopedal/terraform-azurerm-avm-ptn-cicd-agents-and-runners" target="_blank" rel="noopener noreferrer">
+          <span class="repo-row-lang">Terraform</span>
+          <div class="repo-row-content">
+            <h3>avm-ptn-cicd-agents-and-runners</h3>
+            <p>Official AVM pattern module: self-hosted ADO agents and GitHub runners with PAT and UAMI auth, no public IP egress</p>
+          </div>
+        </a>
+        <a class="repo-row lang-terraform" href="https://github.com/martinopedal/ghec-vnet-runners-azure" target="_blank" rel="noopener noreferrer">
+          <span class="repo-row-lang">Terraform</span>
+          <div class="repo-row-content">
+            <h3>ghec-vnet-runners-azure</h3>
+            <p>GitHub-hosted runners with Azure VNet integration for GHE.com — EU data residency and private endpoint connectivity</p>
+          </div>
+        </a>
+        <a class="repo-row lang-terraform" href="https://github.com/martinopedal/terraform-azurerm-github-runners-alz-corp" target="_blank" rel="noopener noreferrer">
+          <span class="repo-row-lang">Terraform</span>
+          <div class="repo-row-content">
+            <h3>terraform-azurerm-github-runners-alz-corp</h3>
+            <p>Self-hosted GitHub Actions runners that run inside ALZ Corp landing zones with central firewall egress</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="repo-group">
+      <h3 class="repo-group-label">Terraform Platform Modules</h3>
+      <div class="repo-rows">
+        <a class="repo-row lang-terraform" href="https://github.com/martinopedal/terraform-azapi-aks-automatic" target="_blank" rel="noopener noreferrer">
+          <span class="repo-row-lang">Terraform</span>
+          <div class="repo-row-content">
+            <h3>terraform-azapi-aks-automatic</h3>
+            <p>AKS Automatic with ALZ Corp networking — BYO VNet, multiple ingress options (AGC/NGINX/Istio), managed identity everywhere</p>
+          </div>
+        </a>
+        <a class="repo-row lang-terraform" href="https://github.com/martinopedal/terraform-azurerm-avm-ptn-aiml-ai-foundry" target="_blank" rel="noopener noreferrer">
+          <span class="repo-row-lang">Terraform</span>
+          <div class="repo-row-content">
+            <h3>avm-ptn-aiml-ai-foundry</h3>
+            <p>Official AVM pattern module for Azure AI Foundry (formerly AI Studio) with network isolation and private endpoints</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="repo-group">
+      <h3 class="repo-group-label">AKS Automation</h3>
+      <div class="repo-rows">
+        <a class="repo-row lang-powershell" href="https://github.com/martinopedal/aks-automatic-ingress-migration" target="_blank" rel="noopener noreferrer">
+          <span class="repo-row-lang">PowerShell</span>
+          <div class="repo-row-content">
+            <h3>aks-automatic-ingress-migration</h3>
+            <p>Automated migration from NGINX Ingress to Application Gateway for Containers on AKS Automatic clusters</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="repo-group">
+      <h3 class="repo-group-label">Other Tooling</h3>
+      <div class="repo-rows">
+        <a class="repo-row lang-python" href="https://github.com/martinopedal/news-fetcher" target="_blank" rel="noopener noreferrer">
+          <span class="repo-row-lang">Python</span>
+          <div class="repo-row-content">
+            <h3>news-fetcher</h3>
+            <p>RSS feed aggregator with AI relevance scoring — ingests tech news and filters for Azure/Kubernetes/IaC content</p>
+          </div>
+        </a>
+        <a class="repo-row lang-python" href="https://github.com/martinopedal/linkedin-auto-poster" target="_blank" rel="noopener noreferrer">
+          <span class="repo-row-lang">Python</span>
+          <div class="repo-row-content">
+            <h3>linkedin-auto-poster</h3>
+            <p>AI-powered LinkedIn post generator — drafts posts in your voice from RSS feeds, submits via PR approval workflow</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="repo-rows" style="margin-top: 1.5rem;">
+      <a class="repo-row lang-all" href="https://github.com/martinopedal" target="_blank" rel="noopener noreferrer">
+        <span class="repo-row-lang">All repos</span>
+        <div class="repo-row-content">
+          <h3>See everything on GitHub →</h3>
+          <p>Terraform modules, ARG queries, MCP servers, and CI/CD tooling from real customer engagements</p>
+        </div>
+      </a>
+    </div>
+
   </div>
 </section>

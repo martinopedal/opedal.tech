@@ -804,3 +804,207 @@ footer a:hover {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ============================================================
+   KRANZ — PR B redesign additions
+   Section markers, repo rows, work-card-trim, language borders,
+   accent rule under h2. Bales (print) and Lovell (/work) append
+   AFTER this block in their own delimited sections.
+   ============================================================ */
+
+/* ---- Hero gradient on name (subtle, hero only) ---- */
+#hero h1 {
+  background: linear-gradient(135deg, #2f81f7 0%, #58a6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Fallback for browsers that don't support background-clip */
+@supports not (background-clip: text) {
+  #hero h1 {
+    color: var(--text);
+  }
+}
+
+/* ---- Section markers ---- */
+.section-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+section h2 {
+  position: relative;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---- Repo rows (replaces repo-grid for grouped layout) ---- */
+.repo-group {
+  margin-bottom: 2.5rem;
+}
+
+.repo-group:last-child {
+  margin-bottom: 0;
+}
+
+.repo-group-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.repo-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.repo-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left-width: 2px;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  transition: border-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.repo-row:hover {
+  border-color: var(--accent);
+  color: inherit;
+}
+
+.repo-row-lang {
+  display: flex;
+  align-items: center;
+  min-width: 80px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.repo-row-content h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent-hover);
+  margin-bottom: 0.25rem;
+}
+
+.repo-row-content p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Language-specific border colors */
+.repo-row.lang-terraform {
+  border-left-color: #844fba;
+}
+
+.repo-row.lang-python {
+  border-left-color: #3fb950;
+}
+
+.repo-row.lang-powershell {
+  border-left-color: #5391fe;
+}
+
+.repo-row.lang-typescript {
+  border-left-color: #3178c6;
+}
+
+.repo-row.lang-javascript {
+  border-left-color: #f1e05a;
+}
+
+.repo-row.lang-go {
+  border-left-color: #00add8;
+}
+
+.repo-row.lang-csharp {
+  border-left-color: #178600;
+}
+
+.repo-row.lang-all {
+  border-left-color: var(--accent);
+}
+
+/* ---- Work rows (trimmed homepage version) ---- */
+.work-rows {
+  display: grid;
+  gap: 1rem;
+}
+
+.work-row {
+  display: grid;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.work-row:hover {
+  border-color: var(--accent);
+}
+
+.work-row h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.work-row p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.work-row-link {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.work-row-link:hover {
+  color: var(--accent-hover);
+}
+
+/* ---- Speaking single-line format ---- */
+.speaking-line {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.speaking-line a {
+  font-weight: 500;
+}
+
+/* ---- Contact email button ---- */
+.contact-links .btn {
+  min-width: 140px;
+}
+
+/* ============================================================
+   END KRANZ SECTION
+   ============================================================ */
