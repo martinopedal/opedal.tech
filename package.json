@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "check:facts": "node scripts/check-facts.mjs",
     "spellcheck": "cspell \"**/*.{md,astro,ts,js,mjs,html,css,json,yml,yaml}\" --no-progress --show-suggestions",
     "spellcheck:summary": "cspell \"**/*.{md,astro,ts,js,mjs,html,css,json,yml,yaml}\" --no-progress --summary"
   },
