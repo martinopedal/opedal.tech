@@ -176,23 +176,20 @@ const profilePageSchema = {
         </div>
 
         <div class="cv-skills-block">
-          <h3>Technical Skills</h3>
-          <div class="cv-technical-skills">
-            {data.skills.technical.map((skill) => {
-              // Map percentage to a hard-coded utility class so the inline
-              // `style="--bar-fill: ..."` (CSP-blocked) is not needed.
-              // Round to nearest 5% to match the available .is-NN classes.
-              const pct = Math.round(skill.level * 100 / 5) * 5;
-              const fillClass = `is-${pct}`;
-              return (
-                <div class="cv-skill-bar">
-                  <span class="cv-skill-name">{skill.name}</span>
-                  <div class="cv-skill-track">
-                    <div class={`cv-skill-fill ${fillClass}`}></div>
-                  </div>
-                </div>
-              );
-            })}
+          <h3>Industry Knowledge</h3>
+          <div class="cv-skill-pills">
+            {data.skills.industry_knowledge.map((skill) => (
+              <span class="cv-skill-tag">{skill}</span>
+            ))}
+          </div>
+        </div>
+
+        <div class="cv-skills-block">
+          <h3>Tools & Technologies</h3>
+          <div class="cv-skill-pills">
+            {data.skills.tools_technologies.map((skill) => (
+              <span class="cv-skill-tag">{skill}</span>
+            ))}
           </div>
         </div>
 

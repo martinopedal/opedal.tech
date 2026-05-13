@@ -1555,6 +1555,23 @@ section h2 {
   border-radius: 2rem;
 }
 
+/* Skill pills (Industry Knowledge, Tools & Technologies) */
+.cv-skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cv-skill-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.3rem 0.75rem;
+  background: var(--tag-bg);
+  color: var(--color-accent);
+  border-radius: 2rem;
+}
+
 /* ---- Certifications ---- */
 .cv-certifications {
   list-style: none;

@@ -177,41 +177,81 @@ skills:
     - Kubernetes / AKS
     - Stakeholder Management
 
-  # Self-rated technical depth, 0.0–1.0. Used by LaTeX to draw bar fractions
-  # (\barrule{level}{...}) and by /cv to render proportional-width bars in CSS
-  # (no JavaScript, just inline width via a CSS custom property).
-  technical:
-    - { name: Azure Platform,        level: 0.40 }
-    - { name: Security / IAM,        level: 0.35 }
-    - { name: Networking,            level: 0.40 }
-    - { name: Kubernetes / AKS,      level: 0.35 }
-    - { name: AI / Generative AI,    level: 0.25 }
-    - { name: Terraform / Bicep,     level: 0.30 }
-    - { name: GitHub / DevSecOps,    level: 0.30 }
+  # Technical skills grouped by category, mirroring LinkedIn taxonomy for ATS alignment.
+  # Source of truth: Martin's LinkedIn profile as of 2026-05.
+  # Do NOT add numeric ratings — flat lists match ATS keyword patterns and avoid
+  # the self-rating trap where 15 years Azure experience reads as "40%".
+  industry_knowledge:
+    - Microsoft Azure
+    - Cloud Architecture
+    - Solution Architecture
+    - Enterprise Architecture
+    - Cloud Governance
+    - Cloud Security
+    - Network Security
+    - Cybersecurity
+    - Technical Leadership
+    - Platform Engineering
+    - Cloud-Native Architecture
+    - Azure Landing Zones
+    - Well-Architected Framework
+    - Cloud Adoption Framework
+    - Stakeholder Management
+    - Technical Presentations
+    - Project Delivery
+    - Migration Projects
+
+  tools_technologies:
+    - Azure Kubernetes Service (AKS)
+    - Kubernetes
+    - Terraform
+    - Bicep (Domain-Specific Language)
+    - Infrastructure as code (IaC)
+    - Generative AI
+    - Artificial Intelligence (AI)
+    - Machine Learning
+    - GitHub Copilot
+    - GitHub
+    - GitOps
+    - Azure DevOps Services
+    - Continuous Integration and Continuous Delivery (CI/CD)
+    - DevOps
+    - Microservices
+    - Docker
+    - Identity and Access Management (IAM)
+    - Microsoft Entra ID
+    - Microsoft Defender for Cloud
+    - Azure Policy
+    - PowerShell
+    - Virtualization
+    - Network Administration
 
   # Free-text tag cloud. Rendered as \cvtag{...} in LaTeX and pill spans on /cv.
+  # Aligned with ATS keywords for Cloud Solution Architect / Lead roles and LinkedIn
+  # recommendation themes. Generic soft skills ("Interpersonal Skills") removed.
   competencies:
     - Trusted Advisor
-    - C-Suite Engagement
+    - Executive Engagement
     - Enterprise Architecture
-    - Cloud Migration
-    - Cost Optimization
-    - Cloud Consolidation
-    - Technology Strategy
-    - Pre-Sales & Consulting
-    - Customer Success
-    - Multi-Cloud
-    - Reference Architectures
-    - AKS Automatic
-    - Large-Scale Programs
+    - Azure Landing Zones (ALZ)
+    - Cloud Adoption Framework
+    - Well-Architected Framework
     - Solution Design
+    - Technical Pre-Sales
+    - Pre-Sales Engineering
+    - Customer Success
+    - Strategic + Operational Range
+    - Architectural Strategy
+    - Stakeholder Management
+    - Technical Leadership
+    - Cross-Functional Collaboration
+    - Reference Architectures
+    - Workshop Facilitation
     - Technical Evangelism
-    - Data Science & ML
-    - Technical Credibility
-    - Relationship Building
-    - Interpersonal Skills
-    - Team Collaboration
-    - Mentoring & Coaching
+    - End-to-End Project Delivery
+    - Open Knowledge Sharing
+    - Holistic Solution Design
+    - Mentorship
 
 # `kind` is a typed bucket so the LaTeX template can pick an icon
 # (\faCloud for cloud certs, \faCog for everything else). On /cv the kind
