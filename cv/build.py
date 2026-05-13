@@ -29,6 +29,41 @@ PUBLIC_DIR = REPO_ROOT / "public" / "cv"
 MODES = ["1page", "multipage"]
 
 
+# LaTeX special characters escaped when emitted from data via Jinja `finalize`.
+#
+# Intentionally EXCLUDED:
+#   - '\' : data is not expected to contain literal backslashes; leaving it
+#     unescaped also avoids interfering with template-controlled commands.
+#   - '~' : used in the template as a non-breaking space inside join separators
+#     like ' ~•~ '. Escaping would produce a visible tilde glyph.
+#   - '^' : not expected in data; escaping is unnecessary noise.
+_LATEX_ESCAPES = [
+    ("&", r"\&"),
+    ("%", r"\%"),
+    ("$", r"\$"),
+    ("#", r"\#"),
+    ("_", r"\_"),
+    ("{", r"\{"),
+    ("}", r"\}"),
+]
+
+
+def latex_escape(value):
+    """Escape LaTeX special characters in any string emitted from YAML data.
+
+    Wired as Jinja `finalize` so it runs once per variable substitution after
+    user filters (e.g. `| trim`, `| join`) have produced the final string.
+    Non-string values (numbers, None) are passed through unchanged.
+    """
+    if value is None:
+        return ""
+    if not isinstance(value, str):
+        return value
+    for needle, replacement in _LATEX_ESCAPES:
+        value = value.replace(needle, replacement)
+    return value
+
+
 def main():
     """Main build orchestration."""
     print("[build.py] Starting CV build for architect variant")
@@ -54,6 +89,7 @@ def main():
         comment_end_string="=))",
         trim_blocks=True,
         lstrip_blocks=True,
+        finalize=latex_escape,
     )
     template = env.get_template("architect.tex.j2")
     print(f"[build.py] Loaded template from {TEMPLATES_DIR / 'architect.tex.j2'}")
