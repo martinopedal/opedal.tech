@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+
+const title = 'Work — opedal.tech';
+const description = 'Evidence trail of platform-engineering work across Azure Landing Zones, GitHub runners, AKS Automatic, Terraform AVM patterns, and AI platforms in regulated industries.';
+
+// BreadcrumbList JSON-LD for /work page
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://opedal.tech',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Work',
+      item: 'https://opedal.tech/work/',
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <Fragment slot="head-extra">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <Nav />
+
+  <section class="work-page">
+    <div class="container">
+      <span class="section-label">Work</span>
+      <h2>What I Work On</h2>
+      <p class="section-intro">
+        Platform-engineering work that came out of real customer engagements. Every claim links to a repo, blog post, or talk.
+      </p>
+
+      <section class="work-area">
+        <h3>Azure Landing Zones at Scale</h3>
+        <p class="work-claim">
+          End-to-end ALZ Corp deployments with automated compliance validation and 135+ checklist queries.
+        </p>
+        <ul class="evidence">
+          <li>
+            <a href="https://github.com/martinopedal/azure-analyzer" target="_blank" rel="noopener noreferrer">azure-analyzer</a> — bundled assessment runner that unifies azqr, PSRule, AzGovViz, and 135 ALZ graph queries into one portable JSON + HTML report
+          </li>
+          <li>
+            <a href="https://github.com/martinopedal/alz-graph-queries" target="_blank" rel="noopener noreferrer">alz-graph-queries</a> — automated ALZ checklist validation via Azure Resource Graph queries that take coverage from 49 to 135 items
+          </li>
+          <li>
+            <a href="/blog/azure-landing-zones-2025/">Azure Landing Zones 2025</a> — blog post on ALZ governance patterns, network topology, and compliance automation
+          </li>
+        </ul>
+      </section>
+
+      <section class="work-area">
+        <h3>GitHub Runners on Azure (Private Networking)</h3>
+        <p class="work-claim">
+          GitHub-hosted and self-hosted runners with Azure VNet integration, Container Apps, and ALZ Corp firewall egress.
+        </p>
+        <ul class="evidence">
+          <li>
+            <a href="https://github.com/martinopedal/terraform-azurerm-avm-ptn-cicd-agents-and-runners" target="_blank" rel="noopener noreferrer">terraform-azurerm-avm-ptn-cicd-agents-and-runners</a> — official AVM pattern module for self-hosted ADO agents and GitHub runners with PAT and UAMI auth, no public IP egress
+          </li>
+          <li>
+            <a href="https://github.com/martinopedal/ghec-vnet-runners-azure" target="_blank" rel="noopener noreferrer">ghec-vnet-runners-azure</a> — GitHub-hosted runners with Azure VNet integration for GHE.com, EU data residency and private endpoint connectivity
+          </li>
+          <li>
+            <a href="https://github.com/martinopedal/terraform-azurerm-github-runners-alz-corp" target="_blank" rel="noopener noreferrer">terraform-azurerm-github-runners-alz-corp</a> — self-hosted GitHub Actions runners inside ALZ Corp landing zones with central firewall egress
+          </li>
+        </ul>
+      </section>
+
+      <section class="work-area">
+        <h3>AKS Automatic with azapi</h3>
+        <p class="work-claim">
+          AKS Automatic clusters with ALZ Corp networking, BYO VNet, and multiple ingress patterns documented with full Terraform parity.
+        </p>
+        <ul class="evidence">
+          <li>
+            <a href="https://github.com/martinopedal/terraform-azapi-aks-automatic" target="_blank" rel="noopener noreferrer">terraform-azapi-aks-automatic</a> — AKS Automatic with BYO VNet, Application Gateway for Containers, NGINX, Istio ingress options, managed identity everywhere
+          </li>
+          <li>
+            <a href="https://github.com/martinopedal/aks-automatic-ingress-migration" target="_blank" rel="noopener noreferrer">aks-automatic-ingress-migration</a> — automated migration from NGINX Ingress to Application Gateway for Containers on AKS Automatic clusters
+          </li>
+        </ul>
+      </section>
+
+      <section class="work-area">
+        <h3>Terraform AVM Patterns</h3>
+        <p class="work-claim">
+          Official Azure Verified Modules (AVM) pattern modules built to run inside ALZ Corp landing zones with network isolation.
+        </p>
+        <ul class="evidence">
+          <li>
+            <a href="https://github.com/martinopedal/terraform-azurerm-avm-ptn-aiml-ai-foundry" target="_blank" rel="noopener noreferrer">terraform-azurerm-avm-ptn-aiml-ai-foundry</a> — official AVM pattern module for Azure AI Foundry (formerly AI Studio) with network isolation and private endpoints
+          </li>
+          <li>
+            <a href="https://github.com/martinopedal/terraform-azurerm-avm-ptn-cicd-agents-and-runners" target="_blank" rel="noopener noreferrer">terraform-azurerm-avm-ptn-cicd-agents-and-runners</a> — official AVM pattern module for CI/CD runners with network isolation and private egress
+          </li>
+        </ul>
+      </section>
+
+      <section class="work-area">
+        <h3>AI Platforms in Regulated Industries</h3>
+        <p class="work-claim">
+          Azure AI Foundry and Azure OpenAI deployments for Tier-1 Nordic banks, defense contractors, and government bodies with sovereign cloud requirements.
+        </p>
+        <ul class="evidence">
+          <li>
+            Tier-1 Nordic bank — Azure OpenAI with private endpoints, customer-managed keys, and Azure AI Content Safety integration. 48M+ NOK consultant portfolio delivered.
+          </li>
+          <li>
+            Defense contractor — Azure AI Foundry proof-of-concept with Azure Machine Learning private link, VNet-isolated compute, and data exfiltration prevention.
+          </li>
+          <li>
+            Government bodies — Azure OpenAI reference architecture with Azure Front Door, Azure Firewall, and Azure Policy guardrails for data residency.
+          </li>
+        </ul>
+      </section>
+
+      <section class="work-area">
+        <h3>GitHub Copilot Adoption</h3>
+        <p class="work-claim">
+          GitHub Copilot enablement for enterprise customers, from technical onboarding to usage analytics and productivity measurement.
+        </p>
+        <ul class="evidence">
+          <li>
+            <a href="/blog/building-with-github-copilot/">Building with GitHub Copilot</a> — blog post on Copilot adoption patterns, prompt engineering, and productivity gains
+          </li>
+          <li>
+            Tier-1 Nordic bank — GitHub Copilot Enterprise rollout with Copilot Knowledge indexing over internal documentation, custom instructions, and usage tracking via Azure Log Analytics.
+          </li>
+          <li>
+            Defense contractor — GitHub Copilot Business proof-of-concept with GitHub Enterprise Managed Users, audit log streaming to Azure Monitor, and network egress control via Azure Firewall.
+          </li>
+        </ul>
+      </section>
+
+      <section class="work-area">
+        <h3>Speaking &amp; Evangelism</h3>
+        <p class="work-claim">
+          Technical evangelism at Microsoft events and internal knowledge-sharing sessions, covering Azure Landing Zones, AKS, and GitHub Copilot.
+        </p>
+        <ul class="evidence">
+          <li>
+            NIC (Norwegian Infrastructure Conference) speaker — 94% approval rating, Level 300 technical content, live-streamed to 200+ attendees.
+          </li>
+          <li>
+            Microsoft internal events — 50–100 in-person sessions, 200+ virtual sessions on Azure Landing Zones, AKS Automatic, and GitHub Copilot.
+          </li>
+          <li>
+            Customer workshops — Azure OpenAI workshops for regulated industries, GitHub Advanced Security workshops for enterprise customers.
+          </li>
+        </ul>
+      </section>
+
+    </div>
+  </section>
+</BaseLayout>

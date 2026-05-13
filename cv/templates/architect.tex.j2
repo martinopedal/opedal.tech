@@ -1,0 +1,269 @@
+((= Jinja2 template for architect CV - renders 1page or multipage via mode parameter =))
+% hipstercv.sty loads hyperref without options; pre-pass `hidelinks` before \documentclass to avoid option clash.
+\PassOptionsToPackage{hidelinks}{hyperref}
+\documentclass[grey]{hipstercv}
+\usepackage[utf8]{inputenc}
+\usepackage[default]{raleway}
+((* if mode == '1page' *))
+\usepackage[margin=0.7cm, a4paper]{geometry}
+((* else *))
+\usepackage[margin=1cm, a4paper]{geometry}
+((* endif *))
+
+%------------------------------------------------------------------ Variables
+\newlength{\rightcolwidth}
+\newlength{\leftcolwidth}
+((* if mode == '1page' *))
+\setlength{\leftcolwidth}{0.28\textwidth}
+\setlength{\rightcolwidth}{0.67\textwidth}
+((* else *))
+\setlength{\leftcolwidth}{0.3\textwidth}
+\setlength{\rightcolwidth}{0.65\textwidth}
+((* endif *))
+
+%--- Header with photo ---
+\renewcommand{\header}[7]{%
+\tikz[remember picture,overlay] {%
+((* if mode == '1page' *))
+\node[rectangle, fill=#5, anchor=north, minimum width=\paperwidth, minimum height=4.2cm](header) at (current page.north){};%
+((* else *))
+\node[rectangle, fill=#5, anchor=north, minimum width=\paperwidth, minimum height=5cm](header) at (current page.north){};%
+((* endif *))
+\node[left=#7 of header.north, anchor=east](name) at (header.east) {%
+\fontfamily{\sfdefault}\selectfont #2};%
+\node[anchor=south east](degree) at (name.north east) {%
+\fontfamily{\sfdefault}\selectfont #1};%
+\node[anchor=north east](descr) at (name.south east) {%
+\fontfamily{\sfdefault}\selectfont #3};%
+\node[right=#6 of header.west, anchor=west](picture) at (header.west) {};%
+((* if mode == '1page' *))
+\draw[path picture={\node[anchor=center] at (path picture bounding box.center){\includegraphics[height=3.6cm]{photo.jpg}};}] (picture) circle (1.7);%
+}%
+\vspace{0.8cm}%
+((* else *))
+\draw[path picture={\node[anchor=center] at (path picture bounding box.center){\includegraphics[height=4.3cm]{photo.jpg}};}] (picture) circle (2);%
+}%
+\vspace{1.5cm}%
+((* endif *))
+}
+
+%--- Redefine cvevent without image column ---
+\renewcommand{\cvevent}[5]{%
+((* if mode == '1page' *))
+{#1} & \textbf{#2}\newline\textsc{#3} $\cdot$ {#4 ~\faMapMarker}\newline{\color{black!70}\scriptsize #5}\vspace{0.8em}%
+((* else *))
+{#1} & \textbf{#2}\newline\textsc{#3} $\cdot$ {#4 ~\faMapMarker}\newline{\color{black!70}\footnotesize #5}\vspace{1.5em}%
+((* endif *))
+}
+
+%------------------------------------------------------------------
+\title{CV -- ((( person.name )))}
+\author{((( person.name )))}
+\date{March 2026}
+
+\pagestyle{empty}
+\begin{document}
+
+\thispagestyle{empty}
+
+\section*{Start}
+
+((* if mode == '1page' *))
+\header{\bg{headerfontbox}{headerfontboxfont}{((( person.role_short )))} }{\bgupper{headerfontbox}{headerfontboxfont}{\bfseries\Huge ((( person.name )))}}{\bg{headerfontbox}{headerfontboxfont}{\large Cloud Solution Architect}}{}{headerblue}{3cm}{1.8cm}
+((* else *))
+\header{\bg{headerfontbox}{headerfontboxfont}{((( person.role_short )))} }{\bgupper{headerfontbox}{headerfontboxfont}{\bfseries\Huge ((( person.name )))}}{\bg{headerfontbox}{headerfontboxfont}{\large Cloud Solution Architect}}{}{headerblue}{3.5cm}{2cm}
+((* endif *))
+
+%------------------------------------------------
+
+\subsection*{}
+((* if mode == '1page' *))
+\vspace{3em}
+
+\setlength{\columnsep}{1.2cm}
+\columnratio{0.28}[0.67]
+((* else *))
+\vspace{4em}
+
+\setlength{\columnsep}{1.5cm}
+\columnratio{0.3}[0.65]
+((* endif *))
+\begin{paracol}{2}
+\hbadness5000
+
+\paracolbackgroundoptions
+
+((* if mode == '1page' *))
+\scriptsize
+((* else *))
+\footnotesize
+((* endif *))
+{\setasidefontcolour
+
+\bgupper{cvgreen}{white}{Profile} \\
+\bg{cvgreen}{white}{personal} \\
+
+\begin{tabular}{ll}
+\faUser & ((( person.name ))) \\
+\faGlobe & ((( person.location.nationality ))) \\
+\faMapMarker & ((( person.location.city ))), ((( person.location.country ))) \\
+\end{tabular}
+
+\medskip
+
+((* if mode == '1page' *))
+\bg{cvgreen}{white}{Specialization} \\
+
+{\tiny ((( skills.specializations | join(' ~•~ ') )))}
+((* else *))
+\bg{cvgreen}{white}{Areas of specialization} \\
+
+((( skills.specializations | join(' ~•~ ') )))
+((* endif *))
+
+\medskip
+
+\bgupper{cvgreen}{white}{Skills} \\
+\bg{cvgreen}{white}{Languages}
+\smallskip
+
+\begin{minipage}[t]{\leftcolwidth}
+\begin{tabular}{l | ll}
+((* for lang in person.languages *))
+((* if lang.native *))
+\textbf{((( lang.name )))} & ((( lang.level ))) & {\phantom{x}((* if mode == '1page' *))\tiny((* else *))\footnotesize((* endif *)) native} \\
+((* else *))
+\textbf{((( lang.name )))} & ((( lang.level ))) & \pictofraction{\faCircle}{cvpurple}{4}{black!30}{1}{\tiny} \\
+((* endif *))
+((* endfor *))
+\end{tabular}
+\end{minipage}
+
+\medskip
+
+\bg{cvgreen}{white}{Cloud \& Technology} \\
+
+\begin{minipage}[t]{((* if mode == '1page' *))0.28((* else *))0.3((* endif *))\textwidth}
+\begin{tabular}{r @{\hspace{0.5em}}l}
+((* for skill in skills.technical *))
+     \bg{skilllabelcolour}{iconcolour}{((* if mode == '1page' *))\tiny ((* endif *))((( skill.name )))} & \barrule{((( skill.level )))}{0.5em}{cvpurple} \\
+((* endfor *))
+\end{tabular}
+\end{minipage}
+
+\medskip
+
+\bg{cvgreen}{white}{Certifications (((( certifications | length ))))} \\
+((* if mode == '1page' *))
+
+\tiny
+((* else *))
+\smallskip
+
+\scriptsize
+((* endif *))
+\begin{tabular}{cl}
+((* for cert in certifications *))
+((* if cert.kind == 'cloud' *))\faCloud((* else *))\faCog((* endif *)) & ((* if mode == '1page' *))((( cert.name | replace('Azure', 'AZ') | replace('Associate', 'Assoc.') | replace('for Cloud', '') | replace('Defender ', '') )))((* else *))((( cert.name | replace('Azure', 'AZ') | replace('Associate', 'Assoc.') | replace('for Cloud', '') | replace('Defender ', '') )))((* endif *)) \\
+((* endfor *))
+\end{tabular}
+
+\medskip
+
+((* if mode == '1page' *))
+\scriptsize
+((* else *))
+\footnotesize
+((* endif *))
+
+\bg{cvgreen}{white}{Contact} \\
+\smallskip
+\begin{tabular}{cl}
+\faEnvelopeO & \href{mailto:((( person.contact.email )))}{((( person.contact.email )))} \\
+\faLinkedin & \href{((( person.contact.linkedin_url )))}{((( person.contact.linkedin_handle )))} \\
+\faGlobe & \href{((( person.contact.website_url )))}{((( person.contact.website_domain )))} \\
+\end{tabular}
+
+\phantom{turn the page}
+}
+%-----------------------------------------------------------
+\switchcolumn
+
+((* if mode == '1page' *))
+\scriptsize
+((* else *))
+\small
+((* endif *))
+\section*{Professional Summary}
+
+((( summary | trim )))
+
+\section*{Career History}
+
+\begin{tabular}{r| p{((* if mode == '1page' *))0.5((* else *))0.45((* endif *))\textwidth}}
+((* for job in experience *))
+((* if mode in job.appears_on *))
+    \cvevent{((( job.period )))}{((( job.role )))}{((( job.employer )))}{((( job.location )))}{((( job.detail )))} \\
+((* endif *))
+((* endfor *))
+\end{tabular}
+
+\vspace{((* if mode == '1page' *))0.8em((* else *))0.5em((* endif *))}
+
+\begin{minipage}[t]{((* if mode == '1page' *))0.55((* else *))0.52((* endif *))\textwidth}
+\section*{Selected Enterprise Engagements}
+((* if mode == '1page' *))
+{\tiny
+\begin{tabular}{>{\bfseries}r p{0.55\textwidth}}
+((* for eng in engagements *))
+((* if mode in eng.appears_on *))
+    ((( eng.sector ))) & ((( eng.work ))) \\
+((* endif *))
+((* endfor *))
+\end{tabular}
+}
+((* else *))
+\begin{tabular}{>{\footnotesize\bfseries}r >{\footnotesize}p{0.55\textwidth}}
+((* for eng in engagements *))
+((* if mode in eng.appears_on *))
+    ((( eng.sector ))) & ((( eng.work ))) \\
+((* endif *))
+((* endfor *))
+\end{tabular}
+((* endif *))
+\end{minipage}
+
+\vspace{((* if mode == '1page' *))0.8em((* else *))0.5em((* endif *))}
+
+\section*{Core Competencies}
+\begin{minipage}[t]{\columnwidth}
+((* if mode == '1page' *))
+{\tiny
+((* for comp in skills.competencies *))
+\cvtag{((( comp )))}
+((* endfor *))
+}
+((* else *))
+((* for comp in skills.competencies *))
+\cvtag{((( comp )))}
+((* endfor *))
+((* endif *))
+\end{minipage}
+
+%----------------------------------------------------------------------------------------
+((* if mode == '1page' *))
+%	FINAL FOOTER
+%----------------------------------------------------------------------------------------
+((* endif *))
+\vfill{}
+\setlength{\parindent}{0pt}
+\begin{minipage}[t]{\rightcolwidth}
+\begin{center}\fontfamily{\sfdefault}\selectfont \color{black!70}
+{((* if mode == '1page' *))\tiny((* else *))\small((* endif *)) ((( person.name ))) \icon{\faEnvelopeO}{cvpurple}{} ((( person.contact.email ))) \icon{\faMapMarker}{cvpurple}{} ((( person.location.city ))), ((( person.location.country ))) \icon{\faLinkedin}{cvpurple}{} linkedin.com/in/((( person.contact.linkedin_handle ))) \icon{\faGlobe}{cvpurple}{} ((( person.contact.website_domain )))
+}
+\end{center}
+\end{minipage}
+
+\end{paracol}
+
+\end{document}

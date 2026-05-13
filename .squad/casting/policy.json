@@ -1,0 +1,21 @@
+{
+  "$schema": "https://github.com/martinopedal/squad/schemas/casting-policy.json",
+  "version": 1,
+  "default_team_size": 5,
+  "policy_notes": [
+    "One universe per assignment. Never mix.",
+    "Names are persistent identifiers only. No role-play, no catchphrases, no character speech patterns.",
+    "Scribe is always 'Scribe' (exempt from casting).",
+    "Ralph is always 'Ralph' (exempt from casting).",
+    "Overflow handling: use diegetic expansion (recurring/minor characters) before thematic promotion."
+  ],
+  "universe_allowlist": [
+    {
+      "key": "apollo-mocr",
+      "name": "Apollo Program — Mission Control & flight crews",
+      "capacity": 25,
+      "active": true,
+      "selection_rationale": "PR B is a checklist-heavy build pipeline (LaTeX -> PDF) plus a redesign with hard CSP flight rules and a verification gate. Apollo MOCR maps onto this work shape exactly."
+    }
+  ]
+}

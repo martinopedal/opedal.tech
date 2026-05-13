@@ -1,0 +1,15 @@
+{
+  "$schema": "https://github.com/martinopedal/squad/schemas/casting-history.json",
+  "version": 1,
+  "assignments": [
+    {
+      "assignment_id": "pr-b-2026-05-13",
+      "created_at": "2026-05-13",
+      "universe": "apollo-mocr",
+      "team_size": 5,
+      "shape": "redesign + LaTeX pipeline + verification gate",
+      "agents": ["Aaron", "Bales", "Kranz", "Lovell", "Garman"],
+      "rationale": "Pipeline + checklist + flight-rule constraints + Go/No-Go gate map onto Apollo Mission Control naturally. Names are deterministic identifiers; team behavior is governed by per-agent charters, not by the source characters."
+    }
+  ]
+}

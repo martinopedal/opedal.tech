@@ -7,10 +7,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Top-level permissions are intentionally read-only. The deploy job
+# escalates to `pages: write` and `id-token: write` only when it needs
+# them, scoped to that job alone. The build job inherits read-only.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Per-ref concurrency so PR builds don't cancel each other or the main deploy.
 concurrency:
@@ -55,6 +56,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    # Scope the privileged permissions to the one job that needs them.
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
