@@ -99,13 +99,42 @@ body {
   line-height: var(--lh-base);
 }
 
+/* Default link treatment: thin underline that thickens and shifts to
+   terracotta on hover. The 3px offset keeps the underline clear of
+   descenders without floating obviously above the baseline. */
 a {
   color: var(--accent);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(212, 165, 132, 0.45);
+  text-underline-offset: 3px;
+  transition: color 0.18s ease, text-decoration-color 0.18s ease, text-decoration-thickness 0.18s ease;
 }
 
 a:hover {
-  color: var(--accent-hover);
+  color: var(--color-accent-strong);
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--color-accent-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a { transition: none; }
+}
+
+/* Opt links inside structural surfaces (nav, cards, buttons, footer)
+   out of the underline — those have their own affordances (hover lift,
+   contrasting bg) and look noisy with a default text-decoration. */
+.site-nav a,
+.nav-brand,
+.btn,
+.blog-card,
+.repo-row,
+.work-row,
+.footer-links a,
+.work-back-link,
+.footer-line a,
+.skip-link {
+  text-decoration: none;
 }
 
 /* ---- Layout helpers ---- */
@@ -203,14 +232,17 @@ a:hover {
 
 /* ---- Focus-visible (a11y) ----
    Make keyboard focus indicators visible across all interactive elements.
-   Uses :focus-visible so mouse users do not get a focus ring on click. */
+   Uses :focus-visible so mouse users do not get a focus ring on click.
+   Terracotta accent (--color-accent-strong) reads as a distinct "active"
+   state versus the peach used for link rest, and the 3px offset keeps
+   the ring clear of the new link underline. */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 [tabindex]:focus-visible,
 .btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
   border-radius: 2px;
 }
 
