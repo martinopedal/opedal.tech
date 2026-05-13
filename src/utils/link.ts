@@ -1,10 +1,12 @@
 /**
  * link() — Base-path-aware internal link helper
  * 
- * Astro's BASE_URL is env-driven:
- *   - localhost:                                '/'
- *   - github.io project pages:                  '/opedal.tech/'
+ * Astro's BASE_URL is env-driven (NOTE: NOT guaranteed trailing-slashed):
+ *   - localhost (no env):                       '/'
+ *   - github.io project pages (via env):        '/opedal.tech' (no trailing slash)
  *   - opedal.tech custom domain (post-cutover): '/'
+ * 
+ * This helper normalizes to guarantee exactly one slash between base and path.
  * 
  * Usage:
  *   <a href={link('cv')}>CV</a>           → /cv or /opedal.tech/cv
@@ -19,7 +21,11 @@ export function link(path: string): string {
     return path;
   }
 
-  const base = import.meta.env.BASE_URL; // Astro provides this, trailing-slashed
-  const clean = path.replace(/^\//, ''); // Strip leading slash if user added one
-  return `${base}${clean}`;
+  const base = import.meta.env.BASE_URL.replace(/\/$/, ''); // Strip trailing slash if any
+  const clean = path.replace(/^\//, ''); // Strip leading slash if any
+  // For the home path (empty after cleaning), return base + '/' so we get '/' or '/opedal.tech/'
+  if (clean === '') {
+    return base + '/';
+  }
+  return `${base}/${clean}`;
 }
