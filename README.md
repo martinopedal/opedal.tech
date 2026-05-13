@@ -59,6 +59,17 @@ If you ever need to host private drafts or non-public content, keep them in a se
 - HTTPS enforced via GitHub Pages — never link to HTTP resources
 - See [SECURITY.md](SECURITY.md) for the vulnerability reporting process
 
+## Contributions
+
+This is a personal portfolio repo and is **not open for contributions**. Pull requests for features, redesigns, content rewrites, or refactors will be closed without review.
+
+What is welcome:
+
+- **Security vulnerabilities** — report privately via the process in [SECURITY.md](SECURITY.md) (GitHub private vulnerability reporting).
+- **Bug reports** — broken links, rendering issues, accessibility problems, or anything factually wrong: open an issue with a clear repro.
+
+Everything else (design opinions, content suggestions, stack changes) is out of scope.
+
 ## Local preview
 
 ```bash
