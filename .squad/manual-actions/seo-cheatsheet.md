@@ -1,7 +1,7 @@
 # Manual SEO Action Cheatsheet
 
-**Target duration**: 30–60 minutes  
-**Priority order**: Biggest SEO/visibility wins first  
+**Target duration**: 30–70 minutes  
+**Priority order**: Biggest SEO/visibility wins first (LinkedIn → Social profiles → GitHub → Search Console)  
 **Context**: opedal.tech is brand-new, has ~0 organic backlinks, ranks beyond page 30 for "Martin Opedal". These actions build the off-site foundation that automated agents can't control.
 
 ---
@@ -69,95 +69,75 @@ Cloud Solution Architect with 15+ years leading complex IT programs across finan
 
 ---
 
-## 4. Google Search Console Verification + Sitemap (15 min)
+## 4. X (Twitter) → Website Link (2 min)
 
-**Why it matters**: Without GSC verification, Google won't index the site or show it in search results. This unlocks indexing, sitemaps, performance data, and manual index requests.
+**Why it matters**: X profile provides another rel=me reciprocation for identity verification. Low effort, adds to sameAs schema signals for search engines.
 
-**Two verification paths** (choose one):
-
-### Path A: DNS TXT Record (Recommended — covers all subdomains)
-
-**URL**: <https://search.google.com/search-console/welcome>
-
-**Steps**:
-1. Click "Domain" property option
-2. Enter `opedal.tech`
-3. Google provides a TXT record like `google-site-verification=abc123xyz...`
-4. Log in to **Domeneshop** (Martin's registrar — confirmed via `Resolve-DnsName`)
-   - URL: <https://www.domeneshop.no/admin>
-5. Navigate to DNS settings for `opedal.tech`
-6. Add TXT record:
-   - **Name**: `@` (or leave blank for apex domain)
-   - **Type**: TXT
-   - **Value**: Paste the verification string from Google
-   - **TTL**: 3600 (default)
-7. Click "Save"
-8. Wait 5–10 minutes for DNS propagation
-9. Return to Google Search Console, click "Verify"
-
-### Path B: HTML Meta Tag (Faster — requires one commit)
-
-**URL**: <https://search.google.com/search-console/welcome>
-
-**Steps**:
-1. Click "URL prefix" property option
-2. Enter `https://opedal.tech`
-3. Select "HTML tag" verification method
-4. Google provides a tag like `<meta name="google-site-verification" content="abc123xyz..." />`
-5. Copy **only the content value** (the `abc123xyz...` part)
-6. In **opedal.tech** repo, go to Settings → Secrets and variables → Actions → Variables
-7. Create new repository variable:
-   - **Name**: `GOOGLE_SITE_VERIFICATION`
-   - **Value**: Paste the verification code (without `<meta>` tags)
-8. Commit will be handled by Pyne3 agent (or Martin can open a PR to pass the variable to BaseLayout.astro)
-9. Wait for Pages deployment to finish (~2 min)
-10. Return to Google Search Console, click "Verify"
-
-**After verification** (both paths):
-1. In GSC, go to Sitemaps (left sidebar)
-2. Enter `https://opedal.tech/sitemap-index.xml`
-3. Click "Submit"
-4. Go to URL Inspection tool (left sidebar)
-5. Manually request indexing for these URLs:
-   - `https://opedal.tech/`
-   - `https://opedal.tech/about/`
-   - `https://opedal.tech/cv/`
-   - `https://opedal.tech/work/`
-
-**Verification**:
-- GSC shows "Ownership verified" checkmark
-- Sitemap appears as "Success" status
-- Indexed URLs increment over 24–48 hours
-
----
-
-## 5. Bing Webmaster Tools (2 min)
-
-**Why it matters**: Bing powers Yahoo, DuckDuckGo, and ChatGPT's web search. One-click import from GSC copies all verification + sitemaps instantly.
-
-**URL**: <https://www.bing.com/webmasters/>
+**Direct action URL**: <https://x.com/settings/profile> (or <https://twitter.com/settings/profile>)
 
 **What to do**:
-1. Sign in with Microsoft account
-2. Click "Import from Google Search Console"
-3. Authorize the connection
-4. Select `opedal.tech` from the list
-5. Click "Import"
+1. Click "Edit profile"
+2. Find "Website" field
+3. **URL**: `https://opedal.tech`
+4. Click "Save"
 
-**Alternate path** (if GSC import fails):
-1. Click "Add a site"
-2. Enter `https://opedal.tech`
-3. Use same DNS TXT or meta tag method as GSC:
-   - For meta tag: Create repo variable `BING_SITE_VERIFICATION` (Pyne3 will handle the tag slot)
-4. Submit sitemap: `https://opedal.tech/sitemap-index.xml`
+**Note**: Martin confirmed X account is "not active" — just set the website link, no need to update bio.
 
 **Verification**:
-- Bing dashboard shows opedal.tech with "Verified" status
-- Sitemap appears in the Sitemaps report
+- Visit <https://x.com/MartinOpedal>
+- Confirm opedal.tech link appears in profile header or bio section
+- Link should be clickable and display in profile
 
 ---
 
-## 6. GitHub Profile README (10 min)
+## 5. Instagram → Website Link + Bio (2 min)
+
+**Why it matters**: Instagram profile link provides social proof and rel=me verification. Mobile-first audience discovers opedal.tech through Instagram bio.
+
+**Direct action URL**: <https://www.instagram.com/accounts/edit/> (or tap "Edit profile" in Instagram app)
+
+**What to do**:
+1. Tap/click "Edit profile"
+2. Find "Website" field
+3. **URL**: `https://opedal.tech`
+4. Update "Bio" to include (add to existing or replace):
+
+```
+Lead Cloud Solution Architect at Microsoft. Patterns, code, and lessons at opedal.tech.
+```
+
+5. Tap/click "Done" or "Submit"
+
+**Verification**:
+- Visit <https://www.instagram.com/martinopedal/>
+- Confirm opedal.tech link appears in bio
+- Confirm bio text includes opedal.tech mention
+
+---
+
+## 6. Facebook → Website Link (2 min)
+
+**Why it matters**: Facebook profile provides another high-authority rel=me reciprocation. Meta's platforms are heavily indexed by search engines.
+
+**Direct action URL**: <https://www.facebook.com/opedalmartin/about_contact_and_basic_info> (or navigate to profile → About → Contact and basic info)
+
+**What to do**:
+1. Go to "About" tab on profile
+2. Click "Contact and basic info"
+3. Find "Websites and social links" section
+4. Click "Add a website"
+5. **URL**: `https://opedal.tech`
+6. **Label**: "Personal website" or "Blog"
+7. Click "Save"
+
+**Verification**:
+- Visit <https://www.facebook.com/opedalmartin>
+- Click "About" tab
+- Confirm opedal.tech appears in "Contact and basic info" → "Websites"
+
+---
+
+## 7. GitHub Profile README (10 min)
 
 **Why it matters**: GitHub profile READMEs are indexed by Google and appear in search results. This is a high-authority Microsoft/GitHub domain linking to opedal.tech.
 
@@ -220,7 +200,158 @@ I speak at Nordic Infrastructure Conference, run architecture workshops for stra
 
 ---
 
-## 7. Microsoft Tech Community Profile (5 min)
+## 8. Google Search Console Verification + Sitemap (15 min)
+
+**Why it matters**: Without GSC verification, Google won't index the site or show it in search results. This unlocks indexing, sitemaps, performance data, and manual index requests.
+
+**Two verification paths** (choose one):
+
+### Path A: DNS TXT Record (Recommended — covers all subdomains)
+
+**URL**: <https://search.google.com/search-console/welcome>
+
+**Steps**:
+1. Click "Domain" property option
+2. Enter `opedal.tech`
+3. Google provides a TXT record like `google-site-verification=abc123xyz...`
+4. Log in to **Domeneshop** (Martin's registrar — confirmed via `Resolve-DnsName`)
+   - URL: <https://www.domeneshop.no/admin>
+5. Navigate to DNS settings for `opedal.tech`
+6. Add TXT record:
+   - **Name**: `@` (or leave blank for apex domain)
+   - **Type**: TXT
+   - **Value**: Paste the verification string from Google
+   - **TTL**: 3600 (default)
+7. Click "Save"
+8. Wait 5–10 minutes for DNS propagation
+9. Return to Google Search Console, click "Verify"
+
+### Path B: HTML Meta Tag (Faster — requires one commit)
+
+**URL**: <https://search.google.com/search-console/welcome>
+
+**Steps**:
+1. Click "URL prefix" property option
+2. Enter `https://opedal.tech`
+3. Select "HTML tag" verification method
+4. Google provides a tag like `<meta name="google-site-verification" content="abc123xyz..." />`
+5. Copy **only the content value** (the `abc123xyz...` part)
+6. In **opedal.tech** repo, go to Settings → Secrets and variables → Actions → Variables
+7. Create new repository variable:
+   - **Name**: `GOOGLE_SITE_VERIFICATION`
+   - **Value**: Paste the verification code (without `<meta>` tags)
+8. Commit will be handled by Pyne3 agent (or Martin can open a PR to pass the variable to BaseLayout.astro)
+9. Wait for Pages deployment to finish (~2 min)
+10. Return to Google Search Console, click "Verify"
+
+**After verification** (both paths):
+1. In GSC, go to Sitemaps (left sidebar)
+2. Enter `https://opedal.tech/sitemap-index.xml`
+3. Click "Submit"
+4. Go to URL Inspection tool (left sidebar)
+5. Manually request indexing for these URLs:
+   - `https://opedal.tech/`
+   - `https://opedal.tech/about/`
+   - `https://opedal.tech/cv/`
+   - `https://opedal.tech/work/`
+
+**Verification**:
+- GSC shows "Ownership verified" checkmark
+- Sitemap appears as "Success" status
+- Indexed URLs increment over 24–48 hours
+
+---
+
+## 9. Bing Webmaster Tools (2 min)
+
+**Why it matters**: Bing powers Yahoo, DuckDuckGo, and ChatGPT's web search. One-click import from GSC copies all verification + sitemaps instantly.
+
+**URL**: <https://www.bing.com/webmasters/>
+
+**What to do**:
+1. Sign in with Microsoft account
+2. Click "Import from Google Search Console"
+3. Authorize the connection
+4. Select `opedal.tech` from the list
+5. Click "Import"
+
+**Alternate path** (if GSC import fails):
+1. Click "Add a site"
+2. Enter `https://opedal.tech`
+3. Use same DNS TXT or meta tag method as GSC:
+   - For meta tag: Create repo variable `BING_SITE_VERIFICATION` (Pyne3 will handle the tag slot)
+4. Submit sitemap: `https://opedal.tech/sitemap-index.xml`
+
+**Verification**:
+- Bing dashboard shows opedal.tech with "Verified" status
+- Sitemap appears in the Sitemaps report
+
+---
+
+## 10. Microsoft Tech Community Profile (5 min)
+
+**Why it matters**: GitHub profile READMEs are indexed by Google and appear in search results. This is a high-authority Microsoft/GitHub domain linking to opedal.tech.
+
+**Check if repo exists**:
+- Visit <https://github.com/martinopedal/martinopedal>
+- If it shows 404, go to <https://github.com/new> and create a **public** repo named `martinopedal` (matches username)
+
+**Direct edit URL** (after repo exists):
+- <https://github.com/martinopedal/martinopedal/edit/main/README.md>
+
+**README content** (copy/paste, plain markdown):
+
+```markdown
+# Martin Opedal
+
+Lead Cloud Solution Architect at Microsoft Norway. I write about Azure Landing Zones, AKS, and platform engineering at **[opedal.tech](https://opedal.tech)**.
+
+## What I Do
+
+I architect Landing Zones, AKS Automatic, and AI Foundry deployments for Nordic enterprises in regulated industries. I work with banks, government agencies, and defense contractors running GitHub Advanced Security in air-gapped environments. My GitHub repos include Terraform AVM patterns, AKS modules, and bundled Azure governance assessment tooling.
+
+I speak at Nordic Infrastructure Conference, run architecture workshops for strategic accounts, and contribute to Azure Verified Modules.
+
+## Experience
+
+- **Microsoft** (2024–Present): Lead / Cross Cloud Solution Architect  
+  Technology strategy for regulated Nordic enterprises. Well-Architected reviews, AI Foundry workshops, reference architectures.
+
+- **Sopra Steria** (2024): Senior Manager, Microsoft Cloud  
+  Led Microsoft cloud practice. Carried forward large European bank engagement.
+
+- **Teknograd** (2011–2020): Systems Engineer → Senior Cloud Architect  
+  Datacenter-to-cloud migrations. Managed VMware estates, Azure, M365, Entra ID for enterprise customers.
+
+## Certifications
+
+- Azure Solutions Architect Expert
+- Azure Cybersecurity Architect Expert
+- Azure DevOps Engineer Expert
+- HashiCorp Terraform Associate
+- 5 additional Azure/M365 certifications
+
+## Links
+
+- **Website**: [opedal.tech](https://opedal.tech)
+- **LinkedIn**: [linkedin.com/in/martin-opedal](https://www.linkedin.com/in/martin-opedal)
+- **CV**: [opedal.tech/cv](https://opedal.tech/cv)
+- **Work samples**: [opedal.tech/work](https://opedal.tech/work)
+
+---
+
+[![Astro](https://img.shields.io/badge/Built%20with-Astro-FF5D01?logo=astro&logoColor=white)](https://astro.build)
+[![Azure](https://img.shields.io/badge/Azure-Certified-0078D4?logo=microsoftazure&logoColor=white)](https://opedal.tech/cv)
+```
+
+**Verification**:
+- Visit <https://github.com/martinopedal>
+- Confirm README renders with opedal.tech links
+- Google search `site:github.com martinopedal opedal.tech` after 48 hours — should return profile page
+
+---
+
+## 11. Sessionize Speaker Profile (5 min)
 
 **Why it matters**: Microsoft.com is a top-10 global domain. A profile link here is a strong authority signal for Azure-related queries.
 
@@ -244,7 +375,7 @@ Lead Cloud Solution Architect at Microsoft Norway, architecting Azure Landing Zo
 
 ---
 
-## 8. Sessionize Speaker Profile (5 min)
+## 12. Nordic Infrastructure Conference Speaker Bio Update (5 min)
 
 **Why it matters**: Sessionize profiles are crawled by conference organizers and Google. If Martin has spoken at conferences, this profile should exist.
 
@@ -271,7 +402,7 @@ Lead Cloud Solution Architect at Microsoft Norway. I architect Azure Landing Zon
 
 ---
 
-## 9. Nordic Infrastructure Conference Speaker Bio Update (5 min)
+## 13. Bluesky Handle Claim — Use opedal.tech as Handle (10 min)
 
 **Why it matters**: NIC is the premier Nordic infrastructure conference. Martin has spoken there (94% approval rating, Level 300, live-streamed per `architect.yml`). A speaker page backlink is high-authority for Nordic/Azure searches.
 
@@ -307,7 +438,7 @@ LinkedIn: linkedin.com/in/martin-opedal
 
 ---
 
-## 10. Bluesky Handle Claim — Use opedal.tech as Handle (10 min)
+## 14. CII Best Practices Badge Application (20 min)
 
 **Why it matters**: Bluesky allows domain-based handles (e.g., `@opedal.tech`). This creates a verified identity signal and a permanent backlink in Bluesky's public feed data (crawled by search engines). Zero cost, strong brand signal.
 
@@ -337,7 +468,7 @@ LinkedIn: linkedin.com/in/martin-opedal
 
 ---
 
-## 11. CII Best Practices Badge Application (20 min)
+## 15. Mastodon rel=me Reciprocation (5 min, optional)
 
 **Why it matters**: CII badge lifts OpenSSF Scorecard by +0.5 to +1.0 points (Loomis3 is targeting 9.0+). The badge appears on GitHub README and signals engineering rigor to enterprises evaluating the repo.
 
@@ -372,7 +503,7 @@ LinkedIn: linkedin.com/in/martin-opedal
 
 ---
 
-## 12. Mastodon rel=me Reciprocation (5 min, optional)
+## 16. PageSpeed/Search Console Post-Deploy Verification (3 min)
 
 **Why it matters**: Mastodon uses `rel="me"` bidirectional links for identity verification. If Martin has a Mastodon account, this creates a verified backlink at zero cost. Pyne3 is shipping `<link rel="me">` tags — Martin just needs to reciprocate from his Mastodon profile.
 
@@ -427,7 +558,7 @@ LinkedIn: linkedin.com/in/martin-opedal
 
 ---
 
-## 14. Schema.org Validator Pass (2 min, post-Pyne3-deploy)
+## Post-Completion Checklist
 
 **Why it matters**: Invalid JSON-LD breaks Google's rich snippets (author cards, breadcrumbs, article metadata). This confirms Pyne3's Person + Article schemas are error-free.
 
@@ -464,6 +595,9 @@ After completing all actions above, verify the end-to-end SEO foundation:
 ### Backlinks (within 7 days)
 - [ ] LinkedIn profile (Contact Info + Featured)
 - [ ] LinkedIn About section text
+- [ ] X (Twitter) profile website link
+- [ ] Instagram profile website + bio
+- [ ] Facebook profile website link
 - [ ] GitHub profile README
 - [ ] Microsoft Tech Community profile
 - [ ] Sessionize profile (if exists)
@@ -495,9 +629,12 @@ After completing all actions above, verify the end-to-end SEO foundation:
 | LinkedIn Contact Info + Website | 5 min |
 | LinkedIn About section | 3 min |
 | LinkedIn Featured section | 7 min |
+| X website link | 2 min |
+| Instagram website + bio | 2 min |
+| Facebook website link | 2 min |
+| GitHub profile README | 10 min |
 | Google Search Console + sitemap | 15 min |
 | Bing Webmaster Tools import | 2 min |
-| GitHub profile README | 10 min |
 | Microsoft Tech Community | 5 min |
 | Sessionize profile | 5 min |
 | NIC speaker bio email | 5 min |
@@ -506,7 +643,7 @@ After completing all actions above, verify the end-to-end SEO foundation:
 | Mastodon rel=me (optional) | 5 min |
 | PageSpeed check | 3 min |
 | Schema validator | 2 min |
-| **Total** | **~60 min** |
+| **Total** | **~70 min** |
 
 ---
 
