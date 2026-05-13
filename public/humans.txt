@@ -1,0 +1,22 @@
+# humanstxt.org — Team & Tech
+
+/* TEAM */
+Author: Martin Opedal
+Location: Oslo, Norway
+Email: hello@opedal.tech
+GitHub: martinopedal
+LinkedIn: martin-opedal
+
+/* SITE */
+Standards: HTML5, CSS3, RSS 2.0, Schema.org JSON-LD
+Components: Astro, Markdown
+Software: Visual Studio Code, GitHub Copilot
+Fonts: JetBrains Mono (self-hosted)
+Design: Architect Charcoal (warm earth palette)
+
+/* THANKS */
+Built with: Astro
+Hosted on: GitHub Pages
+Code available: https://github.com/martinopedal/opedal.tech
+
+Last update: 2025/05/13
