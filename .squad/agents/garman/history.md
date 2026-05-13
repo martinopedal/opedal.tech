@@ -73,4 +73,74 @@ Parallel `git commit` calls hit `.git/index.lock` contention. Solution: serializ
 **Workflow permissions escalation for attestation:**
 Added `attestations: write` and `id-token: write` to `pages.yml` build job's permissions block (previously inherited `contents: read` only). Required for `attest-build-provenance` action.
 
+### Linkcheck gate session (2025-06-13, feat/ci-linkcheck)
+
+**Lychee configuration for Astro static site:**
+- Used `lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411 # v2.8.0`
+- Config in `lychee.toml` at repo root — DO NOT use `base = "dist"` option (invalid TOML key)
+- Must pass `--base dist/` as CLI arg to resolve root-relative links (`/cv`, `/blog`, `/fonts/...`)
+- Config keys that worked: `max_concurrency`, `timeout`, `max_retries`, `user_agent`, `scheme`, `exclude`, `accept`, `include_fragments`
+
+**Upload-pages-artifact tarball extraction gotcha:**
+`actions/upload-pages-artifact` packages `dist/` as `artifact.tar`, not raw files. Linkcheck job must:
+1. Download artifact with `actions/download-artifact@v8`
+2. Extract: `mkdir -p dist && tar -xf dist-artifact/artifact.tar -C dist`
+3. Then run lychee on extracted `dist/`
+
+**Deploy gating pattern (linkcheck between build and deploy):**
+```yaml
+jobs:
+  build:
+    steps:
+      - name: Upload artifact
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
+        uses: actions/upload-pages-artifact@SHA
+        with:
+          path: dist/
+
+  linkcheck:
+    needs: build
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@SHA
+      - uses: actions/download-artifact@SHA
+        with:
+          name: github-pages
+          path: dist-artifact
+      - run: tar -xf dist-artifact/artifact.tar -C dist
+      - uses: lycheeverse/lychee-action@SHA
+        with:
+          args: --base dist/ --config lychee.toml --no-progress dist/
+          fail: true
+
+  deploy:
+    needs: [build, linkcheck]  # blocks deploy if linkcheck fails
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+```
+
+Conditional match: upload artifact on PRs so linkcheck can validate before merge, but deploy only on push/workflow_dispatch.
+
+**Social media domain exclusion for CI link checkers:**
+LinkedIn, Twitter/X, Instagram, Facebook all return 999/403 to crawler user agents. Must exclude in `lychee.toml`:
+```toml
+exclude = [
+  "^https?://(www\\.)?linkedin\\.com",
+  "^https?://(www\\.)?twitter\\.com",
+  "^https?://(www\\.)?x\\.com",
+  "^https?://(www\\.)?instagram\\.com",
+  "^https?://(www\\.)?facebook\\.com",
+]
+accept = [200, 201, 202, 203, 204, 206, 301, 302, 304, 308, 999]
+```
+
+**Lychee report artifact path:**
+Action outputs to `lychee/out.md` by default, but uploads just `out.md` to artifact root. Download with:
+```yaml
+- uses: actions/upload-artifact@SHA
+  if: always()
+  with:
+    name: lychee-report
+    path: lychee/out.md
+```
+
 (append as work progresses)
