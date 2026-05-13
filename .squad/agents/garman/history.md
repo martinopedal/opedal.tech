@@ -143,4 +143,30 @@ Action outputs to `lychee/out.md` by default, but uploads just `out.md` to artif
     path: lychee/out.md
 ```
 
+### Fact-check system session (2025-06-13, chore/fact-check-ci)
+
+**Registry-plus-regex pattern for tenure claims:**
+Created `content/facts.yml` as source of truth for career timeline and life-facts, paired with `scripts/check-facts.mjs` that walks `src/` and applies targeted regex checks. Registry mirrors `cv/data/architect.yml` (the authoritative source for career data) and computes derived facts at run-time (years_with_azure_entra_m365, years_at_microsoft, years_at_teknograd). Checker validates:
+- Tenure claims (`(\d+|word)\+?\s*years?`) — flags any numeric or word-form claim that doesn't match a known derived value
+- Employer-specific claims (`(\d+)\s+years?\s+at\s+(\w+)`) — cross-checks against YAML
+- Venture counts (`co-?founded\s+(\w+)\s+brewer`) — validates against `ventures.breweries_cofounded`
+
+**Word-to-number mapping critical for natural prose:**
+Initial regex only caught digits (`\d+`), missed word-form claims like "thirty years" or "nine years". Added `wordToNum` map covering one through fifty, updated tenure regex to `(\d+|one|two|...|fifty)\+?\s*years?`. Prose naturally uses words for small numbers (nine, fifteen, two), digits for larger ones (2024, 135). Checker must handle both.
+
+**High-signal exclusion patterns prevent false positives:**
+Excluded CSS numeric values (`width|height|padding|...:\s*\d+`), ISO dates in blog frontmatter (`\d{4}-\d{2}-\d{2}`), Node versions in workflows (`node-version:\s*\d+`). False-positive rate must stay near-zero or the check gets ignored. Pattern: exclude by regex, not by line number (more maintainable as files evolve).
+
+**Source-of-truth split: content/facts.yml mirrors cv/data/architect.yml:**
+Career timeline facts (microsoft_start_year, teknograd_start_year) live in `cv/data/architect.yml` (parsed by both LaTeX pipeline and /cv HTML page). `content/facts.yml` mirrors them for the fact-checker. When both files contain the same fact, `architect.yml` is authoritative. Minimizes drift surface: one editor updates both, or updates `architect.yml` and the fact-checker re-validates copy against the new value.
+
+**Fact-check complements cspell, not replaces semantic review:**
+Martin caught "I ran datacenters for nine years before joining Microsoft" — numerically correct (Teknograd 2011–2020 = 9 years), semantically wrong (he worked *with* datacenters, Azure, M365, and Entra simultaneously, not in sequence). The fact-checker validates numeric claims against a registry; it doesn't parse meaning. Connell fixes the semantic issue in `content/about-timeline-fix`. The checker is the second line of defense after human verification, catching future hallucinations when an agent or Martin writes "30 years at Microsoft" or "co-founded five breweries."
+
+**CI workflow paired with npm script for local pre-flight:**
+`.github/workflows/fact-check.yml` triggers on `pull_request` and `push` for `src/**`, `content/**`, `cv/data/**` changes. Runs `node scripts/check-facts.mjs` (exit 0 = pass, exit 1 = fail with report). Added `"check:facts": "node scripts/check-facts.mjs"` to `package.json` so Martin can run locally before pushing. Pattern: every CI gate should have a local-run equivalent.
+
+**Zero false positives on first test run:**
+Ran checker against current `src/` tree — passed cleanly. Injected fake claim "thirty years" — caught and reported with file path, line number, claimed value, and expected values. Reverted to "nine years" — passed again. No tuning iterations needed; exclusion patterns were sufficient out of the gate.
+
 (append as work progresses)
