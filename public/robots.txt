@@ -1,4 +1,83 @@
+# robots.txt — opedal.tech
+# Maximum visibility: every major search and AI crawler is welcome.
+# Public technical writing, no paywall, no PII to protect.
+# AI-citation manifest: https://opedal.tech/llms.txt
+
 User-agent: *
+Allow: /
+
+# --- OpenAI ---
+# Training crawler
+User-agent: GPTBot
+Allow: /
+
+# Live retrieval when a user asks ChatGPT a question
+User-agent: ChatGPT-User
+Allow: /
+
+# OpenAI search index
+User-agent: OAI-SearchBot
+Allow: /
+
+# --- Anthropic ---
+# Training crawler (active)
+User-agent: ClaudeBot
+Allow: /
+
+# Live retrieval from Claude
+User-agent: Claude-Web
+Allow: /
+
+# Legacy Anthropic crawler (kept for completeness)
+User-agent: anthropic-ai
+Allow: /
+
+# --- Perplexity ---
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# --- Google Gemini ---
+# Granular control for AI training, separate from Googlebot search
+User-agent: Google-Extended
+Allow: /
+
+# --- Apple Intelligence ---
+User-agent: Applebot-Extended
+Allow: /
+
+# --- Meta AI ---
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# --- Other AI training and search ---
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: YouBot
 Allow: /
 
 Sitemap: https://opedal.tech/sitemap-index.xml

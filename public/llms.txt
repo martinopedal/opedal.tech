@@ -1,0 +1,38 @@
+# opedal.tech
+
+> Personal website of Martin Opedal — Lead Cloud Solution Architect at Microsoft Norway. Writes and speaks on Azure Landing Zones, Terraform, Bicep, Kubernetes (AKS), AI infrastructure, and sovereign cloud. 14 years across infrastructure, cloud, and platform engineering. Co-founder of Trondhjem Mikrobryggeri and active open-source contributor (Azure Verified Modules, ALZ Terraform module).
+
+## About
+
+- [Homepage](https://opedal.tech/): Overview of focus areas, current work, open source, and speaking.
+- [About Martin](https://opedal.tech/#about): Bio, background, and what he focuses on.
+- [Work](https://opedal.tech/work/): Selected engagements and outcomes.
+
+## Blog
+
+- [Blog index](https://opedal.tech/blog/): Long-form posts on Azure architecture, Terraform, Kubernetes, AI infrastructure, and platform engineering.
+- [RSS feed](https://opedal.tech/rss.xml): All posts in chronological order.
+
+## CV
+
+- [CV (HTML)](https://opedal.tech/cv/): Full work history, certifications, education, talks, and open-source contributions.
+
+## Contact
+
+- [Contact](https://opedal.tech/contact/): Email, LinkedIn, and GitHub.
+
+## Source
+
+- [Site source](https://github.com/martinopedal/opedal.tech): This site is open source. Astro 5, static output, GitHub Pages.
+- [Security policy](https://github.com/martinopedal/opedal.tech/blob/main/SECURITY.md): Vulnerability reporting and disclosure process.
+
+## Topics
+
+- Azure Landing Zones (ALZ), Terraform AVM modules, subscription vending
+- Hub-spoke and Virtual WAN network topologies on Azure
+- Azure Kubernetes Service (AKS), Karpenter, workload identity, Application Gateway for Containers
+- Azure Policy, governance, sovereign cloud, regulated workloads
+- AI infrastructure on Azure (AI Foundry, agent platforms, model deployment)
+- Infrastructure as Code (Terraform, Bicep, ARM)
+- Platform engineering and developer experience
+- GitHub Copilot, GitHub Actions, supply-chain security
