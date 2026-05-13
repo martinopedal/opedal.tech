@@ -292,9 +292,40 @@ input:focus-visible,
    HERO
    ============================================================ */
 #hero {
-  padding: 5rem 1.5rem 4.5rem;
+  position: relative;
+  padding: var(--space-9) var(--space-5) var(--space-8);
   text-align: center;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--color-accent-glow) 0%, transparent 70%);
+  /* Warm radial glow at top-center, then the warm bg.
+     The dot-grid texture is layered on a ::before pseudo-element so
+     it can be masked independently (see below). */
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, var(--color-accent-glow) 0%, transparent 70%),
+    var(--color-bg);
+  overflow: hidden;
+}
+
+/* Signature dot-grid texture. Lives on a pseudo-element so we can
+   mask it (radial fade) without affecting hero content. The SVG ships
+   24×24 with a single 1.25px peach circle at 8% opacity — repeated
+   across the hero, the result is a barely-there technical grid that
+   evokes blueprints/CAD without being decorative noise. */
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('/dot-grid.svg') 0 0 / 24px 24px repeat;
+  /* Mask so dots are densest near the upper-center and fade to
+     invisible at the edges and bottom — keeps the texture from
+     flatly tiling the whole hero. */
+  mask-image: radial-gradient(ellipse 90% 75% at 50% 25%, #000 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 25%, #000 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-inner {
