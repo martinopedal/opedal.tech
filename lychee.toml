@@ -23,6 +23,11 @@ exclude = [
   "^https?://(www\\.)?x\\.com",
   "^https?://(www\\.)?instagram\\.com",
   "^https?://(www\\.)?facebook\\.com",
+  # Skip self-host absolute URLs (canonical, og:url, JSON-LD).
+  # Internal links are already validated by --root-dir against dist/.
+  # External self-host checks create a chicken-and-egg problem when this PR
+  # adds a new page that does not yet exist on production.
+  "^https?://(www\\.)?opedal\\.tech",
 ]
 
 # Accept these as success (some sites return 999 to bots)
