@@ -168,15 +168,37 @@ const personSchema = {
     <slot />
     <footer>
       <div class="container">
-        <p>
-          &copy; {currentYear} Martin Opedal &middot; Built with Astro &middot;
-          <a
-            href="https://github.com/martinopedal/opedal.tech"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View source code on GitHub">Source</a
-          >
+        <p class="footer-line">
+          &copy; {currentYear} Martin Opedal &middot; Built with Astro
         </p>
+        <ul class="footer-links" role="list">
+          <li>
+            <a
+              href="mailto:hello@opedal.tech"
+              aria-label="Email Martin Opedal at hello@opedal.tech">Email</a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/martinopedal"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Martin Opedal on GitHub">GitHub</a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/martin-opedal"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Martin Opedal on LinkedIn">LinkedIn</a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/martinopedal/opedal.tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View source code on GitHub">Source</a>
+          </li>
+        </ul>
       </div>
     </footer>
   </body>

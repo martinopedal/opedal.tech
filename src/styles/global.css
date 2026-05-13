@@ -10,15 +10,65 @@
 }
 
 :root {
+  /* Force the browser to use the dark color-scheme for native UI
+     (form controls, scrollbars, focus rings) — the site is dark-only,
+     and this prevents browsers from auto-tinting native chrome on
+     systems where prefers-color-scheme: light is set. */
+  color-scheme: dark;
+
   /* Architect Charcoal palette: warm near-black + terracotta accent */
   --color-bg:          #14110f;  /* Warm near-black base */
-  --color-surface:     #1f1b18;  /* Warm surface */
+  --color-surface:     #1c1814;  /* Warm surface (card resting) */
+  --color-elevated:    #261f19;  /* Warm elevated (card hover/active) */
   --color-text:        #e8e2d8;  /* Warm text */
   --color-text-dim:    #ada79d;  /* Muted text — AAA on both bg and surface */
   --color-border:      #2a2520;  /* Border color */
-  --color-accent:      #d4a584;  /* Sand/clay accent — AAA on bg and surface */
-  --color-accent-hover:#e0b89a;  /* Lighter sand for hover states */
-  
+
+  /* Two-tone warm accent system */
+  --color-accent:        #d4a584;  /* Peach — links, focus rings, primary accents */
+  --color-accent-strong: #d97757;  /* Terracotta — emphasis, hover, metrics */
+  --color-accent-glow:   rgba(217, 119, 87, 0.15);  /* Warm radial halos, button glows */
+  --color-accent-hover:  #e0b89a;  /* Lighter peach for link hover (legacy) */
+
+  /* Warm shadows — subtle terracotta-tinted depth */
+  --shadow-warm-sm: 0 4px 12px rgba(217, 119, 87, 0.06);
+  --shadow-warm-md: 0 8px 24px rgba(217, 119, 87, 0.10);
+
+  /* Modular type scale — every body/heading size on the site should
+     resolve to one of these tokens. Ad-hoc rem literals (1.4rem,
+     0.92rem, etc.) are an anti-pattern — round the value to the
+     nearest step on this scale instead. */
+  --fs-xs:   0.78rem;   /* eyebrows, blog tags, cert kinds */
+  --fs-sm:   0.92rem;   /* nav links, dates, body small */
+  --fs-base: 1rem;      /* body text */
+  --fs-md:   1.18rem;   /* hero tagline, cv-job h3 */
+  --fs-lg:   1.5rem;    /* prose h2 */
+  --fs-xl:   2rem;      /* section h2 */
+  --fs-2xl:  2.75rem;   /* cv-header h1 */
+  --fs-3xl:  4rem;      /* hero name (cap on clamp) */
+
+  /* Line-height tokens. --lh-base = 1.6 is the long-form prose target;
+     1.7 was a touch loose. */
+  --lh-tight: 1.15;
+  --lh-snug:  1.35;
+  --lh-base:  1.6;
+
+  /* Spacing scale — 4px geometric. Use these for vertical rhythm:
+     section paddings (--space-9), card paddings (--space-5/6), gaps. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;   /* mobile section padding */
+  --space-8: 64px;
+  --space-9: 96px;   /* desktop section padding */
+
+  /* Reading measure for long-form prose. ~64ch keeps blog posts at
+     comfortable readability; longer lines tire the eye. */
+  --measure: 64ch;
+
   /* Legacy variable names kept for compatibility */
   --bg:           var(--color-bg);
   --bg-alt:       var(--color-surface);
@@ -32,7 +82,7 @@
   --tag-text:     #d97757;
   --danger:       #f85149;
   --font:         -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-  --font-mono:    'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --font-mono:    'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   --radius:       8px;
   --max-w:        1080px;
 }
@@ -43,9 +93,10 @@ html {
 
 body {
   font-family: var(--font);
+  font-size: var(--fs-base);
   background: var(--bg);
   color: var(--text);
-  line-height: 1.7;
+  line-height: var(--lh-base);
 }
 
 a {
@@ -100,6 +151,7 @@ a:hover {
 
 .nav-links li a {
   font-size: 0.9rem;
+  font-family: var(--font-mono);
   color: var(--text-muted);
   transition: color 0.2s;
 }
@@ -134,7 +186,7 @@ a:hover {
   top: -100px;
   z-index: 1000;
   padding: 0.75rem 1rem;
-  background: var(--accent);
+  background: var(--color-accent-strong);
   color: var(--bg);
   font-weight: 600;
   text-decoration: none;
@@ -210,7 +262,7 @@ input:focus-visible,
 #hero {
   padding: 5rem 1.5rem 4.5rem;
   text-align: center;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(47, 129, 247, 0.12) 0%, transparent 70%);
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--color-accent-glow) 0%, transparent 70%);
 }
 
 .hero-inner {
@@ -220,28 +272,30 @@ input:focus-visible,
 
 .eyebrow {
   display: inline-block;
-  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1rem;
+  color: var(--color-accent-strong);
+  margin-bottom: var(--space-4);
 }
 
 #hero h1 {
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  font-weight: 800;
+  font-size: clamp(2.2rem, 5vw, var(--fs-3xl));
+  font-family: var(--font-mono);
+  font-weight: 700;
   letter-spacing: -0.04em;
-  line-height: 1.1;
-  color: var(--text);
-  margin-bottom: 1.25rem;
+  line-height: var(--lh-tight);
+  color: var(--color-text);
+  margin-bottom: var(--space-5);
 }
 
 .hero-tagline {
-  font-size: 1.15rem;
+  font-size: var(--fs-md);
   color: var(--text-muted);
   max-width: 580px;
-  margin: 0 auto 2rem;
+  margin: 0 auto var(--space-6);
 }
 
 .hero-cta {
@@ -265,15 +319,24 @@ input:focus-visible,
 }
 
 .btn-primary {
+  position: relative;
   background: var(--accent);
   color: var(--color-bg);  /* Dark warm text for AA compliance */
   border: 1px solid var(--accent);
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .btn-primary:hover {
-  background: var(--accent-hover);
-  border-color: var(--accent-hover);
+  background: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
   color: var(--color-bg);  /* Keep dark on hover too */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--color-accent-glow), inset 0 0 0 1px var(--color-accent-strong);
+  }
 }
 
 .btn-ghost {
@@ -295,10 +358,10 @@ section {
 }
 
 section h2 {
-  font-size: 1.75rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
   letter-spacing: -0.03em;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-6);
   color: var(--text);
 }
 
@@ -311,6 +374,28 @@ section h2 {
   margin-top: -1.25rem;
   margin-bottom: 2rem;
   font-size: 1rem;
+}
+
+/* ---- Section atmosphere differentiation (homepage) ----
+   Subtle alternation between bg / surface, with the hero halo at the
+   top of the page and a thin warm accent line above the open source
+   section to break the rhythm. Avoid heavy borders — the contrast
+   comes from the surface tier and the optional inset accent glow. */
+#about {
+  background: var(--color-bg);
+}
+
+#work {
+  background: var(--color-surface);
+}
+
+#oss {
+  background: var(--color-bg);
+  box-shadow: inset 0 1px 0 var(--color-accent-glow);
+}
+
+#speaking {
+  background: var(--color-surface);
 }
 
 /* ============================================================
@@ -499,7 +584,32 @@ footer {
 
 footer p {
   font-size: 0.8rem;
+  font-family: var(--font-mono);
   color: var(--text-muted);
+}
+
+.footer-line {
+  margin-bottom: 0.6rem;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 1.25rem;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+}
+
+.footer-links a:hover {
+  color: var(--color-accent-strong);
 }
 
 footer a {
@@ -515,7 +625,7 @@ footer a:hover {
    ============================================================ */
 .blog-hero {
   padding: 4rem 1.5rem 3rem;
-  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(47, 129, 247, 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, var(--color-accent-glow) 0%, transparent 70%);
   border-bottom: 1px solid var(--border);
   text-align: center;
 }
@@ -546,8 +656,8 @@ footer a:hover {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.75rem;
-  transition: border-color 0.2s;
+  padding: var(--space-6);
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   text-decoration: none;
   color: inherit;
 }
@@ -555,6 +665,9 @@ footer a:hover {
 .blog-card:hover {
   border-color: var(--accent);
   color: inherit;
+  background: var(--color-elevated);
+  box-shadow: var(--shadow-warm-md);
+  transform: translateY(-2px);
 }
 
 .blog-card-meta {
@@ -567,11 +680,13 @@ footer a:hover {
 
 .blog-date {
   font-size: 0.8rem;
+  font-family: var(--font-mono);
   color: var(--text-muted);
 }
 
 .blog-tag {
   font-size: 0.75rem;
+  font-family: var(--font-mono);
   font-weight: 600;
   padding: 0.15rem 0.6rem;
   border-radius: 2rem;
@@ -772,8 +887,9 @@ footer a:hover {
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(20, 17, 15, 0.98);  /* Match Architect Charcoal bg */
+    background: var(--color-surface);  /* fully opaque to avoid see-through dropdown */
     border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
     flex-direction: column;
     gap: 0;
     padding: 0.5rem 0;
@@ -825,6 +941,13 @@ footer a:hover {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+
+  /* Disable hover lifts entirely for users who prefer reduced motion. */
+  .repo-row:hover,
+  .blog-card:hover,
+  .work-row:hover {
+    transform: none !important;
+  }
 }
 
 /* ============================================================
@@ -834,31 +957,20 @@ footer a:hover {
    AFTER this block in their own delimited sections.
    ============================================================ */
 
-/* ---- Hero gradient on name (subtle, hero only) ---- */
-#hero h1 {
-  background: linear-gradient(135deg, #d97757 0%, #e59677 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Fallback for browsers that don't support background-clip */
-@supports not (background-clip: text) {
-  #hero h1 {
-    color: var(--text);
-  }
-}
+/* ---- Hero name treatment (mono, confident) ----
+   The previous gradient/text-fill effect is intentionally dropped in
+   favour of the system mono name set against the warm radial halo. */
 
 /* ---- Section markers ---- */
 .section-label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
+  color: var(--color-accent-strong);
+  margin-bottom: var(--space-2);
 }
 
 section h2 {
@@ -892,17 +1004,21 @@ section h2 {
   gap: 0.75rem;
 }
 
+.repo-rows-trailer {
+  margin-top: 1.5rem;
+}
+
 .repo-row {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 1rem;
+  gap: var(--space-4);
   align-items: start;
   background: var(--surface);
   border: 1px solid var(--border);
   border-left-width: 2px;
   border-radius: 4px;
-  padding: 1rem 1.25rem;
-  transition: border-color 0.2s;
+  padding: var(--space-4) var(--space-5);
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   text-decoration: none;
   color: inherit;
 }
@@ -910,18 +1026,27 @@ section h2 {
 .repo-row:hover {
   border-color: var(--accent);
   color: inherit;
+  background: var(--color-elevated);
+  box-shadow: var(--shadow-warm-md);
+  transform: translateY(-2px);
+}
+
+.repo-row:hover h3 {
+  color: var(--color-accent-strong);
 }
 
 .repo-row-lang {
   display: flex;
   align-items: center;
   min-width: 80px;
+  font-family: var(--font-mono);
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--text-muted);
 }
 
 .repo-row-content h3 {
+  font-family: var(--font-mono);
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--accent-hover);
@@ -941,32 +1066,64 @@ section h2 {
   border-left-color: #844fba;
 }
 
+.repo-row.lang-terraform .repo-row-lang {
+  color: #b58be6;
+}
+
 .repo-row.lang-python {
   border-left-color: #3fb950;
+}
+
+.repo-row.lang-python .repo-row-lang {
+  color: #5fd576;
 }
 
 .repo-row.lang-powershell {
   border-left-color: #5391fe;
 }
 
+.repo-row.lang-powershell .repo-row-lang {
+  color: #7eaeff;
+}
+
 .repo-row.lang-typescript {
   border-left-color: #3178c6;
+}
+
+.repo-row.lang-typescript .repo-row-lang {
+  color: #6aa6e0;
 }
 
 .repo-row.lang-javascript {
   border-left-color: #f1e05a;
 }
 
+.repo-row.lang-javascript .repo-row-lang {
+  color: #f1e05a;
+}
+
 .repo-row.lang-go {
   border-left-color: #00add8;
+}
+
+.repo-row.lang-go .repo-row-lang {
+  color: #4cc8e6;
 }
 
 .repo-row.lang-csharp {
   border-left-color: #178600;
 }
 
+.repo-row.lang-csharp .repo-row-lang {
+  color: #4cb135;
+}
+
 .repo-row.lang-all {
   border-left-color: var(--accent);
+}
+
+.repo-row.lang-all .repo-row-lang {
+  color: var(--accent);
 }
 
 /* ---- Work rows (trimmed homepage version) ---- */
@@ -981,11 +1138,14 @@ section h2 {
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 1.25rem 1.5rem;
-  transition: border-color 0.2s;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .work-row:hover {
   border-color: var(--accent);
+  background: var(--color-elevated);
+  box-shadow: var(--shadow-warm-md);
+  transform: translateY(-2px);
 }
 
 .work-row h3 {
@@ -1051,11 +1211,11 @@ section h2 {
 }
 
 .cv-header h1 {
-  font-size: 2.5rem;
+  font-size: var(--fs-2xl);
   font-weight: 800;
   letter-spacing: -0.04em;
   color: var(--text);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-2);
 }
 
 .cv-role {
@@ -1192,7 +1352,8 @@ section h2 {
 }
 
 .cv-job h3 {
-  font-size: 1.15rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-md);
   font-weight: 600;
   color: var(--text);
 }
@@ -1306,11 +1467,36 @@ section h2 {
 
 .cv-skill-fill {
   height: 100%;
-  width: var(--bar-fill);
   background: var(--accent);
   border-radius: 3px;
   transition: width 0.3s ease;
 }
+
+/* Width utility classes for skill bar fills.
+   Hard-coded because CSP `style-src 'self'` blocks inline `style=`
+   attributes (including ones that set CSS custom properties).
+   Steps of 5% cover all current and likely future skill levels. */
+.cv-skill-fill.is-0   { width: 0%; }
+.cv-skill-fill.is-5   { width: 5%; }
+.cv-skill-fill.is-10  { width: 10%; }
+.cv-skill-fill.is-15  { width: 15%; }
+.cv-skill-fill.is-20  { width: 20%; }
+.cv-skill-fill.is-25  { width: 25%; }
+.cv-skill-fill.is-30  { width: 30%; }
+.cv-skill-fill.is-35  { width: 35%; }
+.cv-skill-fill.is-40  { width: 40%; }
+.cv-skill-fill.is-45  { width: 45%; }
+.cv-skill-fill.is-50  { width: 50%; }
+.cv-skill-fill.is-55  { width: 55%; }
+.cv-skill-fill.is-60  { width: 60%; }
+.cv-skill-fill.is-65  { width: 65%; }
+.cv-skill-fill.is-70  { width: 70%; }
+.cv-skill-fill.is-75  { width: 75%; }
+.cv-skill-fill.is-80  { width: 80%; }
+.cv-skill-fill.is-85  { width: 85%; }
+.cv-skill-fill.is-90  { width: 90%; }
+.cv-skill-fill.is-95  { width: 95%; }
+.cv-skill-fill.is-100 { width: 100%; }
 
 .cv-competencies {
   display: flex;
@@ -1392,7 +1578,7 @@ section h2 {
 .cv-speaking-metric {
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--accent);
+  color: var(--color-accent-strong);
   margin-top: 0.5rem;
 }
 
@@ -1467,8 +1653,7 @@ section h2 {
 
 .cv-edu-item {
   padding: 1.25rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--surface);  border: 1px solid var(--border);
   border-radius: var(--radius);
 }
 
@@ -1631,6 +1816,19 @@ section h2 {
   padding: 4rem 0;
 }
 
+.work-back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.work-back-link:hover {
+  color: var(--color-accent-strong);
+}
+
 /* ---- Work area sections ---- */
 .work-area {
   margin-bottom: 3rem;
@@ -1681,7 +1879,7 @@ section h2 {
   content: '→';
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--color-accent-strong);
   font-weight: 600;
 }
 
@@ -1714,4 +1912,57 @@ section h2 {
 
 pre, code, kbd, samp {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* ============================================================
+   404 PAGE
+   Extracted from src/pages/404.astro because the page CSP
+   (style-src 'self' with no 'unsafe-inline') blocks scoped
+   <style> blocks in Astro components.
+   ============================================================ */
+.not-found {
+  padding: 6rem 1.5rem;
+  text-align: center;
+  max-width: 720px;
+}
+
+.not-found .eyebrow {
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.not-found h1 {
+  margin-bottom: 1rem;
+}
+
+.not-found .lead {
+  color: var(--text-muted);
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-6);
+}
+
+.not-found-links {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  text-align: left;
+  display: inline-block;
+}
+
+.not-found-links li {
+  margin: 0.5rem 0;
+  color: var(--text-muted);
+}
+
+.not-found-links li a {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.not-found .muted {
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
