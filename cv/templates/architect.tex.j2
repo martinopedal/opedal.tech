@@ -4,6 +4,7 @@
 \documentclass[grey]{hipstercv}
 \usepackage[utf8]{inputenc}
 \usepackage[default]{raleway}
+\usepackage{enumitem}
 ((* if mode == '1page' *))
 \usepackage[margin=0.7cm, a4paper]{geometry}
 ((* else *))
@@ -249,6 +250,45 @@
 ((* endfor *))
 ((* endif *))
 \end{minipage}
+
+((* if open_source and open_source | length > 0 *))
+
+\vspace{((* if mode == '1page' *))0.8em((* else *))1em((* endif *))}
+
+\section*{Open Source}
+
+((* for group in open_source *))
+((* set group_repos = [] *))
+((* for repo in group.repos *))
+((* if mode in repo.appears_on *))
+((* set _ = group_repos.append(repo) *))
+((* endif *))
+((* endfor *))
+((* if group_repos | length > 0 *))
+\begin{minipage}[t]{((* if mode == '1page' *))0.55((* else *))0.52((* endif *))\textwidth}
+((* if mode == '1page' *))
+{\scriptsize \textbf{((( group.group )))}}
+\vspace{0.3em}
+{\tiny\begin{itemize}[leftmargin=1em, itemsep=0.2em]
+((*- for repo in group_repos *))
+\item \textbf{((( repo.name )))} \textit{[((( repo.lang )))]} --- ((( repo.summary )))
+((*- endfor *))
+\end{itemize}}
+((* else *))
+{\footnotesize \textbf{((( group.group )))}}
+\vspace{0.4em}
+{\scriptsize\begin{itemize}[leftmargin=1em, itemsep=0.3em]
+((*- for repo in group_repos *))
+\item \textbf{((( repo.name )))} \textit{[((( repo.lang )))]} --- ((( repo.summary )))
+((*- endfor *))
+\end{itemize}}
+((* endif *))
+\end{minipage}
+
+\vspace{((* if mode == '1page' *))0.4em((* else *))0.6em((* endif *))}
+((* endif *))
+((* endfor *))
+((* endif *))
 
 %----------------------------------------------------------------------------------------
 ((* if mode == '1page' *))
