@@ -1,4 +1,4 @@
-# humanstxt.org — Team & Tech
+# humanstxt.org, Team & Tech
 
 /* TEAM */
 Author: Martin Opedal
