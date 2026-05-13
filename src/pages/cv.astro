@@ -1,0 +1,249 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import yaml from 'js-yaml';
+import fs from 'node:fs';
+
+// Load CV data at build time
+const cvPath = 'cv/data/architect.yml';
+const cvYaml = fs.readFileSync(cvPath, 'utf8');
+const data = yaml.load(cvYaml);
+
+const title = 'CV — Martin Opedal';
+const description = 'Lead Cloud Solution Architect at Microsoft with 15+ years leading complex IT programs across financial services, insurance, government, and technology. Trusted advisor to C-suite executives.';
+
+// ProfilePage JSON-LD schema
+const profilePageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  dateCreated: '2025-01-13',
+  dateModified: new Date().toISOString().split('T')[0],
+  mainEntity: {
+    '@type': 'Person',
+    name: data.person.name,
+    jobTitle: data.person.role,
+    worksFor: {
+      '@type': 'Organization',
+      name: data.person.employer.name,
+      url: data.person.employer.url,
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: data.person.location.city,
+      addressCountry: data.person.location.country_code,
+    },
+    email: data.person.contact.email,
+    url: data.person.contact.website_url,
+    sameAs: [
+      data.person.contact.linkedin_url,
+      data.person.contact.github_url,
+    ],
+  },
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <Fragment slot="head-extra">
+    <script type="application/ld+json" set:html={JSON.stringify(profilePageSchema)} />
+  </Fragment>
+
+  <Nav />
+
+  <div class="cv-page">
+    <div class="container">
+      <!-- Header -->
+      <header class="cv-header">
+        <h1>{data.person.name}</h1>
+        <p class="cv-role">{data.person.role}</p>
+        <p class="cv-employer">
+          <a href={data.person.employer.url} target="_blank" rel="noopener noreferrer">
+            {data.person.employer.name}
+          </a>
+        </p>
+        <p class="cv-location">{data.person.location.city}, {data.person.location.country}</p>
+        
+        <dl class="cv-contact">
+          <div class="cv-contact-item">
+            <dt>Email</dt>
+            <dd><a href={`mailto:${data.person.contact.email}`}>{data.person.contact.email}</a></dd>
+          </div>
+          <div class="cv-contact-item">
+            <dt>LinkedIn</dt>
+            <dd>
+              <a href={data.person.contact.linkedin_url} target="_blank" rel="noopener noreferrer">
+                {data.person.contact.linkedin_handle}
+              </a>
+            </dd>
+          </div>
+          <div class="cv-contact-item">
+            <dt>GitHub</dt>
+            <dd>
+              <a href={data.person.contact.github_url} target="_blank" rel="noopener noreferrer">
+                {data.person.contact.github_handle}
+              </a>
+            </dd>
+          </div>
+          <div class="cv-contact-item">
+            <dt>Web</dt>
+            <dd><a href={data.person.contact.website_url}>{data.person.contact.website_domain}</a></dd>
+          </div>
+        </dl>
+
+        <div class="cv-languages">
+          {data.person.languages.map((lang) => (
+            <span class="cv-lang">
+              {lang.name} ({lang.level}{lang.native ? ', Native' : ''})
+            </span>
+          ))}
+        </div>
+      </header>
+
+      <!-- Summary -->
+      <section class="cv-section">
+        <span class="section-label">Professional Summary</span>
+        <h2>Summary</h2>
+        <p class="cv-summary">{data.summary}</p>
+      </section>
+
+      <!-- Download buttons -->
+      <div class="cv-downloads">
+        <a
+          href="/cv/architect-1page.pdf"
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Download 1-Page PDF
+        </a>
+        <a
+          href="/cv/architect-multipage.pdf"
+          class="btn btn-ghost"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Download Multi-Page PDF
+        </a>
+      </div>
+
+      <!-- Experience -->
+      <section class="cv-section">
+        <span class="section-label">Career History</span>
+        <h2>Experience</h2>
+        <div class="cv-experience">
+          {data.experience.map((job) => (
+            <article class="cv-job">
+              <div class="cv-job-header">
+                <h3>{job.role}</h3>
+                <span class="cv-period">{job.period}</span>
+              </div>
+              <p class="cv-job-org">
+                {job.employer} &middot; {job.location}
+              </p>
+              <p class="cv-job-detail">{job.detail}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- Engagements -->
+      <section class="cv-section">
+        <span class="section-label">Selected Engagements</span>
+        <h2>Enterprise Engagements</h2>
+        <div class="cv-engagements">
+          {data.engagements.map((engagement) => (
+            <div class="cv-engagement">
+              <h3>{engagement.sector}</h3>
+              <p>{engagement.work}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="cv-section">
+        <span class="section-label">Expertise</span>
+        <h2>Skills</h2>
+
+        <div class="cv-skills-block">
+          <h3>Specializations</h3>
+          <ul class="cv-specializations">
+            {data.skills.specializations.map((spec) => (
+              <li>{spec}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="cv-skills-block">
+          <h3>Technical Skills</h3>
+          <div class="cv-technical-skills">
+            {data.skills.technical.map((skill) => (
+              <div class="cv-skill-bar">
+                <span class="cv-skill-name">{skill.name}</span>
+                <div class="cv-skill-track">
+                  <div
+                    class="cv-skill-fill"
+                    style={`--bar-fill: ${skill.level * 100}%`}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="cv-skills-block">
+          <h3>Competencies</h3>
+          <div class="cv-competencies">
+            {data.skills.competencies.map((comp) => (
+              <span class="cv-comp-tag">{comp}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Certifications -->
+      <section class="cv-section">
+        <span class="section-label">Credentials</span>
+        <h2>Certifications</h2>
+        <ul class="cv-certifications">
+          {data.certifications.map((cert) => (
+            <li class="cv-cert">
+              {cert.name}
+              <span class="cv-cert-kind">{cert.kind === 'cloud' ? 'Cloud' : 'Tooling'}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- Speaking -->
+      <section class="cv-section">
+        <span class="section-label">Public Speaking</span>
+        <h2>Speaking</h2>
+        <div class="cv-speaking">
+          {data.speaking.map((event) => (
+            <div class="cv-speaking-item">
+              <h3>{event.venue}</h3>
+              <p>{event.talk}</p>
+              <p class="cv-speaking-metric">{event.metric}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {data.education && data.education.length > 0 && (
+        <section class="cv-section">
+          <span class="section-label">Academic Background</span>
+          <h2>Education</h2>
+          <div class="cv-education">
+            {data.education.map((edu) => (
+              <div class="cv-edu-item">
+                <h3>{edu.degree}</h3>
+                <p>{edu.institution}</p>
+                <p class="cv-period">{edu.year}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </div>
+</BaseLayout>
