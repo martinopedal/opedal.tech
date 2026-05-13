@@ -268,8 +268,8 @@
 ((* if mode == '1page' *))
 {\scriptsize \textbf{((( group.group )))}}
 \vspace{0.3em}
-\tiny
 \begin{itemize}[leftmargin=1em, itemsep=0.2em]
+\tiny
 ((* for repo in group_repos *))
 \item \textbf{((( repo.name )))} \textit{[((( repo.lang )))]} --- ((( repo.summary )))
 ((* endfor *))
@@ -277,8 +277,8 @@
 ((* else *))
 {\footnotesize \textbf{((( group.group )))}}
 \vspace{0.4em}
-\scriptsize
 \begin{itemize}[leftmargin=1em, itemsep=0.3em]
+\scriptsize
 ((* for repo in group_repos *))
 \item \textbf{((( repo.name )))} \textit{[((( repo.lang )))]} --- ((( repo.summary )))
 ((* endfor *))
