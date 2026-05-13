@@ -1,40 +1,30 @@
 ---
-import { Image } from 'astro:assets';
-import portrait from '../assets/martin-opedal.jpg';
 ---
 <section id="about">
   <div class="container">
     <span class="section-label">Profile</span>
     <h2>About</h2>
-    <div class="about-grid">
-      <Image
-        src={portrait}
-        alt="Portrait of Martin Opedal, Lead Cloud Solution Architect at Microsoft"
-        widths={[200, 320, 400]}
-        sizes="(min-width: 768px) 220px, 160px"
-        class="about-photo"
-        loading="eager"
-        decoding="async"
-      />
-      <div class="about-text">
-        <p>
-          I've been working with Azure, Entra and M365 since 2011. I spent 15
-          years running datacenter operations and cloud migrations side by side
-          at Teknograd, Advania, Avanade and Sopra Steria before joining
-          Microsoft. Most of my landing zone opinions trace back to something
-          that failed in physical infrastructure or broke in an ExpressRoute
-          config.
-        </p>
-        <p>
-          Now I architect Azure Landing Zones, AKS Automatic, and AI Foundry
-          deployments for Nordic enterprises. I use Terraform daily. The modules
-          I ship come from real customer engagements, not theory.
-        </p>
-        <p>
-          I co-founded two craft breweries. Fermentation and infrastructure both
-          need the right controls and patience.
-        </p>
-      </div>
+    <div class="about-text">
+      <p>
+        I've been working with Azure, Entra and M365 since 2011. I spent 15
+        years running datacenter operations and cloud migrations side by side
+        at Teknograd, Advania, Avanade and Sopra Steria before joining
+        Microsoft. Most of my landing zone opinions trace back to something
+        that failed in physical infrastructure or broke in an ExpressRoute
+        config.
+      </p>
+      <p>
+        Now I architect Azure Landing Zones, AKS Automatic, and AI Foundry
+        deployments for Nordic enterprises. I use Terraform daily. The modules
+        I ship come from real customer engagements, not theory.
+      </p>
+      <p>
+        I co-founded two craft breweries. Fermentation and infrastructure both
+        need the right controls and patience.
+      </p>
+      <p class="about-more">
+        <a href="/about/">More about how I got here →</a>
+      </p>
     </div>
   </div>
 </section>
