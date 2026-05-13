@@ -142,15 +142,23 @@
 
 \medskip
 
-\bg{cvgreen}{white}{Cloud \& Technology} \\
+\bg{cvgreen}{white}{Industry Knowledge} \\
 
-\begin{minipage}[t]{((* if mode == '1page' *))0.28((* else *))0.3((* endif *))\textwidth}
-\begin{tabular}{r @{\hspace{0.5em}}l}
-((* for skill in skills.technical *))
-     \bg{skilllabelcolour}{iconcolour}{((* if mode == '1page' *))\tiny ((* endif *))((( skill.name )))} & \barrule{((( skill.level )))}{0.5em}{cvpurple} \\
-((* endfor *))
-\end{tabular}
-\end{minipage}
+((* if mode == '1page' *))
+{\tiny ((( skills.industry_knowledge | join(' ~•~ ') )))}
+((* else *))
+{\scriptsize ((( skills.industry_knowledge | join(' ~•~ ') )))}
+((* endif *))
+
+\medskip
+
+\bg{cvgreen}{white}{Tools \& Technologies} \\
+
+((* if mode == '1page' *))
+{\tiny ((( skills.tools_technologies | join(' ~•~ ') )))}
+((* else *))
+{\scriptsize ((( skills.tools_technologies | join(' ~•~ ') )))}
+((* endif *))
 
 \medskip
 
