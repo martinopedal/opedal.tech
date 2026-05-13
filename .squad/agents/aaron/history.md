@@ -23,6 +23,42 @@
 
 ## Learnings
 
+### 2026-05-13: Skills + Competencies overhaul — LinkedIn taxonomy as ground truth (PR #43)
+
+**Context:**
+/cv/ page rendered technical skills with percentage bars (Azure Platform 40%, AI 25%) that understated 15 years Azure experience and ran counter to ATS keyword patterns. Competencies list included generic soft skills ("Interpersonal Skills", "Team Collaboration") that diluted ATS keyword density.
+
+**Solution:**
+Replaced self-rated technical skill bars with grouped flat lists mirroring LinkedIn taxonomy. Self-rated percentages are arbitrary and misleading. LinkedIn uses flat skills lists. ATS systems do keyword matching, not numeric scoring. Senior architect bios typically don't self-rate.
+
+**Skills YAML restructure:**
+- Removed `skills.technical` (bar chart data structure with 7 items at 0.25–0.40 range)
+- Added `skills.industry_knowledge` (18 skills: Microsoft Azure, Cloud Architecture, Solution Architecture, Enterprise Architecture, Cloud Governance, Cloud Security, Network Security, Cybersecurity, Technical Leadership, Platform Engineering, Cloud-Native Architecture, Azure Landing Zones, Well-Architected Framework, Cloud Adoption Framework, Stakeholder Management, Technical Presentations, Project Delivery, Migration Projects)
+- Added `skills.tools_technologies` (23 skills: AKS, Kubernetes, Terraform, Bicep, IaC, Generative AI, AI, ML, GitHub Copilot, GitHub, GitOps, Azure DevOps, CI/CD, DevOps, Microservices, Docker, IAM, Entra ID, Defender for Cloud, Azure Policy, PowerShell, Virtualization, Network Administration)
+- Source of truth: Martin's LinkedIn profile (verbatim keyword strings) + role-specific frameworks (Azure Landing Zones, Well-Architected Framework, Cloud Adoption Framework)
+
+**Competencies overhaul:**
+Dropped: Multi-Cloud, Data Science & ML, Technical Credibility, Relationship Building, Interpersonal Skills, Team Collaboration, Cloud Consolidation, AKS Automatic, Cost Optimization, Cloud Migration, C-Suite Engagement, Large-Scale Programs
+
+Added: Executive Engagement, Azure Landing Zones (ALZ), Cloud Adoption Framework, Well-Architected Framework, Technical Pre-Sales, Pre-Sales Engineering, Strategic + Operational Range, Architectural Strategy, Cross-Functional Collaboration, Workshop Facilitation, End-to-End Project Delivery, Open Knowledge Sharing, Holistic Solution Design
+
+**Renderer changes:**
+- `cv.astro`: replaced bar chart rendering (`cv-technical-skills` with `.cv-skill-bar` and `.cv-skill-track`) with grouped pill layout (`.cv-skill-pills` and `.cv-skill-tag`)
+- `architect.tex.j2`: replaced tabular bar chart (`\barrule{level}{...}`) with separator-joined inline strings (`((( skills.industry_knowledge | join(' ~•~ ') )))`)
+- `global.css`: added `.cv-skill-pills` (flex wrap container) and `.cv-skill-tag` (warm-toned pill with `var(--color-accent)`)
+
+**Build results:**
+- Astro HTML build: clean (verified `dist/cv/index.html` rendered grouped pills correctly)
+- LaTeX PDF build: succeeded in CI via `xu-cheng/latex-action` (2m56s); local build blocked by MiKTeX Perl dependency (expected per Aaron's LaTeX CI fragility learnings)
+
+**ATS keyword density:**
+~60+ high-value role keywords for "Cloud Solution Architect" / "Lead Cloud Architect" roles. Skills mirror LinkedIn verbatim (e.g., "Identity and Access Management (IAM)" not "Security / IAM"; "Azure Kubernetes Service (AKS)" not "Kubernetes / AKS") for exact ATS matching.
+
+**Key learning:**
+LinkedIn skills taxonomy is the canonical ground truth for CV keyword strings. Copy verbatim to maximize ATS match confidence. No self-rated percentages above 95% — leaves no headroom and reads as bragging. Flat grouped lists > self-rated bars for senior architect positioning.
+
+---
+
 ### 2026-05-13: Open Source Section LaTeX Compilation (PR #23) — INCOMPLETE
 
 **Context:**

@@ -1,0 +1,591 @@
+{
+  "desktop_home_full": "C:\\git\\opedal.tech\\.audit-shots\\desktop_home_full.png",
+  "desktop_home_above_fold": "C:\\git\\opedal.tech\\.audit-shots\\desktop_home_above_fold.png",
+  "home_desktop_metrics": {
+    "title": "Martin Opedal \u00b7 opedal.tech",
+    "portrait": {
+      "src": "https://opedal.tech/_astro/martin-opedal.DmY-csEF_Z2iAkrT.webp",
+      "alt": "Portrait of Martin Opedal, Lead Cloud Solution Architect at Microsoft",
+      "width": 220,
+      "height": 220,
+      "renderedWidth": 220,
+      "renderedHeight": 220,
+      "top": 670
+    },
+    "allImages": [
+      {
+        "src": "https://opedal.tech/_astro/martin-opedal.DmY-csEF_Z2iAkrT.webp",
+        "alt": "Portrait of Martin Opedal, Lead Cloud Solution Architect at Microsoft"
+      }
+    ],
+    "sections": [
+      {
+        "id": "about",
+        "cls": "",
+        "top": 482,
+        "height": 531
+      },
+      {
+        "id": "work",
+        "cls": "alt-bg",
+        "top": 1012,
+        "height": 894
+      },
+      {
+        "id": "oss",
+        "cls": "",
+        "top": 1907,
+        "height": 1534
+      },
+      {
+        "id": "speaking",
+        "cls": "",
+        "top": 3441,
+        "height": 278
+      }
+    ],
+    "docHeight": 3819,
+    "viewportWidth": 1440
+  },
+  "home_desktop_blue_audit": [
+    {
+      "tag": "SPAN",
+      "cls": "repo-row-lang",
+      "prop": "color",
+      "value": "rgb(126, 174, 255)",
+      "snippet": "<span class=\"repo-row-lang\">PowerShell</span>"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "repo-row-lang",
+      "prop": "borderTopColor",
+      "value": "rgb(126, 174, 255)",
+      "snippet": "<span class=\"repo-row-lang\">PowerShell</span>"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "repo-row-lang",
+      "prop": "outlineColor",
+      "value": "rgb(126, 174, 255)",
+      "snippet": "<span class=\"repo-row-lang\">PowerShell</span>"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "repo-row-lang",
+      "prop": "color",
+      "value": "rgb(181, 139, 230)",
+      "snippet": "<span class=\"repo-row-lang\">Terraform</span>"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "repo-row-lang",
+      "prop": "borderTopColor",
+      "value": "rgb(181, 139, 230)",
+      "snippet": "<span class=\"repo-row-lang\">Terraform</span>"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "repo-row-lang",
+      "prop": "outlineColor",
+      "value": "rgb(181, 139, 230)",
+      "snippet": "<span class=\"repo-row-lang\">Terraform</span>"
+    }
+  ],
+  "home_desktop_a11y": {
+    "missingAlt": [],
+    "emptyAlt": [],
+    "targetBlankNoRel": [],
+    "smallTapTargets": [
+      {
+        "text": "opedal.tech",
+        "w": 93,
+        "h": 28
+      },
+      {
+        "text": "Home",
+        "w": 35,
+        "h": 22
+      },
+      {
+        "text": "Work",
+        "w": 35,
+        "h": 19
+      },
+      {
+        "text": "CV",
+        "w": 17,
+        "h": 19
+      },
+      {
+        "text": "Blog",
+        "w": 35,
+        "h": 19
+      },
+      {
+        "text": "Contact",
+        "w": 60,
+        "h": 19
+      },
+      {
+        "text": "See deployment patterns",
+        "w": 982,
+        "h": 22
+      },
+      {
+        "text": "See AKS patterns",
+        "w": 982,
+        "h": 22
+      },
+      {
+        "text": "See security patterns",
+        "w": 982,
+        "h": 22
+      },
+      {
+        "text": "See runner patterns",
+        "w": 982,
+        "h": 22
+      },
+      {
+        "text": "Nordic Infrastructure Conferen",
+        "w": 244,
+        "h": 20
+      },
+      {
+        "text": "Email",
+        "w": 38,
+        "h": 17
+      },
+      {
+        "text": "GitHub",
+        "w": 46,
+        "h": 17
+      },
+      {
+        "text": "LinkedIn",
+        "w": 61,
+        "h": 17
+      },
+      {
+        "text": "Source",
+        "w": 46,
+        "h": 17
+      }
+    ]
+  },
+  "desktop_cv_full": "C:\\git\\opedal.tech\\.audit-shots\\desktop_cv_full.png",
+  "desktop_cv_above_fold": "C:\\git\\opedal.tech\\.audit-shots\\desktop_cv_above_fold.png",
+  "cv_desktop_metrics": {
+    "sectionCount": 7,
+    "sections": [
+      {
+        "h2": "Summary",
+        "top": 564,
+        "bottom": 960,
+        "height": 396,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Experience",
+        "top": 1102,
+        "bottom": 2488,
+        "height": 1386,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Enterprise Engagements",
+        "top": 2536,
+        "bottom": 3185,
+        "height": 649,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Skills",
+        "top": 3233,
+        "bottom": 4206,
+        "height": 973,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Certifications",
+        "top": 4254,
+        "bottom": 4681,
+        "height": 427,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Speaking",
+        "top": 4729,
+        "bottom": 5265,
+        "height": 536,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Open Source",
+        "top": 5313,
+        "bottom": 6884,
+        "height": 1571,
+        "marginTop": "0px",
+        "marginBottom": "0px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      }
+    ],
+    "gaps": [
+      {
+        "from": "Summary",
+        "to": "Experience",
+        "gapPx": 142,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      },
+      {
+        "from": "Experience",
+        "to": "Enterprise Engagements",
+        "gapPx": 48,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      },
+      {
+        "from": "Enterprise Engagements",
+        "to": "Skills",
+        "gapPx": 48,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      },
+      {
+        "from": "Skills",
+        "to": "Certifications",
+        "gapPx": 48,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      },
+      {
+        "from": "Certifications",
+        "to": "Speaking",
+        "gapPx": 48,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      },
+      {
+        "from": "Speaking",
+        "to": "Open Source",
+        "gapPx": 48,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      }
+    ],
+    "container": {
+      "display": "block",
+      "gap": "normal",
+      "rowGap": "normal",
+      "padding": "0px 24px"
+    }
+  },
+  "cv_desktop_dom_certs_to_speaking": {
+    "fromParent": "DIV.container",
+    "toParent": "DIV.container",
+    "sameParent": true,
+    "between": [],
+    "fromLastChildHeight": 175,
+    "fromLastChildMarginBottom": "0px",
+    "toFirstChildMarginTop": "0px"
+  },
+  "cv_desktop_dom_speaking_to_oss": {
+    "fromParent": "DIV.container",
+    "toParent": "DIV.container",
+    "sameParent": true,
+    "between": [],
+    "fromLastChildHeight": 283,
+    "fromLastChildMarginBottom": "0px",
+    "toFirstChildMarginTop": "0px"
+  },
+  "cv_band_clip_error": "Page.screenshot: Clipped area is either empty or outside the resulting image\nCall log:\n  - taking page screenshot\n  - waiting for fonts to load...\n  - fonts loaded\n",
+  "desktop_work_full": "C:\\git\\opedal.tech\\.audit-shots\\desktop_work_full.png",
+  "desktop_work_above_fold": "C:\\git\\opedal.tech\\.audit-shots\\desktop_work_above_fold.png",
+  "desktop_blog_full": "C:\\git\\opedal.tech\\.audit-shots\\desktop_blog_full.png",
+  "desktop_blog_above_fold": "C:\\git\\opedal.tech\\.audit-shots\\desktop_blog_above_fold.png",
+  "blog_desktop_blue_audit": [],
+  "mobile_home_full": "C:\\git\\opedal.tech\\.audit-shots\\mobile_home_full.png",
+  "mobile_home_above_fold": "C:\\git\\opedal.tech\\.audit-shots\\mobile_home_above_fold.png",
+  "home_mobile_metrics": {
+    "title": "Martin Opedal \u00b7 opedal.tech",
+    "portrait": {
+      "src": "https://opedal.tech/_astro/martin-opedal.DmY-csEF_Z2iAkrT.webp",
+      "alt": "Portrait of Martin Opedal, Lead Cloud Solution Architect at Microsoft",
+      "width": 160,
+      "height": 160,
+      "renderedWidth": 160,
+      "renderedHeight": 160,
+      "top": 697
+    },
+    "allImages": [
+      {
+        "src": "https://opedal.tech/_astro/martin-opedal.DmY-csEF_Z2iAkrT.webp",
+        "alt": "Portrait of Martin Opedal, Lead Cloud Solution Architect at Microsoft"
+      }
+    ],
+    "sections": [
+      {
+        "id": "about",
+        "cls": "",
+        "top": 509,
+        "height": 876
+      },
+      {
+        "id": "work",
+        "cls": "alt-bg",
+        "top": 1385,
+        "height": 1141
+      },
+      {
+        "id": "oss",
+        "cls": "",
+        "top": 2526,
+        "height": 2494
+      },
+      {
+        "id": "speaking",
+        "cls": "",
+        "top": 5020,
+        "height": 330
+      }
+    ],
+    "docHeight": 5449,
+    "viewportWidth": 390
+  },
+  "home_mobile_a11y": {
+    "missingAlt": [],
+    "emptyAlt": [],
+    "targetBlankNoRel": [],
+    "smallTapTargets": [
+      {
+        "text": "opedal.tech",
+        "w": 93,
+        "h": 28
+      },
+      {
+        "text": "See deployment patterns",
+        "w": 292,
+        "h": 22
+      },
+      {
+        "text": "See AKS patterns",
+        "w": 292,
+        "h": 22
+      },
+      {
+        "text": "See security patterns",
+        "w": 292,
+        "h": 22
+      },
+      {
+        "text": "See runner patterns",
+        "w": 292,
+        "h": 22
+      },
+      {
+        "text": "Nordic Infrastructure Conferen",
+        "w": 244,
+        "h": 20
+      },
+      {
+        "text": "Email",
+        "w": 38,
+        "h": 17
+      },
+      {
+        "text": "GitHub",
+        "w": 46,
+        "h": 17
+      },
+      {
+        "text": "LinkedIn",
+        "w": 61,
+        "h": 17
+      },
+      {
+        "text": "Source",
+        "w": 46,
+        "h": 17
+      }
+    ]
+  },
+  "mobile_cv_full": "C:\\git\\opedal.tech\\.audit-shots\\mobile_cv_full.png",
+  "mobile_cv_above_fold": "C:\\git\\opedal.tech\\.audit-shots\\mobile_cv_above_fold.png",
+  "cv_mobile_metrics": {
+    "sectionCount": 7,
+    "sections": [
+      {
+        "h2": "Summary",
+        "top": 634,
+        "bottom": 1174,
+        "height": 540,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Experience",
+        "top": 1378,
+        "bottom": 3662,
+        "height": 2284,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Enterprise Engagements",
+        "top": 3710,
+        "bottom": 5106,
+        "height": 1396,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Skills",
+        "top": 5154,
+        "bottom": 6737,
+        "height": 1583,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Certifications",
+        "top": 6785,
+        "bottom": 7586,
+        "height": 801,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Speaking",
+        "top": 7634,
+        "bottom": 8169,
+        "height": 536,
+        "marginTop": "0px",
+        "marginBottom": "48px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      },
+      {
+        "h2": "Open Source",
+        "top": 8217,
+        "bottom": 10250,
+        "height": 2033,
+        "marginTop": "0px",
+        "marginBottom": "0px",
+        "paddingTop": "64px",
+        "paddingBottom": "64px",
+        "display": "block",
+        "position": "static"
+      }
+    ],
+    "gaps": [
+      {
+        "from": "Summary",
+        "to": "Experience",
+        "gapPx": 204,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      },
+      {
+        "from": "Experience",
+        "to": "Enterprise Engagements",
+        "gapPx": 48,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      },
+      {
+        "from": "Enterprise Engagements",
+        "to": "Skills",
+        "gapPx": 48,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      },
+      {
+        "from": "Skills",
+        "to": "Certifications",
+        "gapPx": 48,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      },
+      {
+        "from": "Certifications",
+        "to": "Speaking",
+        "gapPx": 48,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      },
+      {
+        "from": "Speaking",
+        "to": "Open Source",
+        "gapPx": 48,
+        "fromMarginBottom": "48px",
+        "toMarginTop": "0px"
+      }
+    ],
+    "container": {
+      "display": "block",
+      "gap": "normal",
+      "rowGap": "normal",
+      "padding": "0px 24px"
+    }
+  },
+  "mobile_work_full": "C:\\git\\opedal.tech\\.audit-shots\\mobile_work_full.png",
+  "mobile_work_above_fold": "C:\\git\\opedal.tech\\.audit-shots\\mobile_work_above_fold.png",
+  "mobile_blog_full": "C:\\git\\opedal.tech\\.audit-shots\\mobile_blog_full.png",
+  "mobile_blog_above_fold": "C:\\git\\opedal.tech\\.audit-shots\\mobile_blog_above_fold.png"
+}
