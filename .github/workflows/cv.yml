@@ -14,6 +14,7 @@ on:
       - main
     paths:
       - 'cv/**'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -58,8 +59,7 @@ jobs:
       - name: Build CV PDFs
         run: python3 cv/build.py
 
-      - name: Upload PDFs as artifacts (PR only)
-        if: github.event_name == 'pull_request'
+      - name: Upload PDFs as artifacts
         uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
         with:
           name: cv-pdfs
