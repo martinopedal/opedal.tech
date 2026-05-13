@@ -98,6 +98,25 @@ tags: ["Azure", "Terraform"]
 - No customer names or confidential engagement details
 - No secrets in HTML source (no API keys, tokens, tracking pixels)
 
+## Voice rules (apply to all narrative copy in `.astro`, `.md`, `.txt`)
+
+These are the rules Martin enforces in production. They apply to every AI-generated and human-written change to bio, blog, About, Hero, llms.txt, humans.txt, and similar narrative content.
+
+1. **Narrative copy stays general; dedicated cards stay specific.** In bio paragraphs use general descriptors. Yes: "I speak publicly on Terraform, GitHub Copilot, and infrastructure-as-code security." No: "I speak at the Nordic Infrastructure Conference on..." Reserve specific venue/event names for dedicated venue cards like `src/components/Speaking.astro` where naming the venue with a link is the whole point.
+2. **Name ventures, drop status parentheticals.** Yes: "I co-founded Cervisiam and Krecher, plus Oculus bar." No: "Cervisiam (still active) and Krecher (ended), plus Oculus bar." If venture status genuinely matters somewhere, put it in a structured field, not narrative prose.
+3. **State things once.** If two consecutive paragraphs make the same point with different words, merge them. Scan for paragraph-level theme duplication, not just sentence-level.
+4. **No em dashes (`—` U+2014) or en dashes (`–` U+2013) anywhere.** Use commas, periods, semicolons, or " and " instead. CI does not catch these; reviewers must. Quick check: `Select-String -Pattern '[\u2014\u2013]' -Path src/**/*.astro,public/llms.txt,public/humans.txt -Encoding UTF8`.
+5. **Banned AI-tell phrases.** Never use in any narrative copy on this site:
+   - **Verbs:** leveraging, driving, unlocking, elevate, empower, accelerate, streamline, optimize
+   - **Adjectives:** robust, comprehensive, cutting-edge, game-changer, future-proof, production-ready, enterprise-grade, AI-powered, seamless
+   - **Filler openers:** "the reality is", "the truth is", "it's worth noting", "here's the thing", "the takeaway", "in today's landscape", "across industries"
+   - **Excited openers:** "I'm excited to", "thrilled to", "humbled to", "grateful to announce", "now more than ever"
+   - **Soft engagement closers:** "agree?", "thoughts?", "what are you seeing?"
+
+   Replace with concrete operational language: name the tool, the constraint, the decision, or the number.
+
+When generating copy, default to direct, concrete, specific. Name actual tools (ALZ Terraform module, AVM, Karpenter, AGC) and real constraints (subnet sizing, central firewall egress, SMI configuration). The full voice profile lives in the user-level writer skill at `~/.copilot/skills/linkedin-writer/SKILL.md` for sessions that have it; this section is the strict subset that always applies.
+
 ## Issue conventions
 
 - Use labels `enhancement`, `bug`, `content`, `chore`, `documentation`, `dependencies`
