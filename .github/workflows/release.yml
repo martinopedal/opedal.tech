@@ -1,0 +1,134 @@
+name: Release
+
+on:
+  schedule:
+    - cron: '0 4 * * 0'  # Sunday 04:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0  # Full history for changelog generation
+
+      - name: Check if new commits exist
+        id: check
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LATEST_TAG" ]; then
+            echo "new_commits=true" >> $GITHUB_OUTPUT
+            echo "No previous tags found, will create first release"
+          else
+            COMMIT_COUNT=$(git rev-list "$LATEST_TAG"..HEAD --count)
+            if [ "$COMMIT_COUNT" -eq 0 ]; then
+              echo "new_commits=false" >> $GITHUB_OUTPUT
+              echo "No new commits since $LATEST_TAG, skipping release"
+            else
+              echo "new_commits=true" >> $GITHUB_OUTPUT
+              echo "Found $COMMIT_COUNT commits since $LATEST_TAG"
+            fi
+          fi
+
+      - name: Generate calver tag
+        if: steps.check.outputs.new_commits == 'true'
+        id: tag
+        run: |
+          DATE=$(date -u +%Y.%m.%d)
+          SHORT_SHA=$(git rev-parse --short=7 HEAD)
+          TAG="v${DATE}-${SHORT_SHA}"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "Generated tag: $TAG"
+
+      - name: Setup Node.js
+        if: steps.check.outputs.new_commits == 'true'
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: steps.check.outputs.new_commits == 'true'
+        run: npm ci
+
+      - name: Build site
+        if: steps.check.outputs.new_commits == 'true'
+        run: npm run build
+
+      - name: Create release artifacts
+        if: steps.check.outputs.new_commits == 'true'
+        id: artifacts
+        run: |
+          # Create archives
+          cd dist
+          tar -czf ../opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz .
+          zip -r ../opedal.tech-${{ steps.tag.outputs.tag }}.zip .
+          cd ..
+          
+          # Generate SHA-256 checksums
+          sha256sum opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz > checksums.txt
+          sha256sum opedal.tech-${{ steps.tag.outputs.tag }}.zip >> checksums.txt
+          
+          echo "### SHA-256 Checksums" > release-notes.md
+          echo '```' >> release-notes.md
+          cat checksums.txt >> release-notes.md
+          echo '```' >> release-notes.md
+          echo "" >> release-notes.md
+          echo "### Verification" >> release-notes.md
+          echo "All artifacts are signed with Sigstore. Verify signatures using:" >> release-notes.md
+          echo '```bash' >> release-notes.md
+          echo "cosign verify-blob --bundle opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz.sigstore.json opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz" >> release-notes.md
+          echo '```' >> release-notes.md
+
+      - name: Sign artifacts with Sigstore
+        if: steps.check.outputs.new_commits == 'true'
+        uses: sigstore/gh-action-sigstore-python@04cffa1d795717b140764e8b640de88853c92acc # v3.3.0
+        with:
+          inputs: |
+            opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz
+            opedal.tech-${{ steps.tag.outputs.tag }}.zip
+          upload-signing-artifacts: true
+
+      - name: Attest build provenance
+        if: steps.check.outputs.new_commits == 'true'
+        uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
+        with:
+          subject-path: |
+            opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz
+            opedal.tech-${{ steps.tag.outputs.tag }}.zip
+
+      - name: Create GitHub Release
+        if: steps.check.outputs.new_commits == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Generate changelog from commits since last tag
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LATEST_TAG" ]; then
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" --no-merges)
+          else
+            CHANGELOG=$(git log "$LATEST_TAG"..HEAD --pretty=format:"- %s (%h)" --no-merges)
+          fi
+          
+          # Combine changelog with release notes
+          echo "## Changes" > full-notes.md
+          echo "$CHANGELOG" >> full-notes.md
+          echo "" >> full-notes.md
+          cat release-notes.md >> full-notes.md
+          
+          # Create release
+          gh release create "${{ steps.tag.outputs.tag }}" \
+            --title "Release ${{ steps.tag.outputs.tag }}" \
+            --notes-file full-notes.md \
+            opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz \
+            opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz.sigstore.json \
+            opedal.tech-${{ steps.tag.outputs.tag }}.zip \
+            opedal.tech-${{ steps.tag.outputs.tag }}.zip.sigstore.json \
+            checksums.txt
