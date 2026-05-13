@@ -13,8 +13,8 @@ const cvPath = 'cv/data/architect.yml';
 const cvYaml = fs.readFileSync(cvPath, 'utf8');
 const data = yaml.load(cvYaml);
 
-const title = 'About — Martin Opedal';
-const description = 'Cloud Solution Architect at Microsoft Norway with 15+ years architecting Azure platforms — datacenter engineer turned Landing Zones specialist, co-founder of two Norwegian craft breweries.';
+const title = 'About, Martin Opedal';
+const description = 'Cloud Solution Architect at Microsoft Norway with 15+ years architecting Azure platforms. Datacenter engineer turned Landing Zones specialist, co-founder of two Norwegian craft breweries.';
 
 // AboutPage JSON-LD schema
 const aboutPageSchema = {
@@ -102,7 +102,7 @@ const breadcrumbSchema = {
           I use Terraform daily. The modules I ship come from real customer engagements, not theory. My GitHub repos include an AVM pattern module for CI/CD runners with VNET integration, an AKS Automatic module that works inside ALZ Corp landing zones with central firewall egress, and a bundled assessment runner that unifies azqr, PSRule, AzGovViz, and 135 ALZ Graph queries into one portable report.
         </p>
         <p>
-          I speak at the Nordic Infrastructure Conference (94% approval rating, Level 300 sessions, live-streamed) on Terraform, GitHub Copilot, and infrastructure-as-code security. Inside Microsoft I run architecture workshops and Well-Architected reviews for strategic accounts. I present at 50–100 in-person events a year and 200+ virtual sessions.
+          I speak at the Nordic Infrastructure Conference (94% approval rating, Level 300 sessions, live-streamed) on Terraform, GitHub Copilot, and infrastructure-as-code security. Inside Microsoft I run architecture workshops and Well-Architected reviews for strategic accounts. I present at 50 to 100 in-person events a year and 200+ virtual sessions.
         </p>
         <p>
           I co-founded two craft breweries in Norway. Fermentation and infrastructure both need the right controls and patience. Brewing taught me that tight feedback loops matter: you taste at every stage, adjust pH and temperature in real time, and ship when the hydrometer says it's ready. Infrastructure is the same: instrument everything, respond to signals, and never skip the smoke test.
@@ -134,15 +134,15 @@ const breadcrumbSchema = {
         <ul class="talks-list">
           {data.speaking.map((item) => (
             <li>
-              <strong>{item.venue}</strong> — {item.talk}
+              <strong>{item.venue}</strong>: {item.talk}
               {item.metric && <span class="talk-metric"> ({item.metric})</span>}
             </li>
           ))}
           <li>
-            <strong>Blog</strong> — <a href={link('blog')}>Articles on Azure Landing Zones, AKS, and GitHub Copilot</a>
+            <strong>Blog</strong>: <a href={link('blog')}>Articles on Azure Landing Zones, AKS, and GitHub Copilot</a>
           </li>
           <li>
-            <strong>Open source</strong> — <a href={link('work')}>Terraform AVM patterns, GitHub runners, Azure governance tooling</a>
+            <strong>Open source</strong>: <a href={link('work')}>Terraform AVM patterns, GitHub runners, Azure governance tooling</a>
           </li>
         </ul>
       </section>

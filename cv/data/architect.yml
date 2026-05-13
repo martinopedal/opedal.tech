@@ -1,4 +1,4 @@
-# architect.yml — single source of truth for the Architect CV.
+# architect.yml, single source of truth for the Architect CV.
 #
 # This file is consumed by:
 #   1. cv/build.py + cv/templates/architect.tex.j2
@@ -63,7 +63,7 @@ summary: |
 # `appears_on` controls whether the entry renders in 1page, multipage,
 # or both PDF variants. All entries appear on the /cv HTML page.
 experience:
-  - period: "2025–Present"
+  - period: "2025 to Present"
     role: Lead / Cross Cloud Solution Architect
     employer: Microsoft
     location: Oslo
@@ -76,9 +76,9 @@ experience:
       customer workshops (Well-Architected, AI Foundry, architecture
       design). Creating reference architectures and best practices. NIC
       speaker (94% approval, Level 300, live-streamed), internal events
-      (50–100 in-person, 200+ virtual).
+      (50 to 100 in-person, 200+ virtual).
 
-  - period: "2024–2025"
+  - period: "2024 to 2025"
     role: Senior Cloud Solution Architect
     employer: Microsoft
     location: Oslo
@@ -100,7 +100,7 @@ experience:
       bank engagement, leading their technical transformation and
       driving consultant expansion sales.
 
-  - period: "2022–2024"
+  - period: "2022 to 2024"
     role: Group Manager, Cloud Architecture
     employer: Avanade
     location: Oslo
@@ -113,7 +113,7 @@ experience:
       deliverables across cross-functional teams. Programs: CAF/ESLZ,
       IaC, security.
 
-  - period: "2020–2022"
+  - period: "2020 to 2022"
     role: Cloud Solution Architect
     employer: Advania
     location: Oslo
@@ -123,7 +123,7 @@ experience:
       mid-market and enterprise. Azure, hybrid cloud, multi-cloud. Cost
       optimization.
 
-  - period: "2011–2020"
+  - period: "2011 to 2020"
     role: Senior Systems Consultant / TAM
     employer: Teknograd
     location: Oslo
@@ -133,7 +133,7 @@ experience:
       Datacenter-to-cloud migrations. Enterprise and distributed
       applications across Azure, M365, VMware, Citrix.
 
-# Anonymized customer engagements — sector + scale only, never names.
+# Anonymized customer engagements, sector + scale only, never names.
 # 1-page omits the lower-priority entries; the full list ships in multipage
 # and on the /cv HTML page.
 engagements:
@@ -179,7 +179,7 @@ skills:
 
   # Technical skills grouped by category, mirroring LinkedIn taxonomy for ATS alignment.
   # Source of truth: Martin's LinkedIn profile as of 2026-05.
-  # Do NOT add numeric ratings — flat lists match ATS keyword patterns and avoid
+  # Do NOT add numeric ratings. Flat lists match ATS keyword patterns and avoid
   # the self-rating trap where 15 years Azure experience reads as "40%".
   industry_knowledge:
     - Microsoft Azure
@@ -281,14 +281,14 @@ speaking:
     appears_on: [1page, multipage]
   - venue: Microsoft internal events
     talk: Architecture and platform sessions
-    metric: 50–100 in-person, 200+ virtual
+    metric: 50 to 100 in-person, 200+ virtual
     appears_on: [multipage]
 
 # Reserved for future expansion. Empty arrays are valid; both the LaTeX
 # template and cv.astro must skip the section header when empty.
 education: []
 
-# Open Source contributions — repos grouped by theme. Each repo can appear
+# Open Source contributions, repos grouped by theme. Each repo can appear
 # on 1page (highlights only), multipage (full list), or both.
 open_source:
   - group: Azure Governance & Assessment
@@ -314,7 +314,7 @@ open_source:
       - name: ghec-vnet-runners-azure
         lang: Terraform
         url: https://github.com/martinopedal/ghec-vnet-runners-azure
-        summary: "GitHub-hosted runners with Azure VNet integration for GHE.com — EU data residency and private endpoint connectivity"
+        summary: "GitHub-hosted runners with Azure VNet integration for GHE.com, EU data residency and private endpoint connectivity"
         appears_on: [multipage]
       - name: terraform-azurerm-github-runners-alz-corp
         lang: Terraform
@@ -327,7 +327,7 @@ open_source:
       - name: terraform-azapi-aks-automatic
         lang: Terraform
         url: https://github.com/martinopedal/terraform-azapi-aks-automatic
-        summary: "AKS Automatic with ALZ Corp networking — BYO VNet, multiple ingress options (AGC/NGINX/Istio), managed identity everywhere"
+        summary: "AKS Automatic with ALZ Corp networking, BYO VNet, multiple ingress options (AGC/NGINX/Istio), managed identity everywhere"
         appears_on: [1page, multipage]
       - name: avm-ptn-aiml-ai-foundry
         lang: Terraform
@@ -348,5 +348,5 @@ open_source:
       - name: linkedin-auto-poster
         lang: Python
         url: https://github.com/martinopedal/linkedin-auto-poster
-        summary: "RSS to LinkedIn pipeline — ingests tech feeds, scores relevance, drafts in your voice, publishes through a GitHub PR approval workflow"
+        summary: "RSS to LinkedIn pipeline, ingests tech feeds, scores relevance, drafts in your voice, publishes through a GitHub PR approval workflow"
         appears_on: [1page, multipage]
