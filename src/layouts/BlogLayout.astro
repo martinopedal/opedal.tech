@@ -2,6 +2,7 @@
 import { link } from '../utils/link';
 import BaseLayout from './BaseLayout.astro';
 import Nav from '../components/Nav.astro';
+import { safeJsonLd } from '../utils/jsonld';
 
 interface Props {
   title: string;
@@ -101,8 +102,8 @@ const breadcrumbSchema = {
     {tags.map((tag) => (
       <meta property="article:tag" content={tag} />
     ))}
-    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={safeJsonLd(articleSchema)} />
+    <script type="application/ld+json" set:html={safeJsonLd(breadcrumbSchema)} />
   </Fragment>
 
   <Nav />
