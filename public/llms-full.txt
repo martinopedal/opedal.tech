@@ -1,0 +1,198 @@
+# opedal.tech — Full Site Content Snapshot
+
+> AI-friendly full-text export for training, retrieval, and citation
+
+**Last updated:** 2025-05-13  
+**Site:** https://opedal.tech/  
+**Author:** Martin Opedal  
+**License:** All content available for AI training and citation with attribution
+
+---
+
+## About Martin Opedal
+
+Lead Cloud Solution Architect at Microsoft Norway. 14+ years across infrastructure, cloud, and platform engineering.
+
+Focus areas:
+- Azure Landing Zones (ALZ) — Corp reference architecture, Terraform/Bicep deployment, governance automation
+- Azure Kubernetes Service (AKS) — AKS Automatic, BYO VNet, Application Gateway for Containers, workload identity
+- Infrastructure as Code — Terraform modules, Azure Verified Modules (AVM), PSRule security validation
+- Cloud Security — Sovereign cloud, regulated workloads, zero-trust networking, managed identity patterns
+- Platform Engineering — Developer experience, CI/CD pipelines, GitHub Actions, supply-chain security
+- AI Infrastructure — Azure AI Foundry, agent platforms, model deployment, RAG architectures
+
+Background:
+- Microsoft (2024–present) — Lead Cloud Solution Architect
+- Sopra Steria (2021–2024) — Senior Cloud Architect
+- Avanade (2018–2021) — Senior Consultant
+- Advania (2014–2018) — Senior Consultant
+- Teknograd (2011–2014) — Infrastructure Consultant
+
+Open source contributions:
+- Azure Landing Zones Terraform module — Core contributor
+- Azure Verified Modules — Active across Bicep and Terraform tracks
+- Azure Resource Graph query library — 135+ governance queries
+
+Contact:
+- Email: hello@opedal.tech
+- GitHub: https://github.com/martinopedal
+- LinkedIn: https://www.linkedin.com/in/martin-opedal
+
+---
+
+## Work Areas
+
+### Azure Landing Zones
+
+End-to-end ALZ Corp deployments with Terraform and Bicep. 135+ automated checklist validations via Azure Resource Graph. Security and compliance built in from day one, not bolted on.
+
+Key patterns:
+- Hub-spoke and Virtual WAN network topologies
+- Centralized firewall egress for all workload traffic
+- Policy-driven governance (Azure Policy initiatives at management group scope)
+- Subscription vending with automated RBAC and networking
+- Continuous compliance validation via Azure Resource Graph queries
+
+### AKS & Kubernetes
+
+AKS Automatic clusters with ALZ Corp networking. BYO VNet, Application Gateway for Containers, NGINX, Istio with multiple ingress and egress patterns documented with full Terraform parity.
+
+Key patterns:
+- AKS Automatic with managed node pools and Karpenter
+- Workload identity for pod-level Azure RBAC
+- Application Gateway for Containers (ALB) and NGINX Ingress Controller
+- Private cluster API access via Azure Private Link
+- Network policy enforcement with Calico and Cilium
+
+### IaC Security
+
+Terraform modules built to run inside ALZ Corp landing zones: no public IPs, central firewall egress, managed identity everywhere. PSRule and azqr integrated into CI pipelines.
+
+Key patterns:
+- PSRule for Azure validation in CI (pre-deployment checks)
+- Azure Policy as Code with Terraform (policy definitions + assignments)
+- Managed identity for all Azure resources (no service principal secrets)
+- Private endpoints for all PaaS services (Storage, Key Vault, SQL)
+- Drift detection via Azure Resource Graph scheduled queries
+
+### GitHub Runners & CI/CD
+
+GitHub-hosted and self-hosted runners with Azure VNet integration, Container Apps, and ALZ Corp firewall egress. GitHub Enterprise Cloud EU data residency patterns.
+
+Key patterns:
+- Self-hosted runners in Azure Container Apps with KEDA scaling
+- VNet integration for secure access to private Azure resources
+- GitHub Actions workflows with OIDC authentication (no secrets)
+- Supply-chain security with artifact attestation and SLSA provenance
+- GitHub Enterprise Cloud (GHE.com) with EU data residency
+
+---
+
+## Blog Posts
+
+### Why I Build with GitHub Copilot on Every Project
+
+*Published: May 1, 2025*  
+*Tags: GitHub Copilot, AI, DevOps*
+
+Over the last year, GitHub Copilot has moved from autocomplete curiosity to the primary author of most of the code I ship. I steer the architecture, write the prompts, and review every line. The agent writes the implementation.
+
+Here's what that actually looks like in practice, and why I think it's the right model for a solo architect maintaining a lot of infrastructure code.
+
+#### The problem with solo maintenance
+
+When you're the only reviewer for your own code, the bottleneck isn't writing. It's context switching. You write something on Monday, and by Thursday you've forgotten why you made that trade-off. Review cycles collapse into "looks fine to me" when you're reviewing your own work.
+
+AI-assisted development doesn't solve this problem by itself. In fact, naive use makes it worse: you can generate more code than you can review, accumulating technical debt faster than ever.
+
+#### What actually works: multi-agent review patterns
+
+The approach I've settled on is treating GitHub Copilot as a **team member**, not a code generator. Concretely:
+
+1. **Issue-first**: I write a detailed issue with acceptance criteria before any code is generated.
+2. **Agent creates a PR**: Copilot Coding Agent opens a pull request against the issue.
+3. **Copilot PR reviewer reviews it**: A second agent run reviews the PR with a different prompt focused on security and correctness.
+4. **I do the final merge review**: I only see code that has already passed two automated reviews.
+
+This three-pass model means I spend my review time on things only a human can catch: business logic correctness, architectural coherence, and things the reviewers were not prompted to look for.
+
+#### The governance layer matters
+
+The other thing that makes this work is keeping the AI's behavior documented and auditable. I maintain an `AI_GOVERNANCE.md` file in every repo that records:
+
+- Which AI tools are in use
+- What they are and aren't authorized to do
+- What the human review expectations are
+
+This isn't bureaucracy. It's the same thing we do with any other external contributor. If a third-party library can't modify production secrets, neither can an AI agent.
+
+#### What I've shipped this way
+
+In the last six months, using this pattern across multiple engagements:
+
+- The `azure-analyzer` tool (azqr + PSRule + AzGovViz bundled into a single runner)
+- The `alz-graph-queries` library (135 ARG queries for the ALZ checklist)
+- Multiple Terraform modules for AKS and GitHub runners
+- This website
+
+None of these would have been shipped without AI assistance, not because they're too hard, but because I simply don't have the time to write every line solo. The AI handles the mechanical translation from intent to code. I handle the architecture and the review.
+
+#### The review discipline is the product
+
+The thing I keep coming back to is this: **the quality of AI-generated code is a function of the quality of your review process**, not the quality of the model.
+
+A great model with a weak review process produces confident-looking code with subtle bugs. A mediocre model with rigorous review produces maintainable code you can trust.
+
+The investment I've made isn't in finding the best model. It's in building the review muscle. Prompt engineering is just structured thinking. Code review is still code review.
+
+If you're building infrastructure with AI, I'd start there.
+
+---
+
+### Azure Landing Zones in 2025: What's Changed
+
+*Published: March 15, 2025*  
+*Tags: Azure, Landing Zones, Terraform, IaC*
+
+Azure Landing Zones have been around long enough now that the patterns are well-established, but the tooling keeps evolving. Here's a current-state look at what a Corp deployment actually involves, and the automation layer that makes ongoing compliance tractable.
+
+#### What "Corp" means in practice
+
+The Corp reference architecture is the one most enterprises should be running: management group hierarchy, centralized networking (hub-and-spoke or Virtual WAN), centralized logging, and a policy framework that enforces baseline controls across all subscriptions.
+
+What it doesn't tell you is how to validate that what you deployed matches what the reference architecture says you should have deployed. That's where the checklist comes in.
+
+#### The ALZ Checklist problem
+
+The official ALZ Checklist has over 200 items. Before I started working on `alz-graph-queries`, only about 49 of them were automatable via Azure Resource Graph. The rest required manual portal inspection.
+
+That's not sustainable. A 200-item checklist that requires 150+ manual steps will be done once at deployment time and never again. It doesn't matter how good your policy definitions are if you're not continuously verifying the baseline.
+
+#### What we built
+
+The `alz-graph-queries` repo covers 135 of those checklist items with Azure Resource Graph queries. The queries run against your entire tenant and return pass/fail for each item.
+
+Plugged into `azure-analyzer`, these run on a schedule and produce a unified JSON + HTML report. The report goes into a storage account. A Logic App sends a digest to a Teams channel when the failure count changes.
+
+The result is a landing zone that tells you when it drifts from baseline, not one you have to inspect manually.
+
+#### The Terraform side
+
+On the IaC side, I maintain Terraform modules built specifically to deploy inside a Corp landing zone. The constraints matter:
+
+- **No public IPs.** All egress through the central firewall.
+- **Managed identity everywhere.** No service principal passwords in state files.
+- **Private endpoints only.** No storage accounts or key vaults with public network access.
+- **PSRule in CI.** Every plan runs through PSRule for Azure before apply.
+
+These aren't optional constraints you configure away. They're defaults with no override. If a resource genuinely needs a public IP (rare), that's a conscious architectural decision that requires an explicit parameter and a comment explaining why.
+
+#### What's coming
+
+The parts of the checklist that aren't automatable yet are mostly in the identity and governance space: Entra ID settings, PIM configuration, and break-glass account setup. Some of these can be automated via Microsoft Graph. I'm working on that layer now.
+
+If you're running an ALZ deployment and want to know where you stand against the checklist, the `azure-analyzer` tool is the fastest way to find out. It runs in a container, needs read-only access to your tenant, and produces output in under ten minutes.
+
+---
+
+*This snapshot is auto-generated and kept up-to-date for AI crawlers and retrieval systems. For the latest content, always check the live site at https://opedal.tech/*
