@@ -99,3 +99,45 @@
 - Lovell builds `/work` route and appends his CSS section after Bales's block.
 - Garman runs final verification gate (typography audit, print preview, schema validation, build check).
 - Coordinator opens PR B after all specialists report done.
+
+### Session 2: About section portrait via Astro Image (2026-05-13, PR #39)
+
+**What I built:**
+- Added Martin's professional headshot to the About section using Astro's `<Image>` component from `astro:assets`.
+- Portrait sourced from `cv/architect/photo.jpg` (800×800, 70 KB) and copied to `src/assets/martin-opedal.jpg` for Astro's optimization pipeline.
+- Modified `src/components/About.astro`: imported `{ Image }` from `'astro:assets'` and `portrait` from the assets folder, wrapped existing `.about-text` in a new `.about-grid` container, added the `<Image>` element with widths `[200, 320, 400]` and responsive sizes attribute.
+- Extended `src/styles/global.css`: added `.about-grid` (flexbox, mobile-first stacked, desktop side-by-side) and `.about-photo` (circular crop via `border-radius: 50%`, 1px warm border using `var(--color-border)`, 160px mobile / 220px desktop).
+
+**Technical decisions:**
+- **Astro Image optimization:** Placed source asset in `src/assets/` (not `public/`) so Astro's built-in Sharp pipeline optimizes it at build time. Generated 4 WebP variants: 3KB, 6KB, 8KB, 21KB (down from 70KB original JPG).
+- **Responsive sizing:** `sizes="(min-width: 768px) 220px, 160px"` tells browsers to select the 220px image on desktop, 160px on mobile. `widths={[200, 320, 400]}` generates three srcset candidates close to those display sizes.
+- **Alt text:** `"Portrait of Martin Opedal, Lead Cloud Solution Architect at Microsoft"` — descriptive, SEO-friendly, accessibility-compliant.
+- **Layout:** Mobile-first flexbox. Mobile: stacked column, photo centered, 160px circular crop. Desktop (768px+): row, photo left, text right, 2.5rem gap (`var(--space-6)` equivalent), 220px circular crop. Photo does not dominate — subtle and professional.
+- **No hover effects:** Plain static image, respects `prefers-reduced-motion` by default (no transitions added).
+- **CSP-safe:** All styles in `global.css`, no inline `style=""` attributes. Astro's `<Image>` component generates a plain `<img>` tag with `srcset` — no inline styles or scripts.
+- **Worktree isolation:** Created in separate worktree (`C:/git/opedal-tech-photo`) to avoid collision with Kranz's parallel PR #38 on `content/hero-subtitle-trim` (edits `Hero.astro` only). Branch `feat/about-photo` from `main`.
+
+**Build verification:**
+- `npm run build` succeeds. Image optimization logged: 4 WebP variants generated.
+- `dist/index.html` contains proper `<img>` tag with `srcset="/_astro/martin-opedal.DmY-csEF_Z2iiyn7.webp 200w, /_astro/martin-opedal.DmY-csEF_oJJA4.webp 320w, /_astro/martin-opedal.DmY-csEF_15ogNf.webp 400w"` and `sizes="(min-width: 768px) 220px, 160px"`.
+- Alt text preserved: `alt="Portrait of Martin Opedal, Lead Cloud Solution Architect at Microsoft"`.
+- Astro added `width="800" height="800"` from original image dimensions (prevents layout shift).
+- No CSP violations (no inline styles or scripts).
+
+**CI checks (PR #39):**
+- ✓ CodeQL/Analyze (actions) — 49s
+- ✓ Deploy to GitHub Pages/Build Astro site — 27s
+- ✓ Deploy to GitHub Pages/Validate links — 20s
+- ✓ Dependency Review — 5s
+- ✓ Copilot Agent PR Review — 6s
+- All checks passed. Merged via `gh pr merge 39 --admin --squash --delete-branch`.
+
+**Files changed:**
+- `src/assets/martin-opedal.jpg` — created (71,872 bytes, copied from `cv/architect/photo.jpg`).
+- `src/components/About.astro` — modified (+27 lines, −10 lines): added imports, wrapped in `.about-grid`, added `<Image>` element.
+- `src/styles/global.css` — modified (+29 lines): added `.about-grid` and `.about-photo` rules with mobile-first breakpoint.
+
+**Files NOT changed (as required):**
+- `cv/architect/photo.jpg` — left untouched (canonical source for CV pipeline).
+- `src/components/Hero.astro` — not touched (Kranz's parallel PR owns this file).
+- All other components, pages, layouts — not touched.
