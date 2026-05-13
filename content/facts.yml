@@ -1,0 +1,39 @@
+# Source of truth for facts asserted on opedal.tech.
+# Used by scripts/check-facts.mjs to validate src/ content.
+# Update this file when life-facts change. Treat as authoritative.
+#
+# COORDINATION: cv/data/architect.yml is the primary source for career timeline.
+# When both files contain the same fact, prefer architect.yml and mirror here.
+
+current_employer: Microsoft
+current_role: Lead Cloud Solution Architect
+current_country: Norway
+
+career:
+  # From cv/data/architect.yml experience[0].period: "2025–Present"
+  # Note: Martin transitioned internally at Microsoft from Senior CSA → Lead/Cross CSA in 2025.
+  # His first Microsoft role started in 2024 as Senior CSA (experience[1]).
+  microsoft_start_year: 2024
+  
+  # From cv/data/architect.yml experience[5]: Teknograd 2011–2020
+  teknograd_start_year: 2011
+  
+  # Martin started working with Azure, M365, and Entra ID at Teknograd in 2011.
+  # From experience[5].detail: "Enterprise and distributed applications across Azure, M365, VMware, Citrix."
+  azure_first_used_year: 2011
+
+ventures:
+  # From About.astro line 30: "I co-founded two craft breweries."
+  breweries_cofounded: 2
+
+# Derived facts computed at run-time by check-facts.mjs (not authored here):
+#   years_with_azure_entra_m365 = current_year - 2011
+#   years_at_microsoft = current_year - 2024
+#   years_before_microsoft = 2024 - 2011 = 13 (but this includes datacenter work, not purely datacenter)
+#
+# NOTE: The About.astro claim "I ran datacenters for nine years before joining Microsoft"
+# is INCORRECT. Martin worked at Teknograd from 2011–2020 (9 years), but that role was
+# NOT datacenter-only — it was "Systems engineering, technical account management.
+# Datacenter-to-cloud migrations. Enterprise and distributed applications across Azure,
+# M365, VMware, Citrix." He worked WITH datacenters, Azure, M365, and Entra simultaneously.
+# Connell is fixing this in PR content/about-timeline-fix.
