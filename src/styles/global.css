@@ -1565,7 +1565,7 @@ section h2 {
   display: flex;
   gap: 1rem;
   justify-content: center;
-  margin: 2.5rem 0 3rem;
+  margin: 0 0 1.5rem 0;  /* removed top margin to prevent 88px dead gap */
   flex-wrap: wrap;
 }
 
@@ -1665,6 +1665,30 @@ section h2 {
   margin-bottom: 1rem;
 }
 
+/* Industry Knowledge: higher visual weight (more breathing room between groups) */
+.cv-skills-block:first-child {
+  margin-bottom: 3rem;  /* extra space after Industry Knowledge */
+}
+
+/* Tools & Technologies: slightly lighter style */
+.cv-skills-block:nth-child(2) .cv-skill-tag {
+  font-size: 0.75rem;  /* slightly smaller */
+  padding: 0.25rem 0.65rem;
+  background: color-mix(in oklab, var(--tag-bg) 60%, transparent 40%);  /* lighter fill */
+}
+
+/* Competencies: tag style (text + thin border, no fill - calmer) */
+.cv-comp-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.65rem;
+  background: transparent;
+  color: var(--color-text-dim);
+  border: 1px solid var(--color-border);
+  border-radius: 2rem;
+}
+
 .cv-specializations {
   list-style: none;
   display: grid;
@@ -1748,15 +1772,7 @@ section h2 {
   gap: 0.5rem;
 }
 
-.cv-comp-tag {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 0.3rem 0.75rem;
-  background: var(--tag-bg);
-  color: var(--tag-text);
-  border-radius: 2rem;
-}
+/* .cv-comp-tag now defined above in Skills section with 3-tier hierarchy */
 
 /* Skill pills (Industry Knowledge, Tools & Technologies) */
 .cv-skill-pills {
