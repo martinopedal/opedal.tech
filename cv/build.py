@@ -138,7 +138,12 @@ def main():
         shutil.copy(pdf_file, dest)
         print(f"[build.py] Copied {pdf_file} → {dest}")
 
-    # 6. Clean up build artifacts (keep PDFs, remove .aux, .log, .fls, etc.)
+    # 6. Create stable martin-opedal-cv.pdf (multipage variant)
+    stable_name = PUBLIC_DIR / "martin-opedal-cv.pdf"
+    shutil.copy(PUBLIC_DIR / "architect-multipage.pdf", stable_name)
+    print(f"[build.py] Created stable filename: {stable_name}")
+
+    # 7. Clean up build artifacts (keep PDFs, remove .aux, .log, .fls, etc.)
     print(f"\n[build.py] Cleaning build directory {BUILD_DIR}")
     for ext in [".aux", ".fdb_latexmk", ".fls", ".log", ".out", ".synctex.gz"]:
         for artifact in BUILD_DIR.glob(f"*{ext}"):
@@ -148,6 +153,7 @@ def main():
     print("\n[build.py] ✓ Build complete. PDFs at:")
     for mode in MODES:
         print(f"  - {PUBLIC_DIR / f'architect-{mode}.pdf'}")
+    print(f"  - {PUBLIC_DIR / 'martin-opedal-cv.pdf'} (stable link)")
 
     sys.exit(0)
 
