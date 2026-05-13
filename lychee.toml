@@ -1,0 +1,35 @@
+# Configuration for lycheeverse/lychee link checker
+# https://github.com/lycheeverse/lychee/blob/master/docs/CONFIG.md
+
+# Maximum number of concurrent requests
+max_concurrency = 8
+
+# Timeout per request in seconds
+timeout = 15
+
+# Retry failed requests once
+max_retries = 1
+
+# User agent
+user_agent = "lychee/0.x (opedal.tech CI link checker)"
+
+# Base path for resolving relative links
+base = "dist"
+
+# Schemes to check (skip mailto:, tel:, etc.)
+scheme = ["http", "https"]
+
+# Don't fail on these domains — they aggressively block crawlers
+exclude = [
+  "^https?://(www\\.)?linkedin\\.com",
+  "^https?://(www\\.)?twitter\\.com",
+  "^https?://(www\\.)?x\\.com",
+  "^https?://(www\\.)?instagram\\.com",
+  "^https?://(www\\.)?facebook\\.com",
+]
+
+# Accept these as success (some sites return 999 to bots)
+accept = [200, 201, 202, 203, 204, 206, 301, 302, 304, 308, 999]
+
+# Treat broken anchors and broken internal links as errors
+include_fragments = true
