@@ -20,6 +20,12 @@ const {
   ogType = 'website',
 } = Astro.props;
 
+// Site verification tokens from environment variables (GitHub Actions repo variables)
+// When Martin adds PUBLIC_GOOGLE_SITE_VERIFICATION and PUBLIC_BING_SITE_VERIFICATION
+// as repo variables, next deploy auto-verifies the site without code changes.
+const gscToken = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingToken = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
+
 // og-default.png ships at 1200x630 (the standard OG aspect). Custom per-page
 // overrides should match these dimensions or override the meta tags below.
 const ogImageUrl = new URL(ogImage, Astro.site).toString();
@@ -31,25 +37,31 @@ const currentYear = new Date().getFullYear();
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
+  '@id': 'https://opedal.tech/#website',
   name: 'opedal.tech',
   alternateName: 'Martin Opedal',
   url: 'https://opedal.tech/',
   inLanguage: ['en', 'nb'],
   author: {
-    '@type': 'Person',
-    name: 'Martin Opedal',
-    url: 'https://opedal.tech/',
+    '@id': 'https://opedal.tech/#person',
+  },
+  publisher: {
+    '@id': 'https://opedal.tech/#person',
   },
 };
 
-// Sitewide Person schema. Lives in BaseLayout so every page emits it.
+// Comprehensive Person schema. Lives in BaseLayout so every page emits it.
 // JSON-LD <script type="application/ld+json"> blocks are CSP-exempt
 // because the browser parses them as data, not executable script.
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': 'https://opedal.tech/#person',
   name: 'Martin Opedal',
+  givenName: 'Martin',
+  familyName: 'Opedal',
   url: 'https://opedal.tech',
+  image: ogImageUrl,
   email: 'mailto:hello@opedal.tech',
   jobTitle: 'Lead Cloud Solution Architect',
   worksFor: {
@@ -69,6 +81,9 @@ const personSchema = {
   sameAs: [
     'https://www.linkedin.com/in/martin-opedal',
     'https://github.com/martinopedal',
+    'https://x.com/MartinOpedal',
+    'https://www.instagram.com/martinopedal',
+    'https://www.facebook.com/opedalmartin',
   ],
   knowsLanguage: ['en', 'nb'],
   knowsAbout: [
@@ -76,6 +91,7 @@ const personSchema = {
     'Azure Landing Zones',
     'Azure Kubernetes Service',
     'Kubernetes',
+    'AKS',
     'Terraform',
     'Bicep',
     'Infrastructure as Code',
@@ -86,8 +102,21 @@ const personSchema = {
     'GitHub Copilot',
     'Azure Policy',
     'Azure Resource Graph',
+    'Azure AI Foundry',
     'Cloud Architecture',
     'DevOps',
+    'Well-Architected Framework',
+  ],
+  award: [
+    'Microsoft Certified: Cybersecurity Architect Expert',
+    'Microsoft Certified: Azure Solutions Architect Expert',
+    'Microsoft Certified: DevOps Engineer Expert',
+    'Microsoft 365 Certified: Administrator Expert',
+    'Microsoft Certified: Azure Network Engineer Associate',
+    'Microsoft Certified: Azure Administrator Associate',
+    'Microsoft Certified: Azure Security Engineer Associate',
+    'HashiCorp Certified: Terraform Associate',
+    'ITIL Foundation',
   ],
   description:
     'Lead Cloud Solution Architect at Microsoft Norway. Designs Azure Landing Zones, AKS platforms, and AI infrastructure for regulated and sovereign workloads. Writes and speaks on Terraform, Bicep, Kubernetes, and platform engineering. Open-source contributor to Azure Verified Modules and the ALZ Terraform module.',
@@ -103,6 +132,10 @@ const personSchema = {
     <meta name="author" content="Martin Opedal" />
     <meta name="theme-color" content="#14110f" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Site verification (env-driven, no code changes needed when tokens added) -->
+    {gscToken && <meta name="google-site-verification" content={gscToken} />}
+    {bingToken && <meta name="msvalidate.01" content={bingToken} />}
 
     <!-- CSP: no inline scripts, no external CDN, same-origin only. JSON-LD is exempt. -->
     <meta
@@ -151,6 +184,11 @@ const personSchema = {
       title="opedal.tech blog"
       href="/rss.xml"
     />
+
+    <!-- IndieWeb identity verification -->
+    <link rel="me" href="https://www.linkedin.com/in/martin-opedal" />
+    <link rel="me" href="https://github.com/martinopedal" />
+    <link rel="me" href="mailto:hello@opedal.tech" />
 
     <!-- Font preload -->
     <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrains-mono-variable.woff2" crossorigin />

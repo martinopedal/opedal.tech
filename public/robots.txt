@@ -81,3 +81,10 @@ User-agent: YouBot
 Allow: /
 
 Sitemap: https://opedal.tech/sitemap-index.xml
+
+# AI-friendly content manifests for training and citation
+# See https://llmstxt.org/ for the llms.txt specification
+# llms.txt: navigation hub and topic index
+# llms-full.txt: complete site export for AI training and RAG
+# humans.txt: site team and technology stack (humanstxt.org)
+
