@@ -59,17 +59,6 @@ If you ever need to host private drafts or non-public content, keep them in a se
 - HTTPS enforced via GitHub Pages — never link to HTTP resources
 - See [SECURITY.md](SECURITY.md) for the vulnerability reporting process
 
-## Contributions
-
-This is a personal portfolio repo and is **not open for contributions**. Pull requests for features, redesigns, content rewrites, or refactors will be closed without review.
-
-What is welcome:
-
-- **Security vulnerabilities** — report privately via the process in [SECURITY.md](SECURITY.md) (GitHub private vulnerability reporting).
-- **Bug reports** — broken links, rendering issues, accessibility problems, or anything factually wrong: open an issue with a clear repro.
-
-Everything else (design opinions, content suggestions, stack changes) is out of scope.
-
 ## Local preview
 
 ```bash
@@ -93,6 +82,43 @@ tags: ["Azure", "Terraform"]
 ```
 
 The content collection schema lives in `src/content/config.ts`.
+
+## Updating the CV
+
+The CV is data-driven. Edit `cv/data/architect.yml` and the rest of the pipeline updates itself.
+
+```
+cv/data/architect.yml          ← edit here (single source of truth)
+        │
+        ├─► cv/build.py + cv/templates/architect.tex.j2
+        │       └─► public/cv/architect-1page.pdf
+        │           public/cv/architect-multipage.pdf
+        │
+        └─► src/pages/cv.astro (and the Open Source section on the homepage)
+                └─► /cv on opedal.tech
+```
+
+End-to-end flow on every push to `main` that touches `cv/**`:
+
+1. **`.github/workflows/cv.yml`** installs Python + LaTeX (`texlive-*` + `latexmk`), runs `python3 cv/build.py`, and uploads both PDFs as artifacts.
+2. The `commit` job downloads the artifacts and commits them back to `main` under `public/cv/` via `git-auto-commit-action`.
+3. Because GitHub's anti-loop rule prevents bot pushes from triggering downstream workflows, `cv.yml` then explicitly dispatches `pages.yml` (`gh workflow run pages.yml`) so the new PDFs ship.
+4. **`.github/workflows/pages.yml`** rebuilds the Astro site (which re-reads `architect.yml`), runs the lychee link gate, and deploys to GitHub Pages.
+
+Adding a new entry (job, talk, certification, repo group):
+
+1. Edit `cv/data/architect.yml`. Use `appears_on: [1page, multipage]` to control variant. See [`cv/README.md`](cv/README.md) for the schema and the redaction rules (no customer names, no Microsoft-internal phrasing, `hello@opedal.tech` as the only contact email).
+2. Open a PR. The `Build CV PDFs` check renders both variants from your branch — read it like CI for the LaTeX itself.
+3. Merge. The pipeline above takes it from there. New PDFs and the updated `/cv` page are live within a couple of minutes.
+
+The website's homepage Open Source section, the `/cv` HTML page, and both PDFs all read the same YAML file. Editing one field updates all three.
+
+Local preview of the LaTeX render (optional — CI is the source of truth):
+
+```powershell
+pip install pyyaml jinja2
+python cv/build.py    # requires latexmk + texlive on PATH
+```
 
 ## Branch protection (`main`)
 
