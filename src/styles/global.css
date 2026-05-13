@@ -10,16 +10,26 @@
 }
 
 :root {
-  --bg:           #0d1117;
-  --bg-alt:       #161b22;
-  --surface:      #21262d;
-  --border:       #30363d;
-  --text:         #e6edf3;
-  --text-muted:   #8b949e;
-  --accent:       #2f81f7;
-  --accent-hover: #58a6ff;
-  --tag-bg:       #1f3a5f;
-  --tag-text:     #79c0ff;
+  /* Architect Charcoal palette: warm near-black + terracotta accent */
+  --color-bg:          #14110f;  /* Warm near-black base */
+  --color-surface:     #1f1b18;  /* Warm surface */
+  --color-text:        #e8e2d8;  /* Warm text */
+  --color-text-dim:    #a39d92;  /* Muted text */
+  --color-border:      #2a2520;  /* Border color */
+  --color-accent:      #d97757;  /* Terracotta accent */
+  --color-accent-hover:#e59677;  /* Lighter terracotta */
+  
+  /* Legacy variable names kept for compatibility */
+  --bg:           var(--color-bg);
+  --bg-alt:       var(--color-surface);
+  --surface:      var(--color-surface);
+  --border:       var(--color-border);
+  --text:         var(--color-text);
+  --text-muted:   var(--color-text-dim);
+  --accent:       var(--color-accent);
+  --accent-hover: var(--color-accent-hover);
+  --tag-bg:       #2f2520;
+  --tag-text:     #d97757;
   --danger:       #f85149;
   --font:         -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
   --font-mono:    'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
@@ -61,7 +71,7 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(13, 17, 23, 0.92);
+  background: rgba(20, 17, 15, 0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -255,39 +265,10 @@ section h2 {
 /* ============================================================
    ABOUT
    ============================================================ */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 3rem;
-  align-items: start;
-}
-
 .about-text p {
   color: var(--text-muted);
   margin-bottom: 1rem;
-  max-width: 620px;
-}
-
-.about-text p:last-child {
-  margin-bottom: 0;
-}
-
-.about-tags {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 180px;
-}
-
-.tag {
-  display: inline-block;
-  padding: 0.3rem 0.75rem;
-  border-radius: 2rem;
-  background: var(--tag-bg);
-  color: var(--tag-text);
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-align: center;
+  max-width: 680px;
 }
 
 /* ============================================================
@@ -774,16 +755,6 @@ footer a:hover {
     flex-wrap: wrap;
     align-items: center;
   }
-
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-tags {
-    flex-direction: row;
-    flex-wrap: wrap;
-    min-width: unset;
-  }
 }
 
 /* ============================================================
@@ -814,7 +785,7 @@ footer a:hover {
 
 /* ---- Hero gradient on name (subtle, hero only) ---- */
 #hero h1 {
-  background: linear-gradient(135deg, #2f81f7 0%, #58a6ff 100%);
+  background: linear-gradient(135deg, #d97757 0%, #e59677 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1610,3 +1581,19 @@ section h2 {
 /* ============================================================
    END LOVELL SECTION
    ============================================================ */
+
+/* ----------------------------------------------------------
+   GARMAN — JetBrains Mono self-hosted (PR C)
+   Scope: monospace elements only. No body text usage.
+   ---------------------------------------------------------- */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono-variable.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+pre, code, kbd, samp {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

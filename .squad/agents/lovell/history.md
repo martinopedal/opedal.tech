@@ -47,4 +47,6 @@ Speaking credibility (from `cv/data/architect.yml`):
 
 ## Learnings
 
-(append as work progresses)
+- **PR B shipped:** `/work` route live in PR #12. Evidence-trail page backs work areas with annotated rows + evidence links (`→ See [repo]` / `→ Read [post]` / `→ Watch [talk]`). Replaced card grid design per consensus direction.
+- **Section markers:** thin mono labels + thin accent rule under each `h2`. Language-specific 2px left borders on repo rows (terraform `#844fba`, python `#3fb950`, powershell `#5391fe`, etc.).
+
