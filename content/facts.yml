@@ -23,8 +23,14 @@ career:
   azure_first_used_year: 2011
 
 ventures:
-  # From About.astro line 30: "I co-founded two craft breweries."
+  # From About.astro line 108: "I co-founded two craft breweries."
   breweries_cofounded: 2
+  bars_cofounded: 1
+  # From About.astro line 111: Named ventures, current status
+  brewery_names: [Cervisiam, Krecher]
+  bar_names: [Oculus]
+  cervisiam_status: active  # Martin still involved
+  krecher_status: ended     # TODO: add krecher_end_year when Martin provides it from LinkedIn
 
 # Derived facts computed at run-time by check-facts.mjs (not authored here):
 #   years_with_azure_entra_m365 = current_year - 2011
