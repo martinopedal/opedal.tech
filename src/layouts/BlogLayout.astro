@@ -34,7 +34,7 @@ const articleUrl = canonicalUrl ?? Astro.url.href;
 const articleImageUrl = new URL('/og-default.png', Astro.site).toString();
 const articleSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Article',
+  '@type': 'TechArticle',
   headline: title,
   description,
   url: articleUrl,
@@ -47,11 +47,19 @@ const articleSchema = {
     '@type': 'Person',
     name: 'Martin Opedal',
     url: 'https://opedal.tech',
+    sameAs: [
+      'https://www.linkedin.com/in/martin-opedal',
+      'https://github.com/martinopedal',
+    ],
   },
   publisher: {
     '@type': 'Person',
     name: 'Martin Opedal',
     url: 'https://opedal.tech',
+    sameAs: [
+      'https://www.linkedin.com/in/martin-opedal',
+      'https://github.com/martinopedal',
+    ],
   },
   mainEntityOfPage: {
     '@type': 'WebPage',
