@@ -30,12 +30,14 @@ const formattedUpdated = updatedDate?.toLocaleDateString('en-GB', {
 // Article schema for blog posts. Stacks on top of the sitewide Person schema
 // emitted by BaseLayout. <script type="application/ld+json"> is CSP-exempt.
 const articleUrl = canonicalUrl ?? Astro.url.href;
+const articleImageUrl = new URL('/og-default.png', Astro.site).toString();
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: title,
   description,
   url: articleUrl,
+  image: articleImageUrl,
   datePublished: pubDate.toISOString(),
   ...(updatedDate ? { dateModified: updatedDate.toISOString() } : {}),
   inLanguage: 'en',

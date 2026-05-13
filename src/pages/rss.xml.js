@@ -10,13 +10,15 @@ export async function GET(context) {
   return rss({
     title: 'opedal.tech',
     description:
-      'Thoughts on Azure Landing Zones, AKS, Terraform, IaC security, and AI-assisted development.',
+      'Field notes on Azure Landing Zones, AKS Automatic with Terraform, IaC security patterns, GitHub Copilot CLI, and AI-assisted platform engineering.',
     site: context.site,
     items: sorted.map((post) => ({
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.pubDate,
       link: `/blog/${post.slug}/`,
+      author: 'hello@opedal.tech (Martin Opedal)',
     })),
+    customData: '<language>en</language>',
   });
 }
