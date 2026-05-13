@@ -6,6 +6,9 @@ const title = '404 · Page not found · opedal.tech';
 const description = 'The page you were looking for does not exist on opedal.tech.';
 ---
 <BaseLayout title={title} description={description}>
+  <Fragment slot="head-extra">
+    <meta name="robots" content="noindex" />
+  </Fragment>
   <Nav />
   <main id="main-content" class="not-found-page" tabindex="-1">
     <section class="container not-found">
