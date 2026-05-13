@@ -47,20 +47,24 @@ Out of scope:
 
 This repository is monitored by [OSSF Scorecard](https://securityscorecards.dev/). Current aggregate score and per-check breakdown: [securityscorecards.dev/viewer/?uri=github.com/martinopedal/opedal.tech](https://api.securityscorecards.dev/projects/github.com/martinopedal/opedal.tech)
 
-### Branch Protection Score (-1)
+### Branch Protection Score (now using rulesets)
 
-The Scorecard Branch-Protection check reports `-1` due to a token visibility limitation. The workflow uses `GITHUB_TOKEN`, which cannot read classic branch protection rules. This is a known Scorecard limitation, **not an absence of protection**.
+**Migration completed 2026-05-13**: Converted from classic branch protection to GitHub rulesets. Rulesets are readable by default workflow tokens (no admin scope required), which should resolve the Scorecard `-1` token visibility issue.
 
-Actual branch protection on `main`:
+**Active ruleset** (ID 16364777, `main branch protection`):
 - ✅ Require pull request before merging (0 required reviewers, solo-maintained)
 - ✅ Require status checks: `Analyze (actions)`, `Build Astro site`, `request-copilot-review`
-- ✅ Require linear history
-- ✅ Do not allow bypassing (enforce for admins)
-- ✅ Do not allow force pushes
-- ✅ Do not allow deletions
+- ✅ Require linear history (`required_linear_history`)
+- ✅ Block force pushes (`non_fast_forward`)
+- ✅ Block branch deletion (`deletion`)
 - ❌ Require signed commits: **disabled** (breaks Dependabot auto-merge and GitHub API commits)
 
-To verify: `gh api repos/martinopedal/opedal.tech/branches/main/protection`
+To verify: `gh api repos/martinopedal/opedal.tech/rulesets/16364777`
+
+**Why rulesets?**
+- Classic branch protection requires `admin` scope to read via API, causing Scorecard's `GITHUB_TOKEN` to fail with `-1`
+- Rulesets are readable with default `contents: read` workflow permissions
+- Functionally equivalent protection, better token visibility
 
 ### Fuzzing (0/10)
 
