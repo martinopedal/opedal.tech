@@ -94,6 +94,9 @@ tags: ["Azure", "Terraform"]
 - No third-party analytics scripts that collect PII
 - CSP enforced via `<meta http-equiv="Content-Security-Policy">` in BaseLayout — no inline scripts permitted
 - No `define:vars` usage in Astro components (would require loosening CSP)
+- **No `<style>` blocks in `.astro` components.** The CSP sets `style-src 'self'` with no `'unsafe-inline'`, so Astro's scoped `<style>` blocks (which become inline `<style>` tags in the head) are blocked at runtime. Add styles to `src/styles/global.css` instead.
+- **No `<script>` blocks in `.astro` components** (same reason — `script-src 'none'`). The site is intentionally JS-free.
+- **External link hygiene**: every `target="_blank"` link must have `rel="noopener noreferrer"`.
 
 ## GitHub-first principle
 

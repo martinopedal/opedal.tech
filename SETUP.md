@@ -37,6 +37,23 @@ Verify by navigating to the Actions tab and checking **Deploy to GitHub Pages**.
 ❌ Allow deletions
 ```
 
+> **Note (drift):** as of the last audit the live protection on `main` only requires **1 approving review** with `enforce_admins=false`, no required status checks, and no linear-history requirement. To bring the live settings in line with the table above, run:
+>
+> ```bash
+> gh api -X PUT repos/martinopedal/opedal.tech/branches/main/protection \
+>   -F required_status_checks.strict=true \
+>   -F 'required_status_checks.contexts[]=Analyze (actions)' \
+>   -F 'required_status_checks.contexts[]=Build Astro site' \
+>   -F enforce_admins=true \
+>   -F required_pull_request_reviews.required_approving_review_count=0 \
+>   -F required_linear_history=true \
+>   -F restrictions= \
+>   -F allow_force_pushes=false \
+>   -F allow_deletions=false
+> ```
+>
+> Side effect: with `enforce_admins=true`, future admin-merges (like `gh pr merge --admin`) will need every required check to be green first. The `Build Astro site` check runs on PRs only after the workflow change in commit history is in place.
+
 ---
 
 ## 3. Configure Domeneshop DNS → GitHub Pages

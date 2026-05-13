@@ -12,9 +12,10 @@ const {
   title,
   description,
   canonicalUrl = Astro.url.href,
-  ogImage = '/og-default.png',
+  ogImage,
 } = Astro.props;
 
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).toString() : undefined;
 const currentYear = new Date().getFullYear();
 ---
 
@@ -38,8 +39,8 @@ const currentYear = new Date().getFullYear();
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
-    <meta name="twitter:card" content="summary_large_image" />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
 
     <!-- RSS feed discovery -->
     <link
@@ -61,7 +62,7 @@ const currentYear = new Date().getFullYear();
           <a
             href="https://github.com/martinopedal/opedal.tech"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             aria-label="View source code on GitHub">Source</a
           >
         </p>

@@ -4,6 +4,17 @@ Personal website for [Martin Opedal](https://www.linkedin.com/in/martin-opedal) 
 
 Hosted at **[opedal.tech](https://opedal.tech)** via GitHub Pages.
 
+## URLs
+
+| Purpose | URL | When it works |
+| ------- | --- | ------------- |
+| Live site (canonical) | <https://opedal.tech> | After DNS cutover at Domeneshop (see [SETUP.md §3](SETUP.md)) |
+| `www` (redirects to apex) | <https://www.opedal.tech> | After DNS cutover |
+| GitHub Pages preview | <https://martinopedal.github.io/opedal.tech/> | As soon as Pages is enabled in [SETUP.md §1](SETUP.md). Once DNS is live, this redirects to the canonical URL. |
+| Local dev server | <http://localhost:4321> | While `npm run dev` is running |
+
+The GitHub Pages preview URL is the fastest way to see the live build before DNS is wired up — it works the moment the `Deploy to GitHub Pages` workflow succeeds.
+
 ## Stack
 
 - **Astro 5** (static output) — Markdown blog + component-based pages

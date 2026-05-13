@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -10,8 +12,9 @@ permissions:
   pages: write
   id-token: write
 
+# Per-ref concurrency so PR builds don't cancel each other or the main deploy.
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -30,15 +33,20 @@ jobs:
         run: npm ci
       - name: Build Astro site
         run: npm run build
+      # Pages-specific steps only on push to main (configure-pages calls the
+      # Pages API which is unavailable on PRs from forks and noisy on PR builds).
       - name: Setup Pages
+        if: github.event_name == 'push'
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
       - name: Upload artifact
+        if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: dist/
 
   deploy:
     name: Deploy to GitHub Pages
+    if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 5
