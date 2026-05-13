@@ -41,49 +41,93 @@ Verify by navigating to the Actions tab and checking **Deploy to GitHub Pages**.
 
 ## 3. Configure Domeneshop DNS → GitHub Pages
 
-GitHub Pages IPs for custom domains (A records):
+> **Current state at the time of writing:** `opedal.tech` and `www.opedal.tech` resolve to Domeneshop's parking IPs (`185.134.245.113` / `2a01:5b40:0:bc03::1`). Until the records below are in place, the site is not yet served by GitHub Pages.
+
+> **Order of operations (important):**
+> 1. Enable GitHub Pages first (Step 1 above) and confirm the workflow deploys to `https://martinopedal.github.io/opedal.tech/` *or* that the Pages tab shows `opedal.tech` queued for DNS check.
+> 2. Then update DNS in Domeneshop.
+> 3. After DNS propagates, GitHub auto-issues a Let's Encrypt TLS cert (usually 10 minutes – a few hours).
+> 4. Finally, tick **Enforce HTTPS** in Settings → Pages.
+
+### 3a. Records to set
+
+GitHub Pages IPs for custom **apex** domains (A records — IPv4):
 
 ```
-A    opedal.tech    185.199.108.153
-A    opedal.tech    185.199.109.153
-A    opedal.tech    185.199.110.153
-A    opedal.tech    185.199.111.153
+A    @    185.199.108.153
+A    @    185.199.109.153
+A    @    185.199.110.153
+A    @    185.199.111.153
 ```
 
-AAAA records for IPv6:
+AAAA records for IPv6 (recommended — GitHub serves both stacks):
 
 ```
-AAAA opedal.tech    2606:50c0:8000::153
-AAAA opedal.tech    2606:50c0:8001::153
-AAAA opedal.tech    2606:50c0:8002::153
-AAAA opedal.tech    2606:50c0:8003::153
+AAAA @    2606:50c0:8000::153
+AAAA @    2606:50c0:8001::153
+AAAA @    2606:50c0:8002::153
+AAAA @    2606:50c0:8003::153
 ```
 
-For `www` redirect (optional — redirects www.opedal.tech to opedal.tech):
+`www` subdomain (recommended — Pages will redirect `www.opedal.tech` → `opedal.tech` because the `CNAME` file in the repo holds the apex):
 
 ```
-CNAME www.opedal.tech    martinopedal.github.io
+CNAME www    martinopedal.github.io.
 ```
 
-**Domeneshop steps:**
+> The trailing dot on `martinopedal.github.io.` makes it an absolute name. Domeneshop accepts the value with or without it; both resolve identically. **Do not** use `martinopedal.github.io/opedal.tech` — Pages requires the bare host.
 
-1. Log in to [domeneshop.no](https://domeneshop.no)
-2. Go to **DNS** for `opedal.tech`
-3. Delete any existing A/AAAA records for the apex domain
-4. Add the 4 A records and 4 AAAA records above
-5. Optionally add the CNAME for `www`
-6. TTL: use 3600 (1 hour) initially; lower to 300 during cutover if needed
+### 3b. Domeneshop UI walkthrough
 
-**Propagation:** DNS changes typically propagate within 1–24 hours.
-GitHub Pages will issue a free Let's Encrypt TLS certificate automatically once DNS resolves.
+1. Log in to [domeneshop.no](https://domeneshop.no).
+2. Click your domain → **DNS** tab for `opedal.tech`.
+3. **Delete** the existing apex A record (`185.134.245.113`) and apex AAAA record (`2a01:5b40:0:bc03::1`) — these point at Domeneshop's parking page.
+4. Also delete any existing `www` A/AAAA records that point at the same parking IPs.
+5. Click **Legg til DNS-oppføring** (Add record) and add each row from 3a:
+   - **Type** = `A` / `AAAA` / `CNAME`
+   - **Vert** (Host) = `@` for the apex, `www` for the subdomain
+   - **Data / Verdi** (Value) = the IP or hostname from 3a
+   - **TTL** = `3600` (1 hour) for steady state. Drop to `300` during cutover if you want faster rollback.
+6. Leave any unrelated records (MX for mail, TXT for SPF/DMARC, etc.) untouched.
 
-Verify with:
+> **DNSSEC**: If Domeneshop has DNSSEC enabled on the zone, leave it on — it is fully compatible with GitHub Pages.
+
+### 3c. Optional — CAA records
+
+If you have or plan to add CAA records, you must whitelist the CAs GitHub Pages uses or certificate issuance will fail. The minimum safe set today:
+
+```
+CAA  @  0 issue "letsencrypt.org"
+CAA  @  0 issue "pki.goog"
+```
+
+If no CAA records exist on the zone, all CAs are allowed by default and you can skip this step.
+
+### 3d. Verify (Windows / PowerShell)
+
+```powershell
+# Should return the 4 GitHub Pages anycast IPs above
+Resolve-DnsName opedal.tech -Type A    | Select-Object Name, IPAddress
+Resolve-DnsName opedal.tech -Type AAAA | Select-Object Name, IPAddress
+
+# www should be an alias to martinopedal.github.io
+Resolve-DnsName www.opedal.tech | Select-Object Name, Type, NameHost, IPAddress
+
+# Once GitHub has issued the cert, this should return HTTP 200
+Invoke-WebRequest -Uri https://opedal.tech -Method Head -UseBasicParsing |
+  Select-Object StatusCode, Headers
+```
+
+Cross-platform equivalent:
+
 ```bash
 dig opedal.tech +short
-# Should return the 4 GitHub Pages IPs above
+dig AAAA opedal.tech +short
+dig www.opedal.tech +short
 curl -I https://opedal.tech
-# Should return HTTP 200
 ```
+
+GitHub's own DNS check is in **Settings → Pages → Custom domain** — it will show ✅ once the records propagate.
 
 ---
 
