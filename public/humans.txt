@@ -22,4 +22,4 @@ Built with: Astro
 Hosted on: GitHub Pages
 Code available: https://github.com/martinopedal/opedal.tech
 
-Last update: 2025/05/13
+Last update: 2026/05/13

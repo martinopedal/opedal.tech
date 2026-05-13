@@ -16,10 +16,12 @@ const data = yaml.load(cvYaml);
 const title = 'About Martin Opedal, Cloud Architect at Microsoft';
 const description = 'Cloud Solution Architect at Microsoft Norway with 15+ years architecting Azure platforms. Datacenter engineer turned Landing Zones specialist, co-founder of two Norwegian craft breweries.';
 
-// AboutPage JSON-LD schema
+// ProfilePage JSON-LD schema (anchored to comprehensive Person @id)
 const aboutPageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'AboutPage',
+  '@type': 'ProfilePage',
+  '@id': 'https://opedal.tech/about/#profilepage',
+  url: 'https://opedal.tech/about/',
   mainEntity: {
     '@id': 'https://opedal.tech/#person',
   },
