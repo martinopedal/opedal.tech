@@ -160,22 +160,16 @@ a:hover {
   color: var(--text);
 }
 
-/* Blog link highlighted */
-.nav-links li a.nav-blog {
+/* Active page indicator: terracotta accent + thin underline.
+   Echoes the eyebrow palette and removes "where am I?" ambiguity. */
+.nav-links li a[aria-current="page"] {
+  color: var(--color-accent-strong);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+.nav-links li a[aria-current="page"]:hover {
   color: var(--accent);
-}
-
-.nav-links li a.nav-blog:hover {
-  color: var(--accent-hover);
-}
-
-/* Contact link active state (when on /contact page) */
-.nav-links li a.nav-contact-active {
-  color: var(--accent);
-}
-
-.nav-links li a.nav-contact-active:hover {
-  color: var(--accent-hover);
 }
 
 /* ---- Skip-to-content link (a11y) ----
@@ -260,9 +254,23 @@ input:focus-visible,
    HERO
    ============================================================ */
 #hero {
+  position: relative;
   padding: 5rem 1.5rem 4.5rem;
   text-align: center;
   background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--color-accent-glow) 0%, transparent 70%);
+  isolation: isolate;
+}
+
+/* Dot-grid texture overlay. Sits behind hero content, above the radial halo. */
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url(/dot-grid.svg);
+  background-repeat: repeat;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: -1;
 }
 
 .hero-inner {
@@ -382,7 +390,11 @@ section h2 {
    section to break the rhythm. Avoid heavy borders — the contrast
    comes from the surface tier and the optional inset accent glow. */
 #about {
-  background: var(--color-bg);
+  background: linear-gradient(
+    180deg,
+    var(--color-bg) 0%,
+    color-mix(in oklab, var(--color-bg) 92%, var(--color-elevated) 8%) 100%
+  );
 }
 
 #work {
