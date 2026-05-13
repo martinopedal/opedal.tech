@@ -1610,3 +1610,19 @@ section h2 {
 /* ============================================================
    END LOVELL SECTION
    ============================================================ */
+
+/* ----------------------------------------------------------
+   GARMAN — JetBrains Mono self-hosted (PR C)
+   Scope: monospace elements only. No body text usage.
+   ---------------------------------------------------------- */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono-variable.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+pre, code, kbd, samp {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

@@ -123,6 +123,9 @@ const personSchema = {
       href="/rss.xml"
     />
 
+    <!-- Font preload -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrains-mono-variable.woff2" crossorigin />
+
     <!-- Sitewide Person schema for search engines and AI scrapers. -->
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
