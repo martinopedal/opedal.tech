@@ -16,3 +16,6 @@ node_modules/
 .env
 .env.*
 !.env.example
+
+# Squad coordination state (private orchestration; not for the public repo)
+.squad/
