@@ -28,10 +28,10 @@ This three-pass model means I spend my review time on things only a human can ca
 
 ## The governance layer matters
 
-The other thing that makes this work is keeping the AI's behaviour documented and auditable. I maintain an `AI_GOVERNANCE.md` file in every repo that records:
+The other thing that makes this work is keeping the AI's behavior documented and auditable. I maintain an `AI_GOVERNANCE.md` file in every repo that records:
 
 - Which AI tools are in use
-- What they are and aren't authorised to do
+- What they are and aren't authorized to do
 - What the human review expectations are
 
 This isn't bureaucracy. It's the same thing we do with any other external contributor. If a third-party library can't modify production secrets, neither can an AI agent.
