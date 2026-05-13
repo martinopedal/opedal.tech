@@ -1,0 +1,241 @@
+# architect.yml — single source of truth for the Architect CV.
+#
+# This file is consumed by:
+#   1. cv/build.py + cv/templates/architect.tex.j2
+#      → produces public/cv/architect-1page.pdf and public/cv/architect-multipage.pdf
+#   2. src/pages/cv.astro
+#      → renders the /cv HTML page at build time
+#
+# Editing rules:
+#   - This file is sanitized for public distribution. Apply the redaction rules
+#     in cv/README.md before adding any new field.
+#   - Phone numbers, customer names, and Microsoft-internal phrasing
+#     (Connect-style "revenue contributor", "pipeline ownership", "multi-million
+#     dollar targets", etc.) are NOT permitted here.
+#   - Section keys map to ATS-friendly HTML headings: Experience, Skills,
+#     Certifications, Speaking, Education. Do not rename without coordinating
+#     with both the LaTeX template and cv.astro.
+
+person:
+  name: Martin Opedal
+  role: Lead Cloud Solution Architect
+  role_short: Lead / Cross
+  employer:
+    name: Microsoft
+    url: https://www.microsoft.com
+  location:
+    city: Oslo
+    country: Norway
+    country_code: NO
+    nationality: Norwegian
+  contact:
+    # Phone deliberately omitted. Email is the alias forwarded by Domeneshop
+    # to the maintainer's real inbox; never paste the underlying address here.
+    email: hello@opedal.tech
+    linkedin_handle: martin-opedal
+    linkedin_url: https://www.linkedin.com/in/martin-opedal
+    github_handle: martinopedal
+    github_url: https://github.com/martinopedal
+    website_domain: opedal.tech
+    website_url: https://opedal.tech
+  languages:
+    - { name: Norwegian, level: C2, native: true }
+    - { name: English,   level: C2, native: false }
+  # Filename only. The LaTeX build resolves it relative to cv/architect/;
+  # the Astro page resolves it relative to public/ after a copy step.
+  photo: photo.jpg
+
+# Short professional summary. One paragraph. First-person not required;
+# CVs read in the third person here. Sentence on "revenue-accountable
+# with multi-million dollar targets" was removed per the PR B locked
+# content decisions.
+summary: |
+  Cloud Solution Architect with 15+ years leading complex IT programs
+  across financial services, insurance, government, and technology.
+  Trusted advisor to C-suite executives. Known for rapidly building
+  strong customer relationships. Enterprise architecture, cost
+  optimization, and data-driven decision-making are core strengths.
+  9 certifications. Strong interpersonal skills, team player, and
+  mentor. Passionate about cloud computing. Willing to travel.
+
+# Career history, most recent first.
+# `detail` is rendered as a single paragraph in both LaTeX and HTML.
+# `appears_on` controls whether the entry renders in 1page, multipage,
+# or both PDF variants. All entries appear on the /cv HTML page.
+experience:
+  - period: "2025–Present"
+    role: Lead / Cross Cloud Solution Architect
+    employer: Microsoft
+    location: Oslo
+    appears_on: [1page, multipage]
+    detail: >
+      Technology strategy for strategic enterprise customers. Strategic
+      accounts portfolio across regulated Nordic enterprises. Orchestrating
+      v-teams across sales, engineering, and customer success. Known for
+      building trust quickly with new customers and teams. Facilitating
+      customer workshops (Well-Architected, AI Foundry, architecture
+      design). Creating reference architectures and best practices. NIC
+      speaker (94% approval, Level 300, live-streamed), internal events
+      (50–100 in-person, 200+ virtual).
+
+  - period: "2024–2025"
+    role: Senior Cloud Solution Architect
+    employer: Microsoft
+    location: Oslo
+    appears_on: [1page, multipage]
+    detail: >
+      Technical pre-sales and consulting. Well-Architected assessments,
+      reference architectures. Platform migrations for FSI and
+      government. Drove platform adoption through consumption-based
+      growth. Product engineering collaboration: field feedback, design
+      reviews, roadmap influence.
+
+  - period: "2024"
+    role: Senior Manager, Microsoft Cloud
+    employer: Sopra Steria
+    location: Oslo
+    appears_on: [1page, multipage]
+    detail: >
+      Led Microsoft cloud practice. Carried forward the large European
+      bank engagement, leading their technical transformation and
+      driving consultant expansion sales.
+
+  - period: "2022–2024"
+    role: Group Manager, Cloud Architecture
+    employer: Avanade
+    location: Oslo
+    appears_on: [1page, multipage]
+    detail: >
+      SI Solution Architect handling sales to Accenture. Infrastructure
+      lead, positioned for Nordics director role. Lead architect for a
+      large European bank, driving their cloud migration. People
+      manager and mentor, 48M+ NOK consultant portfolio, coordinating
+      deliverables across cross-functional teams. Programs: CAF/ESLZ,
+      IaC, security.
+
+  - period: "2020–2022"
+    role: Cloud Solution Architect
+    employer: Advania
+    location: Oslo
+    appears_on: [1page, multipage]
+    detail: >
+      Customer relationship management, consulting. Cloud migration for
+      mid-market and enterprise. Azure, hybrid cloud, multi-cloud. Cost
+      optimization.
+
+  - period: "2011–2020"
+    role: Senior Systems Consultant / TAM
+    employer: Teknograd
+    location: Oslo
+    appears_on: [1page, multipage]
+    detail: >
+      Systems engineering, technical account management.
+      Datacenter-to-cloud migrations. Enterprise and distributed
+      applications across Azure, M365, VMware, Citrix.
+
+# Anonymized customer engagements — sector + scale only, never names.
+# 1-page omits the lower-priority entries; the full list ships in multipage
+# and on the /cv HTML page.
+engagements:
+  - sector: Tier-1 Nordic Bank
+    work: Well-Architected, platform migration, AVD, networking, Defender for Cloud
+    appears_on: [1page, multipage]
+  - sector: Leading Nordic Fintech
+    work: Executive-level cloud strategy, platform migration & architecture
+    appears_on: [1page, multipage]
+  - sector: Global Energy / Maritime
+    work: Agentic AI reference architecture, AI governance, multi-region migration
+    appears_on: [1page, multipage]
+  - sector: Global Shipping & Logistics
+    work: AI Foundry, agent orchestration, data platform migration (Fabric)
+    appears_on: [1page, multipage]
+  - sector: Major Nordic ISV
+    work: Azure Arc SQL migration, Private Link, AMPLS, ExpressRoute
+    appears_on: [multipage]
+  - sector: Defense Contractor
+    work: Azure AI Foundry, GitHub Copilot, GHAS/CodeQL, Terraform, DevSecOps
+    appears_on: [1page, multipage]
+  - sector: Nordic Insurer
+    work: Security architecture, Global Secure Access, VPN migration
+    appears_on: [1page, multipage]
+  - sector: Government Bodies
+    work: Landing Zone migrations, governance frameworks, GitHub adoption
+    appears_on: [1page, multipage]
+
+skills:
+  # Free-text bullet list rendered as a separator-joined inline string in LaTeX
+  # and as <ul> in HTML.
+  specializations:
+    - Cloud Strategy
+    - Enterprise Architecture
+    - C-Suite Advisory
+    - AI Platforms
+    - Security & Compliance
+    - Migration & Modernization
+    - Technology Strategy
+    - Cloud Consolidation
+    - Stakeholder Management
+
+  # Self-rated technical depth, 0.0–1.0. Used by LaTeX to draw bar fractions
+  # (\barrule{level}{...}) and by /cv to render proportional-width bars in CSS
+  # (no JavaScript, just inline width via a CSS custom property).
+  technical:
+    - { name: Azure Platform,        level: 0.40 }
+    - { name: Security / IAM,        level: 0.35 }
+    - { name: Networking,            level: 0.40 }
+    - { name: AI / Generative AI,    level: 0.25 }
+    - { name: Terraform / Bicep,     level: 0.30 }
+    - { name: GitHub / DevSecOps,    level: 0.30 }
+
+  # Free-text tag cloud. Rendered as \cvtag{...} in LaTeX and pill spans on /cv.
+  competencies:
+    - Trusted Advisor
+    - C-Suite Engagement
+    - Enterprise Architecture
+    - Cloud Migration
+    - Cost Optimization
+    - Cloud Consolidation
+    - Technology Strategy
+    - Pre-Sales & Consulting
+    - Customer Success
+    - Multi-Cloud
+    - Reference Architectures
+    - Large-Scale Programs
+    - Solution Design
+    - Technical Evangelism
+    - Data Science & ML
+    - Technical Credibility
+    - Relationship Building
+    - Interpersonal Skills
+    - Team Collaboration
+    - Mentoring & Coaching
+
+# `kind` is a typed bucket so the LaTeX template can pick an icon
+# (\faCloud for cloud certs, \faCog for everything else). On /cv the kind
+# is rendered as a small superscript label.
+certifications:
+  - { name: AZ Solutions Architect Expert,         kind: cloud }
+  - { name: Cybersecurity Architect Expert,        kind: cloud }
+  - { name: Azure Security Engineer Associate,     kind: cloud }
+  - { name: Azure Network Engineer Associate,      kind: cloud }
+  - { name: DevOps Engineer Expert,                kind: cloud }
+  - { name: M365 Administrator Expert,             kind: cloud }
+  - { name: Azure AI Fundamentals,                 kind: cloud }
+  - { name: Terraform Associate (HashiCorp),       kind: tooling }
+  - { name: ITIL Foundation,                       kind: tooling }
+
+# Speaking credibility for the /speaking section on /cv and the homepage line.
+# Verifiable, factual, no embellishment.
+speaking:
+  - venue: Nordic Infrastructure Conference (NIC)
+    talk: Live-streamed Level 300 session
+    metric: 94% approval
+    appears_on: [1page, multipage]
+  - venue: Microsoft internal events
+    talk: Architecture and platform sessions
+    metric: 50–100 in-person, 200+ virtual
+    appears_on: [multipage]
+
+# Reserved for future expansion. Empty arrays are valid; both the LaTeX
+# template and cv.astro must skip the section header when empty.
+education: []
