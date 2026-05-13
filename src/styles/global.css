@@ -545,6 +545,30 @@ footer p {
   color: var(--text-muted);
 }
 
+.footer-line {
+  margin-bottom: 0.6rem;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 1.25rem;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+}
+
+.footer-links a:hover {
+  color: var(--color-accent-strong);
+}
+
 footer a {
   color: var(--text-muted);
 }
