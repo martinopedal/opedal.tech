@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import { Image } from 'astro:assets';
+import portrait from '../assets/martin-opedal.jpg';
+import { link } from '../utils/link';
+import { safeJsonLd } from '../utils/jsonld';
+import yaml from 'js-yaml';
+import fs from 'node:fs';
+
+// Load CV data at build time for timeline accuracy
+const cvPath = 'cv/data/architect.yml';
+const cvYaml = fs.readFileSync(cvPath, 'utf8');
+const data = yaml.load(cvYaml);
+
+const title = 'About — Martin Opedal';
+const description = 'Cloud Solution Architect at Microsoft Norway with 15+ years architecting Azure platforms — datacenter engineer turned Landing Zones specialist, co-founder of two Norwegian craft breweries.';
+
+// AboutPage JSON-LD schema
+const aboutPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  mainEntity: {
+    '@type': 'Person',
+    name: data.person.name,
+    jobTitle: data.person.role,
+    worksFor: {
+      '@type': 'Organization',
+      name: data.person.employer.name,
+      url: data.person.employer.url,
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: data.person.location.city,
+      addressCountry: data.person.location.country_code,
+    },
+    email: data.person.contact.email,
+    url: data.person.contact.website_url,
+    sameAs: [
+      data.person.contact.linkedin_url,
+      data.person.contact.github_url,
+    ],
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://opedal.tech',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'About',
+      item: 'https://opedal.tech/about/',
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <Fragment slot="head-extra">
+    <script type="application/ld+json" set:html={safeJsonLd(aboutPageSchema)} />
+    <script type="application/ld+json" set:html={safeJsonLd(breadcrumbSchema)} />
+  </Fragment>
+
+  <Nav />
+
+  <main id="main-content" class="about-page" tabindex="-1">
+    <div class="container">
+      <a class="about-back-link" href={link('')}>&larr; Back to home</a>
+      
+      <header class="about-header">
+        <Image
+          src={portrait}
+          alt="Portrait of Martin Opedal, Cloud Solution Architect at Microsoft Norway"
+          widths={[200, 280, 400, 560]}
+          sizes="(min-width: 768px) 280px, 200px"
+          class="about-portrait"
+          loading="eager"
+          decoding="async"
+        />
+        <h1>About</h1>
+      </header>
+
+      <article class="about-bio">
+        <p>
+          I ran datacenters for nine years before joining Microsoft. That decade shaped how I think about reliability from the hardware up. I started with Azure in 2011 at Teknograd, a Norwegian systems integrator, managing VMware estates and migrating enterprise workloads to the cloud when Reserved Instances were still a new idea.
+        </p>
+        <p>
+          The datacenter years taught me what breaks. I saw power distribution units fail, watched SAN arrays light up with amber LEDs at 3 AM, and learned that uptime starts with physical redundancy and ends with monitoring that wakes you before customers notice. That foundation shows up in every Landing Zone I design now.
+        </p>
+        <p>
+          Now I architect Azure Landing Zones, AKS Automatic, and AI Foundry deployments for Nordic enterprises. I work with regulated industries: banks that need private endpoints for everything, government agencies migrating on-premises AD forests, defense contractors running GitHub Advanced Security in air-gapped environments. The customer list includes a Tier-1 Nordic bank, major Nordic insurers, global energy firms, and government bodies.
+        </p>
+        <p>
+          I use Terraform daily. The modules I ship come from real customer engagements, not theory. My GitHub repos include an AVM pattern module for CI/CD runners with VNET integration, an AKS Automatic module that works inside ALZ Corp landing zones with central firewall egress, and a bundled assessment runner that unifies azqr, PSRule, AzGovViz, and 135 ALZ Graph queries into one portable report.
+        </p>
+        <p>
+          I speak at the Nordic Infrastructure Conference (94% approval rating, Level 300 sessions, live-streamed) on Terraform, GitHub Copilot, and infrastructure-as-code security. Inside Microsoft I run architecture workshops and Well-Architected reviews for strategic accounts. I present at 50–100 in-person events a year and 200+ virtual sessions.
+        </p>
+        <p>
+          I co-founded two craft breweries in Norway. Fermentation and infrastructure both need the right controls and patience. Brewing taught me that tight feedback loops matter: you taste at every stage, adjust pH and temperature in real time, and ship when the hydrometer says it's ready. Infrastructure is the same: instrument everything, respond to signals, and never skip the smoke test.
+        </p>
+        <p>
+          The breweries were a parallel career while I ran Teknograd's Azure practice. One was a production brewery with a 1,000-liter brewhouse and distribution contracts across southern Norway. The other was a smaller pilot operation where we tested recipes and ran tasting events. I sold both in 2018 to focus full-time on cloud architecture, but the operational discipline stuck.
+        </p>
+        <p>
+          I live in Oslo. I hold nine Azure and Terraform certifications, including Azure Solutions Architect Expert, Cybersecurity Architect Expert, and DevOps Engineer Expert. I write on this site about Landing Zones, AKS, and building with GitHub Copilot. I contribute to Azure Verified Modules and maintain Terraform patterns for regulated enterprises.
+        </p>
+      </article>
+
+      <section class="about-timeline">
+        <h2>Timeline</h2>
+        <ol class="timeline-list">
+          {data.experience.map((role) => (
+            <li class="timeline-entry">
+              <span class="timeline-period">{role.period}</span>
+              <span class="timeline-role">{role.role}</span>
+              <span class="timeline-employer">{role.employer} · {role.location}</span>
+              <p class="timeline-summary">{role.detail}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="about-talks">
+        <h2>Talks &amp; writing</h2>
+        <ul class="talks-list">
+          {data.speaking.map((item) => (
+            <li>
+              <strong>{item.venue}</strong> — {item.talk}
+              {item.metric && <span class="talk-metric"> ({item.metric})</span>}
+            </li>
+          ))}
+          <li>
+            <strong>Blog</strong> — <a href={link('blog')}>Articles on Azure Landing Zones, AKS, and GitHub Copilot</a>
+          </li>
+          <li>
+            <strong>Open source</strong> — <a href={link('work')}>Terraform AVM patterns, GitHub runners, Azure governance tooling</a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="about-contact">
+        <h2>Get in touch</h2>
+        <p>
+          I work with enterprise customers on Azure architecture, Landing Zones, AKS, and AI platforms. Reach out if you need a technical review, a workshop, or a second opinion on a migration plan.
+        </p>
+        <a href={link('contact')} class="btn btn-primary">Reach out</a>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
