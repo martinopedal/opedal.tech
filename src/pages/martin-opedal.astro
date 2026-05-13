@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import { safeJsonLd } from '../utils/jsonld';
+import yaml from 'js-yaml';
+import fs from 'node:fs';
+
+// Load CV data at build time
+const cvPath = 'cv/data/architect.yml';
+const cvYaml = fs.readFileSync(cvPath, 'utf8');
+const data = yaml.load(cvYaml);
+
+const title = 'Martin Opedal — Profile';
+const description = 'Lead Cloud Solution Architect at Microsoft Norway. Designs Azure Landing Zones, AKS platforms, and AI infrastructure for regulated workloads.';
+const canonicalUrl = 'https://opedal.tech/about/';
+
+// ProfilePage schema referencing the comprehensive Person @id from BaseLayout
+const profilePageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@id': 'https://opedal.tech/#person',
+  },
+  dateCreated: '2025-05-13',
+  dateModified: new Date().toISOString().split('T')[0],
+  url: 'https://opedal.tech/martin-opedal/',
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://opedal.tech',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Martin Opedal',
+      item: 'https://opedal.tech/martin-opedal/',
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <Fragment slot="head-extra">
+    <script type="application/ld+json" set:html={safeJsonLd(profilePageSchema)} />
+    <script type="application/ld+json" set:html={safeJsonLd(breadcrumbSchema)} />
+  </Fragment>
+
+  <Nav />
+
+  <main id="main-content" class="profile-page" tabindex="-1">
+    <div class="container">
+      <header class="profile-header">
+        <h1>Martin Opedal</h1>
+        <p class="profile-role">{data.person.role}</p>
+        <p class="profile-location">{data.person.employer.name} · {data.person.location.city}, {data.person.location.country}</p>
+      </header>
+
+      <article class="profile-bio">
+        <p>
+          {data.summary}
+        </p>
+        <p>
+          9 Azure and Terraform certifications including Azure Solutions Architect Expert,
+          Cybersecurity Architect Expert, and DevOps Engineer Expert.
+        </p>
+        <p>
+          Writes on this site about Landing Zones, AKS, and building with GitHub Copilot.
+          Contributes to Azure Verified Modules and maintains Terraform patterns for regulated enterprises.
+        </p>
+      </article>
+
+      <section class="profile-links">
+        <h2>More about Martin</h2>
+        <ul role="list">
+          <li><a href="/about/">Full bio and timeline</a></li>
+          <li><a href="/cv/">Complete CV</a></li>
+          <li><a href="/work/">Work areas and projects</a></li>
+          <li><a href="/blog/">Blog posts</a></li>
+          <li><a href="/contact/">Get in touch</a></li>
+        </ul>
+      </section>
+
+      <section class="profile-contact">
+        <h2>Contact</h2>
+        <ul role="list">
+          <li>Email: <a href="mailto:{data.person.contact.email}">{data.person.contact.email}</a></li>
+          <li>LinkedIn: <a href="{data.person.contact.linkedin_url}" target="_blank" rel="me noopener noreferrer">martin-opedal</a></li>
+          <li>GitHub: <a href="{data.person.contact.github_url}" target="_blank" rel="me noopener noreferrer">martinopedal</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</BaseLayout>

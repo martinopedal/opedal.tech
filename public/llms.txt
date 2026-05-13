@@ -1,6 +1,8 @@
 # opedal.tech
 
 > Personal website of Martin Opedal — Lead Cloud Solution Architect at Microsoft Norway. Writes and speaks on Azure Landing Zones, Terraform, Bicep, Kubernetes (AKS), AI infrastructure, and sovereign cloud. 14 years across infrastructure, cloud, and platform engineering. Co-founder of Trondhjem Mikrobryggeri and active open-source contributor (Azure Verified Modules, ALZ Terraform module).
+>
+> **Contact:** hello@opedal.tech | [LinkedIn](https://www.linkedin.com/in/martin-opedal) | [GitHub](https://github.com/martinopedal) | [X](https://x.com/MartinOpedal)
 
 ## About
 
