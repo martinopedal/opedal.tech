@@ -272,7 +272,7 @@
 {\tiny
 \begin{itemize}[leftmargin=1em, itemsep=0.2em]
 ((* for repo in group_repos *))
-\item \textbf{((( repo.name )))} \cvtag{((( repo.lang )))} — ((( repo.summary )))
+\item \textbf{((( repo.name )))} \textit{[((( repo.lang )))]} — ((( repo.summary )))
 ((* endfor *))
 \end{itemize}
 }
@@ -283,7 +283,7 @@
 {\scriptsize
 \begin{itemize}[leftmargin=1em, itemsep=0.3em]
 ((* for repo in group_repos *))
-\item \textbf{((( repo.name )))} \cvtag{((( repo.lang )))} — ((( repo.summary )))
+\item \textbf{((( repo.name )))} \textit{[((( repo.lang )))]} — ((( repo.summary )))
 ((* endfor *))
 \end{itemize}
 }
