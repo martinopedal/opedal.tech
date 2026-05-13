@@ -37,22 +37,25 @@ Verify by navigating to the Actions tab and checking **Deploy to GitHub Pages**.
 ❌ Allow deletions
 ```
 
-> **Note (drift):** as of the last audit the live protection on `main` only requires **1 approving review** with `enforce_admins=false`, no required status checks, and no linear-history requirement. To bring the live settings in line with the table above, run:
+> **Live state (current):** `required_pull_request_reviews=null` (0 reviewers, matches the table above), `enforce_admins=false`, `required_linear_history=false`, `required_status_checks=null`. The looser admin/linear/checks posture is intentional for a solo-maintained repo: every change goes through a PR, but admin override is preserved for emergencies and required-check enforcement is delegated to the deploy workflow itself (which fails the deploy when build, lychee, or CodeQL fail).
+>
+> If you ever want to tighten to the recommended posture in the table above, run:
 >
 > ```bash
 > gh api -X PUT repos/martinopedal/opedal.tech/branches/main/protection \
 >   -F required_status_checks.strict=true \
 >   -F 'required_status_checks.contexts[]=Analyze (actions)' \
 >   -F 'required_status_checks.contexts[]=Build Astro site' \
+>   -F 'required_status_checks.contexts[]=Validate links' \
 >   -F enforce_admins=true \
->   -F required_pull_request_reviews.required_approving_review_count=0 \
+>   -F required_pull_request_reviews= \
 >   -F required_linear_history=true \
 >   -F restrictions= \
 >   -F allow_force_pushes=false \
 >   -F allow_deletions=false
 > ```
 >
-> Side effect: with `enforce_admins=true`, future admin-merges (like `gh pr merge --admin`) will need every required check to be green first. The `Build Astro site` check runs on PRs only after the workflow change in commit history is in place.
+> Side effect: with `enforce_admins=true`, future admin-merges (like `gh pr merge --admin`) will need every required check to be green first.
 
 ---
 

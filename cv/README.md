@@ -92,5 +92,24 @@ python cv/build.py
 # Outputs land in public/cv/.
 ```
 
-CI builds via `xu-cheng/latex-action@<sha>` so a local TeX install is not
-required to ship.
+CI installs `texlive-*` + `latexmk` via `apt-get` on the runner and invokes
+`python3 cv/build.py` directly (see `.github/workflows/cv.yml`). A local TeX
+install is not required to ship.
+
+## End-to-end pipeline
+
+A push to `main` that touches `cv/**` runs three workflow legs in sequence:
+
+1. `cv.yml` `build` job — renders both PDFs and uploads them as artifacts.
+2. `cv.yml` `commit` job — downloads the artifacts and commits them to
+   `public/cv/` via `git-auto-commit-action`. Because the bot push uses
+   `GITHUB_TOKEN`, GitHub's anti-loop rule prevents it from triggering
+   `pages.yml` automatically. `cv.yml` therefore explicitly dispatches
+   `pages.yml` (`gh workflow run pages.yml --ref main`) when the auto-commit
+   step reports `changes_detected == 'true'`.
+3. `pages.yml` — rebuilds the Astro site (which re-reads `architect.yml`),
+   runs the lychee link gate against the rendered `dist/`, and deploys to
+   GitHub Pages.
+
+Net effect: edit the YAML, push, walk away. New PDFs and the updated `/cv`
+page are live within a couple of minutes with no manual steps.
