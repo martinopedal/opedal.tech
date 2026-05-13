@@ -239,10 +239,11 @@ input:focus-visible,
 
 #hero h1 {
   font-size: clamp(2.2rem, 5vw, 3.5rem);
-  font-weight: 800;
+  font-family: var(--font-mono);
+  font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1.1;
-  color: var(--text);
+  color: var(--color-text);
   margin-bottom: 1.25rem;
 }
 
@@ -854,20 +855,9 @@ footer a:hover {
    AFTER this block in their own delimited sections.
    ============================================================ */
 
-/* ---- Hero gradient on name (subtle, hero only) ---- */
-#hero h1 {
-  background: linear-gradient(135deg, #d97757 0%, #e59677 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Fallback for browsers that don't support background-clip */
-@supports not (background-clip: text) {
-  #hero h1 {
-    color: var(--text);
-  }
-}
+/* ---- Hero name treatment (mono, confident) ----
+   The previous gradient/text-fill effect is intentionally dropped in
+   favour of the system mono name set against the warm radial halo. */
 
 /* ---- Section markers ---- */
 .section-label {
