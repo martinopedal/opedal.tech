@@ -290,69 +290,6 @@ I speak at Nordic Infrastructure Conference, run architecture workshops for stra
 
 ## 10. Microsoft Tech Community Profile (5 min)
 
-**Why it matters**: GitHub profile READMEs are indexed by Google and appear in search results. This is a high-authority Microsoft/GitHub domain linking to opedal.tech.
-
-**Check if repo exists**:
-- Visit <https://github.com/martinopedal/martinopedal>
-- If it shows 404, go to <https://github.com/new> and create a **public** repo named `martinopedal` (matches username)
-
-**Direct edit URL** (after repo exists):
-- <https://github.com/martinopedal/martinopedal/edit/main/README.md>
-
-**README content** (copy/paste, plain markdown):
-
-```markdown
-# Martin Opedal
-
-Lead Cloud Solution Architect at Microsoft Norway. I write about Azure Landing Zones, AKS, and platform engineering at **[opedal.tech](https://opedal.tech)**.
-
-## What I Do
-
-I architect Landing Zones, AKS Automatic, and AI Foundry deployments for Nordic enterprises in regulated industries. I work with banks, government agencies, and defense contractors running GitHub Advanced Security in air-gapped environments. My GitHub repos include Terraform AVM patterns, AKS modules, and bundled Azure governance assessment tooling.
-
-I speak at Nordic Infrastructure Conference, run architecture workshops for strategic accounts, and contribute to Azure Verified Modules.
-
-## Experience
-
-- **Microsoft** (2024–Present): Lead / Cross Cloud Solution Architect  
-  Technology strategy for regulated Nordic enterprises. Well-Architected reviews, AI Foundry workshops, reference architectures.
-
-- **Sopra Steria** (2024): Senior Manager, Microsoft Cloud  
-  Led Microsoft cloud practice. Carried forward large European bank engagement.
-
-- **Teknograd** (2011–2020): Systems Engineer → Senior Cloud Architect  
-  Datacenter-to-cloud migrations. Managed VMware estates, Azure, M365, Entra ID for enterprise customers.
-
-## Certifications
-
-- Azure Solutions Architect Expert
-- Azure Cybersecurity Architect Expert
-- Azure DevOps Engineer Expert
-- HashiCorp Terraform Associate
-- 5 additional Azure/M365 certifications
-
-## Links
-
-- **Website**: [opedal.tech](https://opedal.tech)
-- **LinkedIn**: [linkedin.com/in/martin-opedal](https://www.linkedin.com/in/martin-opedal)
-- **CV**: [opedal.tech/cv](https://opedal.tech/cv)
-- **Work samples**: [opedal.tech/work](https://opedal.tech/work)
-
----
-
-[![Astro](https://img.shields.io/badge/Built%20with-Astro-FF5D01?logo=astro&logoColor=white)](https://astro.build)
-[![Azure](https://img.shields.io/badge/Azure-Certified-0078D4?logo=microsoftazure&logoColor=white)](https://opedal.tech/cv)
-```
-
-**Verification**:
-- Visit <https://github.com/martinopedal>
-- Confirm README renders with opedal.tech links
-- Google search `site:github.com martinopedal opedal.tech` after 48 hours — should return profile page
-
----
-
-## 11. Sessionize Speaker Profile (5 min)
-
 **Why it matters**: Microsoft.com is a top-10 global domain. A profile link here is a strong authority signal for Azure-related queries.
 
 **Direct action URL**: <https://techcommunity.microsoft.com/profile> (must be signed in with Microsoft account)
@@ -375,7 +312,7 @@ Lead Cloud Solution Architect at Microsoft Norway, architecting Azure Landing Zo
 
 ---
 
-## 12. Nordic Infrastructure Conference Speaker Bio Update (5 min)
+## 11. Sessionize Speaker Profile (5 min)
 
 **Why it matters**: Sessionize profiles are crawled by conference organizers and Google. If Martin has spoken at conferences, this profile should exist.
 
@@ -402,7 +339,7 @@ Lead Cloud Solution Architect at Microsoft Norway. I architect Azure Landing Zon
 
 ---
 
-## 13. Bluesky Handle Claim — Use opedal.tech as Handle (10 min)
+## 12. Nordic Infrastructure Conference Speaker Bio Update (5 min)
 
 **Why it matters**: NIC is the premier Nordic infrastructure conference. Martin has spoken there (94% approval rating, Level 300, live-streamed per `architect.yml`). A speaker page backlink is high-authority for Nordic/Azure searches.
 
@@ -438,7 +375,7 @@ LinkedIn: linkedin.com/in/martin-opedal
 
 ---
 
-## 14. CII Best Practices Badge Application (20 min)
+## 13. Bluesky Handle Claim, Use opedal.tech as Handle (10 min)
 
 **Why it matters**: Bluesky allows domain-based handles (e.g., `@opedal.tech`). This creates a verified identity signal and a permanent backlink in Bluesky's public feed data (crawled by search engines). Zero cost, strong brand signal.
 
@@ -468,7 +405,7 @@ LinkedIn: linkedin.com/in/martin-opedal
 
 ---
 
-## 15. Mastodon rel=me Reciprocation (5 min, optional)
+## 14. CII Best Practices Badge Application (20 min)
 
 **Why it matters**: CII badge lifts OpenSSF Scorecard by +0.5 to +1.0 points (Loomis3 is targeting 9.0+). The badge appears on GitHub README and signals engineering rigor to enterprises evaluating the repo.
 
@@ -503,7 +440,7 @@ LinkedIn: linkedin.com/in/martin-opedal
 
 ---
 
-## 16. PageSpeed/Search Console Post-Deploy Verification (3 min)
+## 15. Mastodon rel=me Reciprocation (5 min, optional)
 
 **Why it matters**: Mastodon uses `rel="me"` bidirectional links for identity verification. If Martin has a Mastodon account, this creates a verified backlink at zero cost. Pyne3 is shipping `<link rel="me">` tags — Martin just needs to reciprocate from his Mastodon profile.
 
@@ -531,7 +468,7 @@ LinkedIn: linkedin.com/in/martin-opedal
 
 ---
 
-## 13. PageSpeed Insights Post-Deploy Check (3 min)
+## 16. PageSpeed Insights Post-Deploy Check (3 min)
 
 **Why it matters**: Google uses Core Web Vitals as a ranking factor. Scores below 90 hurt SEO. This is a smoke test to confirm Pyne3's optimizations (JSON-LD, meta tags, sitemap) didn't break performance.
 
@@ -558,7 +495,7 @@ LinkedIn: linkedin.com/in/martin-opedal
 
 ---
 
-## Post-Completion Checklist
+## 17. Schema Validator (2 min)
 
 **Why it matters**: Invalid JSON-LD breaks Google's rich snippets (author cards, breadcrumbs, article metadata). This confirms Pyne3's Person + Article schemas are error-free.
 
