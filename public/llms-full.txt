@@ -11,7 +11,7 @@
 
 ## About Martin Opedal
 
-Lead Cloud Solution Architect at Microsoft Norway. 14+ years across infrastructure, cloud, and platform engineering.
+Lead Cloud Solution Architect at Microsoft Norway. 15+ years across infrastructure, cloud, and platform engineering.
 
 Focus areas:
 - Azure Landing Zones (ALZ) — Corp reference architecture, Terraform/Bicep deployment, governance automation

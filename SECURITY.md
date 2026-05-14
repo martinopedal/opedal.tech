@@ -33,7 +33,7 @@ Out of scope:
 
 ## Security Measures
 
-- No secrets committed to source code — all sensitive values managed via GitHub Secrets
+- No secrets committed to source code; all sensitive values managed via GitHub Secrets
 - SHA-pinned GitHub Actions (never tag-only pins); Dependabot keeps the pins fresh
 - Dependabot enabled for GitHub Actions and npm, including security-update PRs
 - Vulnerability alerts and private vulnerability reporting both enabled
