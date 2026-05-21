@@ -275,10 +275,18 @@ certifications:
 # Speaking credibility for the /speaking section on /cv and the homepage line.
 # Verifiable, factual, no embellishment.
 speaking:
+  - venue: "Agentic AI & DevOps Days (Oslo)"
+    talk: "Where does code generation stop and InfraOps start?"
+    metric: Upcoming, 16 June 2026
+    appears_on: [1page, multipage]
   - venue: Nordic Infrastructure Conference (NIC)
     talk: Live-streamed Level 300 session
     metric: 94% approval
     appears_on: [1page, multipage]
+  - venue: Microsoft customer sessions
+    talk: "GHAS, GitHub / Azure DevOps, Azure Arc / Local"
+    metric: Enterprise and regulated industries
+    appears_on: [multipage]
   - venue: Microsoft internal events
     talk: Architecture and platform sessions
     metric: 50 to 100 in-person, 200+ virtual
