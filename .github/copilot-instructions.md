@@ -46,6 +46,7 @@ tags: ["Azure", "Terraform"]
 - 0 required reviewers (solo-maintained)
 - `enforce_admins = true`, linear history, no force push
 - Required status checks: `Analyze (actions)` (CodeQL) and `Build Astro site`
+- **Always use `git commit -m "message"` with the `-m` flag** — never use bare `git commit` which opens an editor and blocks CLI/agent workflows.
 
 ## CodeQL policy
 
