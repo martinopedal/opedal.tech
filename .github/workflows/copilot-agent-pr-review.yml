@@ -15,7 +15,7 @@ permissions:
 jobs:
   request-copilot-review:
     if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: [self-hosted, personal, linux, x64]
+    runs-on: ${{ fromJSON(vars.RUNS_ON_LINUX_PERSONAL || '["self-hosted","linux","x64","personal"]') }}
     timeout-minutes: 5
     steps:
       - name: Request Copilot code review
