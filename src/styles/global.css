@@ -1443,6 +1443,97 @@ section h2 {
   font-weight: 500;
 }
 
+/* ---- Speaking session catalog (Sessionize) ---- */
+.sessions {
+  margin-top: var(--space-6);
+}
+
+.sessions-heading {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-strong);
+  margin-bottom: var(--space-2);
+}
+
+.sessions-sub {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-5);
+}
+
+.sessions-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.session-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left-width: 2px;
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.session-card:hover,
+.session-card:focus-visible {
+  border-color: var(--accent);
+  background: var(--color-elevated);
+  box-shadow: var(--shadow-warm-md);
+  transform: translateY(-2px);
+  color: inherit;
+}
+
+.session-card-meta {
+  margin-bottom: var(--space-2);
+}
+
+.session-lang {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.55rem;
+  border-radius: 2rem;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+}
+
+.session-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: var(--space-2);
+}
+
+.session-card-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .session-card {
+    transition: none;
+  }
+  .session-card:hover,
+  .session-card:focus-visible {
+    transform: none;
+  }
+}
+
 /* ---- Contact email button ---- */
 .contact-links .btn {
   min-width: 140px;
