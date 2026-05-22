@@ -19,7 +19,7 @@ concurrency:
 jobs:
   analyze:
     name: Analyze (${{ matrix.language }})
-    runs-on: ${{ fromJSON(vars.RUNS_ON_LINUX_PERSONAL || '["self-hosted","linux","x64","personal"]') }}
+    runs-on: ["self-hosted", "personal-linux"] || ubuntu-latest
     timeout-minutes: 30
     permissions:
       security-events: write

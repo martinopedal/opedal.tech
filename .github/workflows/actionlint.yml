@@ -17,7 +17,7 @@ permissions:
 jobs:
   actionlint:
     name: Lint workflows
-    runs-on: ${{ fromJSON(vars.RUNS_ON_LINUX_PERSONAL || '["self-hosted","linux","x64","personal"]') }}
+    runs-on: ["self-hosted", "personal-linux"] || ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
