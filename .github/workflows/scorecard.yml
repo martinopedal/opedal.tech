@@ -11,7 +11,7 @@ permissions: read-all
 jobs:
   analysis:
     name: Scorecard analysis
-    runs-on: ${{ fromJSON(vars.RUNS_ON_LINUX_PERSONAL || '["self-hosted","linux","x64","personal"]') }}
+    runs-on: ["self-hosted", "personal-linux"] || ubuntu-latest
     permissions:
       security-events: write
       id-token: write
