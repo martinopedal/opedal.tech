@@ -26,7 +26,7 @@ concurrency:
 jobs:
   build:
     name: Build CV PDFs
-    runs-on: ${{ fromJSON(vars.RUNS_ON_LINUX_PERSONAL || '["self-hosted","linux","x64","personal"]') }}
+    runs-on: ["self-hosted", "personal-linux"] || ubuntu-latest
 
     steps:
       - name: Harden runner
@@ -70,7 +70,7 @@ jobs:
     name: Commit PDFs to main
     needs: build
     if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
-    runs-on: ${{ fromJSON(vars.RUNS_ON_LINUX_PERSONAL || '["self-hosted","linux","x64","personal"]') }}
+    runs-on: ["self-hosted", "personal-linux"] || ubuntu-latest
 
     permissions:
       contents: write
