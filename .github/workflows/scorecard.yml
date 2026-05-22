@@ -11,7 +11,7 @@ permissions: read-all
 jobs:
   analysis:
     name: Scorecard analysis
-    runs-on: ["self-hosted", "personal-linux"] || ubuntu-latest
+    runs-on: [self-hosted, personal, linux]
     permissions:
       security-events: write
       id-token: write
