@@ -15,7 +15,7 @@ permissions:
 jobs:
   request-copilot-review:
     if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ["self-hosted", "alz-p1"]
+    runs-on: [self-hosted, personal-linux]
     timeout-minutes: 5
     steps:
       - name: Request Copilot code review
@@ -59,3 +59,4 @@ jobs:
                 '4. Required CI checks must be green.',
               ].join('\n')
             });
+
