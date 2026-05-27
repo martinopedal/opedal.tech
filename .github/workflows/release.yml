@@ -11,6 +11,10 @@ permissions:
   attestations: write
 
 jobs:
+  decide-runner:
+    uses: martinopedal/github-runners-alz-corp-cookbook/.github/workflows/decide-runner.yml@v1
+    with:
+      self-hosted-labels: '["self-hosted", "personal", "pub", "linux"]'
   release:
     runs-on: ["self-hosted", "alz-p1"]
     steps:

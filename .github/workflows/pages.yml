@@ -19,9 +19,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  decide-runner:
+    uses: martinopedal/github-runners-alz-corp-cookbook/.github/workflows/decide-runner.yml@v1
+    with:
+      self-hosted-labels: '["self-hosted", "personal", "pub", "linux"]'
   build:
+    needs: decide-runner
     name: Build Astro site
-    runs-on: ["self-hosted", "alz-p1"]
+    runs-on: ${{ fromJSON(needs.decide-runner.outputs.runner-labels) }}
     timeout-minutes: 10
     permissions:
       contents: read
@@ -69,7 +74,7 @@ jobs:
     name: Validate links
     needs: build
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
-    runs-on: ["self-hosted", "alz-p1"]
+    runs-on: ${{ fromJSON(needs.decide-runner.outputs.runner-labels) }}
     timeout-minutes: 5
     permissions:
       contents: read
@@ -109,7 +114,7 @@ jobs:
     name: Deploy to GitHub Pages
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: [build, linkcheck]
-    runs-on: ["self-hosted", "alz-p1"]
+    runs-on: ${{ fromJSON(needs.decide-runner.outputs.runner-labels) }}
     timeout-minutes: 5
     # Scope the privileged permissions to the one job that needs them.
     permissions:
