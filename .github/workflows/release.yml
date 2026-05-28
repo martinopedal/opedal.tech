@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   release:
-    runs-on: ["self-hosted", "alz-p1"]
+    runs-on: [self-hosted, personal-linux]
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
@@ -132,3 +132,4 @@ jobs:
             opedal.tech-${{ steps.tag.outputs.tag }}.zip \
             opedal.tech-${{ steps.tag.outputs.tag }}.zip.sigstore.json \
             checksums.txt
+
