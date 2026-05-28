@@ -71,11 +71,11 @@ jobs:
           tar -czf ../opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz .
           zip -r ../opedal.tech-${{ steps.tag.outputs.tag }}.zip .
           cd ..
-          
+
           # Generate SHA-256 checksums
           sha256sum opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz > checksums.txt
           sha256sum opedal.tech-${{ steps.tag.outputs.tag }}.zip >> checksums.txt
-          
+
           echo "### SHA-256 Checksums" > release-notes.md
           echo '```' >> release-notes.md
           cat checksums.txt >> release-notes.md
@@ -116,13 +116,13 @@ jobs:
           else
             CHANGELOG=$(git log "$LATEST_TAG"..HEAD --pretty=format:"- %s (%h)" --no-merges)
           fi
-          
+
           # Combine changelog with release notes
           echo "## Changes" > full-notes.md
           echo "$CHANGELOG" >> full-notes.md
           echo "" >> full-notes.md
           cat release-notes.md >> full-notes.md
-          
+
           # Create release
           gh release create "${{ steps.tag.outputs.tag }}" \
             --title "Release ${{ steps.tag.outputs.tag }}" \
