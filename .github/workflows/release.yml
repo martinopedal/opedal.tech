@@ -14,7 +14,7 @@ jobs:
   decide-runner:
     uses: martinopedal/github-runners-alz-corp-cookbook/.github/workflows/decide-runner.yml@v1
     with:
-      self-hosted-labels: '["self-hosted", "personal", "pub", "linux"]'
+      self-hosted-labels: '["self-hosted", "public-linux"]'
 
   release:
     needs: decide-runner
@@ -30,15 +30,15 @@ jobs:
         run: |
           LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
           if [ -z "$LATEST_TAG" ]; then
-            echo "new_commits=true" >> $GITHUB_OUTPUT
+            echo "new_commits=true" >> "$GITHUB_OUTPUT"
             echo "No previous tags found, will create first release"
           else
             COMMIT_COUNT=$(git rev-list "$LATEST_TAG"..HEAD --count)
             if [ "$COMMIT_COUNT" -eq 0 ]; then
-              echo "new_commits=false" >> $GITHUB_OUTPUT
+              echo "new_commits=false" >> "$GITHUB_OUTPUT"
               echo "No new commits since $LATEST_TAG, skipping release"
             else
-              echo "new_commits=true" >> $GITHUB_OUTPUT
+              echo "new_commits=true" >> "$GITHUB_OUTPUT"
               echo "Found $COMMIT_COUNT commits since $LATEST_TAG"
             fi
           fi
@@ -50,7 +50,7 @@ jobs:
           DATE=$(date -u +%Y.%m.%d)
           SHORT_SHA=$(git rev-parse --short=7 HEAD)
           TAG="v${DATE}-${SHORT_SHA}"
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "Generated tag: $TAG"
 
       - name: Setup Node.js
@@ -83,15 +83,17 @@ jobs:
           sha256sum opedal.tech-${{ steps.tag.outputs.tag }}.zip >> checksums.txt
 
           echo "### SHA-256 Checksums" > release-notes.md
-          echo '```' >> release-notes.md
-          cat checksums.txt >> release-notes.md
-          echo '```' >> release-notes.md
-          echo "" >> release-notes.md
-          echo "### Verification" >> release-notes.md
-          echo "All artifacts are signed with Sigstore. Verify signatures using:" >> release-notes.md
-          echo '```bash' >> release-notes.md
-          echo "cosign verify-blob --bundle opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz.sigstore.json opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz" >> release-notes.md
-          echo '```' >> release-notes.md
+          {
+            echo '```'
+            cat checksums.txt
+            echo '```'
+            echo ""
+            echo "### Verification"
+            echo "All artifacts are signed with Sigstore. Verify signatures using:"
+            echo '```bash'
+            echo "cosign verify-blob --bundle opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz.sigstore.json opedal.tech-${{ steps.tag.outputs.tag }}.tar.gz"
+            echo '```'
+          } >> release-notes.md
 
       - name: Sign artifacts with Sigstore
         if: steps.check.outputs.new_commits == 'true'
@@ -124,10 +126,12 @@ jobs:
           fi
 
           # Combine changelog with release notes
-          echo "## Changes" > full-notes.md
-          echo "$CHANGELOG" >> full-notes.md
-          echo "" >> full-notes.md
-          cat release-notes.md >> full-notes.md
+          {
+            echo "## Changes"
+            echo "$CHANGELOG"
+            echo ""
+            cat release-notes.md
+          } > full-notes.md
 
           # Create release
           gh release create "${{ steps.tag.outputs.tag }}" \
