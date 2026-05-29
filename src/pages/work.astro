@@ -3,6 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import { link } from '../utils/link';
 import { safeJsonLd } from '../utils/jsonld';
+import { getSessions, summarise } from '../utils/sessionize';
+
+const sessions = await getSessions();
 
 const title = 'Work · opedal.tech';
 const description = 'Evidence trail of platform-engineering work across Azure Landing Zones, GitHub runners, AKS Automatic, Terraform AVM patterns, and AI platforms in regulated industries.';
@@ -162,6 +165,25 @@ const breadcrumbSchema = {
             Microsoft internal events: 50 to 100 in-person sessions, 200+ virtual sessions on Azure Landing Zones, AKS Automatic, and GitHub Copilot.
           </li>
         </ul>
+        {sessions.length > 0 && (
+          <div class="sessions">
+            <h3 class="sessions-heading">Session catalog</h3>
+            <p class="sessions-sub">
+              Talks I am currently pitching. Full abstracts on <a href="https://sessionize.com/martin-opedal" target="_blank" rel="noopener noreferrer">Sessionize</a>.
+            </p>
+            <div class="sessions-list">
+              {sessions.map((s) => (
+                <a class="session-card" href={s.sessionUrl} target="_blank" rel="noopener noreferrer">
+                  <div class="session-card-meta">
+                    <span class="session-lang">{s.language}</span>
+                  </div>
+                  <h4 class="session-card-title">{s.title}</h4>
+                  <p class="session-card-desc">{summarise(s.description)}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
     </div>

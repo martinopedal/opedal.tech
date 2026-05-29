@@ -24,9 +24,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  decide-runner:
+    uses: martinopedal/github-runners-alz-corp-cookbook/.github/workflows/decide-runner.yml@v1
+    with:
+      self-hosted-labels: '["self-hosted", "personal", "pub", "linux"]'
+
   build:
     name: Build CV PDFs
-    runs-on: [self-hosted, personal-linux]
+    needs: decide-runner
+    runs-on: ${{ fromJSON(needs.decide-runner.outputs.runner-labels) }}
 
     steps:
       - name: Harden runner
@@ -68,9 +74,9 @@ jobs:
 
   commit:
     name: Commit PDFs to main
-    needs: build
+    needs: [decide-runner, build]
     if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
-    runs-on: [self-hosted, personal-linux]
+    runs-on: ${{ fromJSON(needs.decide-runner.outputs.runner-labels) }}
 
     permissions:
       contents: write

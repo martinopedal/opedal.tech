@@ -1,43 +1,7 @@
 ---
-type SessionizeSession = {
-  id: number;
-  title: string;
-  description: string;
-  sessionUrl: string;
-  languageCode: string;
-  language: string;
-};
+import { getSessions, summarise } from '../utils/sessionize';
 
-type SessionizePayload = {
-  sessions?: SessionizeSession[];
-};
-
-const SESSIONIZE_API = 'https://sessionize.com/api/speaker/json/0q2vfif629';
-let sessions: SessionizeSession[] = [];
-try {
-  const res = await fetch(SESSIONIZE_API, { signal: AbortSignal.timeout(10000) });
-  if (res.ok) {
-    const data = (await res.json()) as SessionizePayload;
-    sessions = data.sessions ?? [];
-  } else {
-    console.warn(`[Speaking] Sessionize returned HTTP ${res.status}; session catalog hidden in this build.`);
-  }
-} catch (err) {
-  const name = err instanceof Error ? err.name : 'error';
-  console.warn(`[Speaking] Sessionize fetch failed (${name}); session catalog hidden in this build.`);
-  sessions = [];
-}
-if (sessions.length === 0) {
-  console.warn('[Speaking] Sessionize returned 0 sessions; session catalog hidden in this build.');
-}
-
-function summarise(text: string, max = 220): string {
-  const clean = text.replace(/\r\n|\r|\n/g, ' ').replace(/\s+/g, ' ').trim();
-  if (clean.length <= max) return clean;
-  const cut = clean.slice(0, max);
-  const lastSpace = cut.lastIndexOf(' ');
-  return (lastSpace > 0 ? cut.slice(0, lastSpace) : cut) + '...';
-}
+const sessions = await getSessions();
 ---
 <section id="speaking">
   <div class="container">

@@ -13,9 +13,15 @@ permissions:
   contents: read
 
 jobs:
+  decide-runner:
+    uses: martinopedal/github-runners-alz-corp-cookbook/.github/workflows/decide-runner.yml@v1
+    with:
+      self-hosted-labels: '["self-hosted", "personal", "pub", "linux"]'
+
   request-copilot-review:
     if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: [self-hosted, personal-linux]
+    needs: decide-runner
+    runs-on: ${{ fromJSON(needs.decide-runner.outputs.runner-labels) }}
     timeout-minutes: 5
     steps:
       - name: Request Copilot code review
