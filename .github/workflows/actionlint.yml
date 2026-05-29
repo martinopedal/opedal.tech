@@ -15,15 +15,12 @@ permissions:
   pull-requests: write
 
 jobs:
-  decide-runner:
-    uses: martinopedal/github-runners-alz-corp-cookbook/.github/workflows/decide-runner.yml@v1
-    with:
-      self-hosted-labels: '["self-hosted", "public-linux"]'
-
+  # Docker-container action (reviewdog/action-actionlint) requires a Docker
+  # daemon, which self-hosted ACA (container) runners do not provide. Pin to
+  # GitHub-hosted ubuntu-latest. Estate rule: ACA runners are Docker-free only.
   actionlint:
     name: Lint workflows
-    needs: decide-runner
-    runs-on: ${{ fromJSON(needs.decide-runner.outputs.runner-labels) }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
