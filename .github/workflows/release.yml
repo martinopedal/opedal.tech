@@ -11,8 +11,14 @@ permissions:
   attestations: write
 
 jobs:
+  decide-runner:
+    uses: martinopedal/github-runners-alz-corp-cookbook/.github/workflows/decide-runner.yml@v1
+    with:
+      self-hosted-labels: '["self-hosted", "personal", "pub", "linux"]'
+
   release:
-    runs-on: [self-hosted, personal-linux]
+    needs: decide-runner
+    runs-on: ${{ fromJSON(needs.decide-runner.outputs.runner-labels) }}
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6

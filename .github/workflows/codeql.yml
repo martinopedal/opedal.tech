@@ -17,9 +17,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  decide-runner:
+    uses: martinopedal/github-runners-alz-corp-cookbook/.github/workflows/decide-runner.yml@v1
+    with:
+      self-hosted-labels: '["self-hosted", "personal", "pub", "linux"]'
+
   analyze:
     name: Analyze (${{ matrix.language }})
-    runs-on: [self-hosted, personal-linux]
+    needs: decide-runner
+    runs-on: ${{ fromJSON(needs.decide-runner.outputs.runner-labels) }}
     timeout-minutes: 30
     permissions:
       security-events: write
