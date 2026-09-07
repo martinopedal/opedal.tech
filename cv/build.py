@@ -138,8 +138,8 @@ def main():
         shutil.copy(pdf_file, dest)
         print(f"[build.py] Copied {pdf_file} → {dest}")
 
-    # 6. Create stable martin-opedal-cv.pdf (multipage variant)
-    stable_name = PUBLIC_DIR / "martin-opedal-cv.pdf"
+    # 6. Create stable cv.pdf (multipage variant)
+    stable_name = PUBLIC_DIR / "cv.pdf"
     shutil.copy(PUBLIC_DIR / "architect-multipage.pdf", stable_name)
     print(f"[build.py] Created stable filename: {stable_name}")
 
@@ -153,7 +153,7 @@ def main():
     print("\n[build.py] ✓ Build complete. PDFs at:")
     for mode in MODES:
         print(f"  - {PUBLIC_DIR / f'architect-{mode}.pdf'}")
-    print(f"  - {PUBLIC_DIR / 'martin-opedal-cv.pdf'} (stable link)")
+    print(f"  - {PUBLIC_DIR / 'cv.pdf'} (stable link)")
 
     sys.exit(0)
 

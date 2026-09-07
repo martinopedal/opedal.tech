@@ -16,13 +16,13 @@ const {
   description,
   canonicalUrl = Astro.url.href,
   ogImage = '/og-default.png',
-  ogImageAlt = 'opedal.tech, Martin Opedal, Lead Cloud Solution Architect at Microsoft',
+  ogImageAlt = 'opedal.tech, Martin, Cloud Solution Architect',
   ogType = 'website',
 } = Astro.props;
 
 // Site verification tokens from environment variables (GitHub Actions repo variables)
-// When Martin adds PUBLIC_GOOGLE_SITE_VERIFICATION and PUBLIC_BING_SITE_VERIFICATION
-// as repo variables, next deploy auto-verifies the site without code changes.
+// Adding PUBLIC_GOOGLE_SITE_VERIFICATION and PUBLIC_BING_SITE_VERIFICATION
+// as repo variables auto-verifies the site on next deploy without code changes.
 const gscToken = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 const bingToken = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
 
@@ -39,7 +39,7 @@ const websiteSchema = {
   '@type': 'WebSite',
   '@id': 'https://opedal.tech/#website',
   name: 'opedal.tech',
-  alternateName: 'Martin Opedal',
+  alternateName: 'Martin',
   url: 'https://opedal.tech/',
   inLanguage: ['en', 'nb'],
   author: {
@@ -57,18 +57,12 @@ const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   '@id': 'https://opedal.tech/#person',
-  name: 'Martin Opedal',
+  name: 'Martin',
   givenName: 'Martin',
-  familyName: 'Opedal',
   url: 'https://opedal.tech',
   image: ogImageUrl,
   email: 'mailto:hello@opedal.tech',
-  jobTitle: 'Lead Cloud Solution Architect',
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Microsoft',
-    url: 'https://www.microsoft.com',
-  },
+  jobTitle: 'Cloud Solution Architect',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Oslo',
@@ -81,9 +75,6 @@ const personSchema = {
   sameAs: [
     'https://www.linkedin.com/in/martin-opedal',
     'https://github.com/martinopedal',
-    'https://x.com/MartinOpedal',
-    'https://www.instagram.com/martinopedal',
-    'https://www.facebook.com/opedalmartin',
   ],
   knowsLanguage: ['en', 'nb'],
   knowsAbout: [
@@ -119,7 +110,7 @@ const personSchema = {
     'ITIL Foundation',
   ],
   description:
-    'Lead Cloud Solution Architect at Microsoft Norway. Designs Azure Landing Zones, AKS platforms, and AI infrastructure for regulated and sovereign workloads. Writes and speaks on Terraform, Bicep, Kubernetes, and platform engineering. Open-source contributor to Azure Verified Modules and the ALZ Terraform module.',
+    'Cloud Solution Architect based in Oslo. Designs Azure Landing Zones, AKS platforms, and AI infrastructure for regulated and sovereign workloads. Writes and speaks on Terraform, Bicep, Kubernetes, and platform engineering. Open-source contributor to Azure Verified Modules and the ALZ Terraform module.',
 };
 ---
 
@@ -129,7 +120,7 @@ const personSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="author" content="Martin Opedal" />
+    <meta name="author" content="Martin" />
     <meta name="theme-color" content="#14110f" />
     <meta name="generator" content={Astro.generator} />
 
@@ -210,27 +201,27 @@ const personSchema = {
     <footer>
       <div class="container">
         <p class="footer-line">
-          &copy; {currentYear} Martin Opedal &middot; Built with Astro
+          &copy; {currentYear} Martin &middot; Built with Astro
         </p>
         <ul class="footer-links" role="list">
           <li>
             <a
               href="mailto:hello@opedal.tech"
-              aria-label="Email Martin Opedal at hello@opedal.tech">Email</a>
+              aria-label="Email Martin at hello@opedal.tech">Email</a>
           </li>
           <li>
             <a
               href="https://github.com/martinopedal"
               target="_blank"
               rel="me noopener noreferrer"
-              aria-label="Martin Opedal on GitHub">GitHub</a>
+              aria-label="Martin on GitHub">GitHub</a>
           </li>
           <li>
             <a
               href="https://www.linkedin.com/in/martin-opedal"
               target="_blank"
               rel="me noopener noreferrer"
-              aria-label="Martin Opedal on LinkedIn">LinkedIn</a>
+              aria-label="Martin on LinkedIn">LinkedIn</a>
           </li>
           <li>
             <a

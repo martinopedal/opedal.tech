@@ -45,7 +45,7 @@ const articleSchema = {
   keywords: tags.join(', '),
   author: {
     '@type': 'Person',
-    name: 'Martin Opedal',
+    name: 'Martin',
     url: 'https://opedal.tech',
     sameAs: [
       'https://www.linkedin.com/in/martin-opedal',
@@ -54,7 +54,7 @@ const articleSchema = {
   },
   publisher: {
     '@type': 'Person',
-    name: 'Martin Opedal',
+    name: 'Martin',
     url: 'https://opedal.tech',
     sameAs: [
       'https://www.linkedin.com/in/martin-opedal',
@@ -106,7 +106,7 @@ const breadcrumbSchema = {
     {updatedDate && (
       <meta property="article:modified_time" content={updatedDate.toISOString()} />
     )}
-    <meta property="article:author" content="Martin Opedal" />
+    <meta property="article:author" content="Martin" />
     {tags.map((tag) => (
       <meta property="article:tag" content={tag} />
     ))}

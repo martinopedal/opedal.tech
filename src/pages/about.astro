@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import { Image } from 'astro:assets';
-import portrait from '../assets/martin-opedal.jpg';
+import portrait from '../assets/portrait.jpg';
 import { link } from '../utils/link';
 import { safeJsonLd } from '../utils/jsonld';
 import yaml from 'js-yaml';
@@ -13,8 +13,8 @@ const cvPath = 'cv/data/architect.yml';
 const cvYaml = fs.readFileSync(cvPath, 'utf8');
 const data = yaml.load(cvYaml);
 
-const title = 'About Martin Opedal, Cloud Architect at Microsoft';
-const description = 'Cloud Solution Architect at Microsoft Norway with 15+ years architecting Azure platforms. Datacenter engineer turned Landing Zones specialist, co-founder of two Norwegian craft breweries.';
+const title = 'About Martin, Cloud Architect';
+const description = 'Cloud Solution Architect in Oslo with 15+ years architecting Azure platforms. Datacenter engineer turned Landing Zones specialist, co-founder of two Norwegian craft breweries.';
 
 // ProfilePage JSON-LD schema (anchored to comprehensive Person @id)
 const aboutPageSchema = {
@@ -62,7 +62,7 @@ const breadcrumbSchema = {
       <header class="about-header">
         <Image
           src={portrait}
-          alt="Portrait of Martin Opedal, Cloud Solution Architect at Microsoft Norway"
+          alt="Portrait of Martin, Cloud Solution Architect"
           widths={[200, 280, 400, 560]}
           sizes="(min-width: 768px) 280px, 200px"
           class="about-portrait"
@@ -74,7 +74,7 @@ const breadcrumbSchema = {
 
       <article class="about-bio">
         <p>
-          I ran datacenters for nine years before joining Microsoft. That decade shaped how I think about reliability from the hardware up. I started with Azure in 2011 at Teknograd, a Norwegian systems integrator, managing VMware estates and migrating enterprise workloads to the cloud when Reserved Instances were still a new idea.
+          I ran datacenters for nine years before moving to the vendor side. That decade shaped how I think about reliability from the hardware up. I started with Azure in 2011 at a Norwegian systems integrator, managing VMware estates and migrating enterprise workloads to the cloud when Reserved Instances were still a new idea.
         </p>
         <p>
           The datacenter years taught me what breaks. I saw power distribution units fail, watched SAN arrays light up with amber LEDs at 3 AM, and learned that uptime starts with physical redundancy and ends with monitoring that wakes you before customers notice. That foundation shows up in every Landing Zone I design now.
@@ -86,10 +86,10 @@ const breadcrumbSchema = {
           I use Terraform daily. The modules I ship come from real customer engagements, not theory. My GitHub repos include an AVM pattern module for CI/CD runners with VNET integration, an AKS Automatic module that works inside ALZ Corp landing zones with central firewall egress, and a bundled assessment runner that unifies azqr, PSRule, AzGovViz, and 135 ALZ Graph queries into one portable report.
         </p>
         <p>
-          I speak publicly on Terraform, GitHub Copilot, and infrastructure-as-code security. Inside Microsoft I run architecture workshops and Well-Architected reviews for strategic accounts. I present at Microsoft internal events and customer workshops throughout the year.
+          I speak publicly on Terraform, GitHub Copilot, and infrastructure-as-code security. I run architecture workshops and Well-Architected reviews for strategic accounts, and present at internal events and customer workshops throughout the year.
         </p>
         <p>
-          I co-founded two craft breweries in Norway, Cervisiam and Krecher, plus Oculus bar, while running Teknograd's Azure practice. Fermentation and infrastructure both need the right controls and patience. Brewing taught me that tight feedback loops matter: you taste at every stage, adjust pH and temperature in real time, and ship when the hydrometer says it's ready. Infrastructure is the same: instrument everything, respond to signals, and never skip the smoke test.
+          I co-founded two craft breweries in Norway, Cervisiam and Krecher, plus Oculus bar, while running an Azure consulting practice. Fermentation and infrastructure both need the right controls and patience. Brewing taught me that tight feedback loops matter: you taste at every stage, adjust pH and temperature in real time, and ship when the hydrometer says it's ready. Infrastructure is the same: instrument everything, respond to signals, and never skip the smoke test.
         </p>
         <p>
           I live in Oslo. I hold nine Azure and Terraform certifications, including Azure Solutions Architect Expert, Cybersecurity Architect Expert, and DevOps Engineer Expert. I write on this site about Landing Zones, AKS, and building with GitHub Copilot. I contribute to Azure Verified Modules and maintain Terraform patterns for regulated enterprises.

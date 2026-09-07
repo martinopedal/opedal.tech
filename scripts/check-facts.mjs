@@ -100,13 +100,13 @@ function checkFile(filePath, derivedFacts) {
     for (const match of employerMatches) {
       const claimedYears = parseInt(match[1], 10);
       const employer = match[2].toLowerCase();
-      
-      if (employer === 'microsoft' && claimedYears !== derivedFacts.years_at_microsoft) {
+
+      if (employer === 'microsoft' && claimedYears !== derivedFacts.years_at_current_employer) {
         errors.push({
           line: lineNumber,
           text: line.trim(),
-          claim: `${claimedYears} years at Microsoft`,
-          expected: [derivedFacts.years_at_microsoft],
+          claim: `${claimedYears} years at ${match[2]}`,
+          expected: [derivedFacts.years_at_current_employer],
         });
       }
     }
@@ -188,8 +188,8 @@ function main() {
   const currentYear = new Date().getFullYear();
   const derivedFacts = {
     years_with_azure_entra_m365: currentYear - facts.career.azure_first_used_year,
-    years_at_microsoft: currentYear - facts.career.microsoft_start_year,
-    years_at_teknograd: 2020 - facts.career.teknograd_start_year, // 2011–2020 from architect.yml
+    years_at_current_employer: currentYear - facts.career.vendor_start_year,
+    years_at_first_integrator: 2020 - facts.career.first_integrator_start_year, // 2011 to 2020 from architect.yml
     breweries_cofounded: facts.ventures.breweries_cofounded,
     brewery_names: facts.ventures.brewery_names || [],
     bar_names: facts.ventures.bar_names || [],
@@ -200,8 +200,8 @@ function main() {
 
   console.log('📊 Derived facts:');
   console.log(`   - Years with Azure/M365/Entra: ${derivedFacts.years_with_azure_entra_m365}`);
-  console.log(`   - Years at Microsoft: ${derivedFacts.years_at_microsoft}`);
-  console.log(`   - Years at Teknograd: ${derivedFacts.years_at_teknograd}`);
+  console.log(`   - Years at current employer: ${derivedFacts.years_at_current_employer}`);
+  console.log(`   - Years at first systems integrator: ${derivedFacts.years_at_first_integrator}`);
   console.log(`   - Breweries co-founded: ${derivedFacts.breweries_cofounded}`);
   console.log(`   - Brewery names: ${derivedFacts.brewery_names.join(', ')}`);
   console.log(`   - Bar names: ${derivedFacts.bar_names.join(', ')}`);
