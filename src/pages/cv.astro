@@ -23,11 +23,6 @@ const profilePageSchema = {
     '@type': 'Person',
     name: data.person.name,
     jobTitle: data.person.role,
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: data.person.location.city,
-      addressCountry: data.person.location.country_code,
-    },
     email: data.person.contact.email,
     url: data.person.contact.website_url,
     sameAs: [
@@ -51,7 +46,6 @@ const profilePageSchema = {
       <header class="cv-header">
         <h1>{data.person.name}</h1>
         <p class="cv-role">{data.person.role}</p>
-        <p class="cv-location">{data.person.location.city}, {data.person.location.country}</p>
         
         <dl class="cv-contact">
           <div class="cv-contact-item">
@@ -108,7 +102,7 @@ const profilePageSchema = {
                 <span class="cv-period">{job.period}</span>
               </div>
               <p class="cv-job-org">
-                {job.employer} &middot; {job.location}
+                {job.employer}
               </p>
               <p class="cv-job-detail">{job.detail}</p>
             </article>

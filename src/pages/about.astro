@@ -14,7 +14,7 @@ const cvYaml = fs.readFileSync(cvPath, 'utf8');
 const data = yaml.load(cvYaml);
 
 const title = 'About Martin, Cloud Architect';
-const description = 'Cloud Solution Architect in Oslo with 15+ years architecting Azure platforms. Datacenter engineer turned Landing Zones specialist, co-founder of two Norwegian craft breweries.';
+const description = 'Cloud Solution Architect with 15+ years architecting Azure platforms. Datacenter engineer turned Landing Zones specialist, co-founder of two craft breweries.';
 
 // ProfilePage JSON-LD schema (anchored to comprehensive Person @id)
 const aboutPageSchema = {
@@ -92,7 +92,7 @@ const breadcrumbSchema = {
           I co-founded two craft breweries in Norway, Cervisiam and Krecher, plus Oculus bar, while running an Azure consulting practice. Fermentation and infrastructure both need the right controls and patience. Brewing taught me that tight feedback loops matter: you taste at every stage, adjust pH and temperature in real time, and ship when the hydrometer says it's ready. Infrastructure is the same: instrument everything, respond to signals, and never skip the smoke test.
         </p>
         <p>
-          I live in Oslo. I hold nine Azure and Terraform certifications, including Azure Solutions Architect Expert, Cybersecurity Architect Expert, and DevOps Engineer Expert. I write on this site about Landing Zones, AKS, and building with GitHub Copilot. I contribute to Azure Verified Modules and maintain Terraform patterns for regulated enterprises.
+          I hold nine Azure and Terraform certifications, including Azure Solutions Architect Expert, Cybersecurity Architect Expert, and DevOps Engineer Expert. I write on this site about Landing Zones, AKS, and building with GitHub Copilot. I contribute to Azure Verified Modules and maintain Terraform patterns for regulated enterprises.
         </p>
       </article>
 
@@ -103,7 +103,7 @@ const breadcrumbSchema = {
             <li class="timeline-entry">
               <span class="timeline-period">{role.period}</span>
               <span class="timeline-role">{role.role}</span>
-              <span class="timeline-employer">{role.employer} · {role.location}</span>
+              <span class="timeline-employer">{role.employer}</span>
               <p class="timeline-summary">{role.detail}</p>
             </li>
           ))}

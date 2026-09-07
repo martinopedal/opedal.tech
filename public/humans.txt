@@ -2,7 +2,6 @@
 
 /* TEAM */
 Author: Martin
-Location: Oslo, Norway
 Email: hello@opedal.tech
 GitHub: martinopedal
 LinkedIn: martin-opedal

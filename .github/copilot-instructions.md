@@ -114,11 +114,17 @@ are accepted as public, but nothing else should restate the identity.
 - Vendor and product names (Microsoft Azure, Microsoft Entra, "Microsoft Certified: ..."
   credentials, Microsoft Learn) are fine. They describe technology and credentials, not
   employment.
+- **No city or residence.** Never state where Martin lives. No "Based in Oslo", no
+  `address` / `addressLocality` / `addressCountry` / `nationality` / `homeLocation` in
+  JSON-LD, no `Location:` line in `humans.txt`, no per-job `location` in
+  `cv/data/architect.yml`, and no city on conference listings. Market descriptors are
+  fine ("regulated Nordic enterprises", "Norwegian systems integrator") because they
+  describe the market and the employer, not a home address.
 - **Identity graph stays minimal.** JSON-LD `sameAs`, `humans.txt`, and `llms.txt` list
   email, GitHub, and LinkedIn only. Do not add X, Instagram, Facebook, or other personal
   profiles.
 - Quick check before opening a PR:
-  `Select-String -Pattern 'Opedal|Microsoft' -Path src/**/*.astro,public/*.txt,cv/data/*.yml`
+  `Select-String -Pattern 'Opedal|Microsoft|Oslo' -Path src/**/*.astro,public/*.txt,cv/data/*.yml`
   Every remaining hit must be a URL, a product name, or a certification name.
 
 ## Voice rules (apply to all narrative copy in `.astro`, `.md`, `.txt`)
