@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { link } from '../utils/link';
 import Nav from '../components/Nav.astro';
 import yaml from 'js-yaml';
 import fs from 'node:fs';
@@ -63,7 +62,7 @@ const profilePageSchema = {
             <dt>LinkedIn</dt>
             <dd>
               <a href={data.person.contact.linkedin_url} target="_blank" rel="noopener noreferrer">
-                {data.person.contact.linkedin_handle}
+                View profile
               </a>
             </dd>
           </div>
@@ -71,7 +70,7 @@ const profilePageSchema = {
             <dt>GitHub</dt>
             <dd>
               <a href={data.person.contact.github_url} target="_blank" rel="noopener noreferrer">
-                {data.person.contact.github_handle}
+                View profile
               </a>
             </dd>
           </div>
@@ -96,26 +95,6 @@ const profilePageSchema = {
         <h2>Summary</h2>
         <p class="cv-summary">{data.summary}</p>
       </section>
-
-      <!-- Download buttons -->
-      <div class="cv-downloads">
-        <a
-          href={link('cv/architect-1page.pdf')}
-          class="btn btn-primary"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Download 1-Page PDF
-        </a>
-        <a
-          href={link('cv/architect-multipage.pdf')}
-          class="btn btn-ghost"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Download Multi-Page PDF
-        </a>
-      </div>
 
       <!-- Experience -->
       <section class="cv-section">

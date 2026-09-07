@@ -1,10 +1,10 @@
 # architect.yml, single source of truth for the Architect CV.
 #
 # This file is consumed by:
-#   1. cv/build.py + cv/templates/architect.tex.j2
-#      → produces public/cv/architect-1page.pdf and public/cv/architect-multipage.pdf
-#   2. src/pages/cv.astro
+#   1. src/pages/cv.astro
 #      → renders the /cv HTML page at build time
+#   2. scripts/check-facts.mjs
+#      → cross-checks site copy against these claims in CI
 #
 # Editing rules:
 #   - This file is sanitized for public distribution. Apply the redaction rules
@@ -13,8 +13,8 @@
 #     phrasing (Connect-style "revenue contributor", "pipeline ownership",
 #     "multi-million dollar targets", etc.) are NOT permitted here.
 #   - Section keys map to ATS-friendly HTML headings: Experience, Skills,
-#     Certifications, Speaking, Education. Do not rename without coordinating
-#     with both the LaTeX template and cv.astro.
+#     Certifications, Speaking, Education. Do not rename without updating
+#     cv.astro and scripts/check-facts.mjs.
 
 person:
   name: Martin
@@ -38,9 +38,6 @@ person:
   languages:
     - { name: Norwegian, level: C2, native: true }
     - { name: English,   level: C2, native: false }
-  # Filename only. The LaTeX build resolves it relative to cv/architect/;
-  # the Astro page resolves it relative to public/ after a copy step.
-  photo: photo.jpg
 
 # Short professional summary. One paragraph. First-person not required;
 # CVs read in the third person here. Sentence on "revenue-accountable
@@ -56,15 +53,12 @@ summary: |
   mentor. Passionate about cloud computing. Willing to travel.
 
 # Career history, most recent first.
-# `detail` is rendered as a single paragraph in both LaTeX and HTML.
-# `appears_on` controls whether the entry renders in 1page, multipage,
-# or both PDF variants. All entries appear on the /cv HTML page.
+# `detail` is rendered as a single paragraph on the /cv page.
 experience:
   - period: "2025 to Present"
     role: Lead / Cross Cloud Solution Architect
     employer: Global cloud platform vendor
     location: Oslo
-    appears_on: [1page, multipage]
     detail: >
       Technology strategy for strategic enterprise customers. Strategic
       accounts portfolio across regulated Nordic enterprises. Orchestrating
@@ -79,7 +73,6 @@ experience:
     role: Senior Cloud Solution Architect
     employer: Global cloud platform vendor
     location: Oslo
-    appears_on: [1page, multipage]
     detail: >
       Technical pre-sales and consulting. Well-Architected assessments,
       reference architectures. Platform migrations for FSI and
@@ -91,7 +84,6 @@ experience:
     role: Senior Manager, Cloud Practice
     employer: European IT consultancy
     location: Oslo
-    appears_on: [1page, multipage]
     detail: >
       Led the Azure cloud practice. Carried forward the large European
       bank engagement, leading their technical transformation and
@@ -101,7 +93,6 @@ experience:
     role: Group Manager, Cloud Architecture
     employer: Global systems integrator
     location: Oslo
-    appears_on: [1page, multipage]
     detail: >
       SI Solution Architect handling partner-channel sales.
       Infrastructure lead, positioned for Nordics director role. Lead
@@ -114,7 +105,6 @@ experience:
     role: Cloud Solution Architect
     employer: Nordic managed services provider
     location: Oslo
-    appears_on: [1page, multipage]
     detail: >
       Customer relationship management, consulting. Cloud migration for
       mid-market and enterprise. Azure, hybrid cloud, multi-cloud. Cost
@@ -124,7 +114,6 @@ experience:
     role: Senior Systems Consultant / TAM
     employer: Norwegian systems integrator
     location: Oslo
-    appears_on: [1page, multipage]
     detail: >
       Systems engineering, technical account management.
       Datacenter-to-cloud migrations. Enterprise and distributed
@@ -136,32 +125,23 @@ experience:
 engagements:
   - sector: Tier-1 Nordic Bank
     work: Well-Architected, platform migration, AVD, networking, Defender for Cloud
-    appears_on: [1page, multipage]
   - sector: Leading Nordic Fintech
     work: Executive-level cloud strategy, platform migration & architecture
-    appears_on: [1page, multipage]
   - sector: Global Energy / Maritime
     work: Agentic AI reference architecture, AI governance, multi-region migration
-    appears_on: [1page, multipage]
   - sector: Global Shipping & Logistics
     work: AI Foundry, agent orchestration, data platform migration (Fabric)
-    appears_on: [1page, multipage]
   - sector: Major Nordic ISV
     work: Azure Arc SQL migration, Private Link, AMPLS, ExpressRoute
-    appears_on: [multipage]
   - sector: Defense Contractor
     work: Azure AI Foundry, GitHub Copilot, GHAS/CodeQL, Terraform, DevSecOps
-    appears_on: [1page, multipage]
   - sector: Nordic Insurer
     work: Security architecture, Global Secure Access, VPN migration
-    appears_on: [1page, multipage]
   - sector: Government Bodies
     work: Landing Zone migrations, governance frameworks, GitHub adoption
-    appears_on: [1page, multipage]
 
 skills:
-  # Free-text bullet list rendered as a separator-joined inline string in LaTeX
-  # and as <ul> in HTML.
+  # Free-text bullet list rendered as a <ul> on /cv.
   specializations:
     - Cloud Strategy
     - Enterprise Architecture
@@ -223,7 +203,7 @@ skills:
     - Virtualization
     - Network Administration
 
-  # Free-text tag cloud. Rendered as \cvtag{...} in LaTeX and pill spans on /cv.
+  # Free-text tag cloud. Rendered as pill spans on /cv.
   # Aligned with ATS keywords for Cloud Solution Architect / Lead roles and LinkedIn
   # recommendation themes. Generic soft skills ("Interpersonal Skills") removed.
   competencies:
@@ -250,9 +230,7 @@ skills:
     - Holistic Solution Design
     - Mentorship
 
-# `kind` is a typed bucket so the LaTeX template can pick an icon
-# (\faCloud for cloud certs, \faCog for everything else). On /cv the kind
-# is rendered as a small superscript label.
+# `kind` is a typed bucket rendered on /cv as a small superscript label.
 #
 # Certifications listed below are ACTIVE as of the latest renewal cycle.
 # Source of truth: the maintainer's Microsoft Learn dashboard + HashiCorp + AXELOS.
@@ -275,26 +253,21 @@ speaking:
   - venue: "Agentic AI & DevOps Days (Oslo)"
     talk: "Where does code generation stop and InfraOps start?"
     metric: Upcoming, 16 June 2026
-    appears_on: [1page, multipage]
   - venue: Nordic Infrastructure Conference (NIC)
     talk: Live-streamed Level 300 session
     metric: 94% approval
-    appears_on: [1page, multipage]
   - venue: Customer sessions
     talk: "GHAS, GitHub / Azure DevOps, Azure Arc / Local"
     metric: Enterprise and regulated industries
-    appears_on: [multipage]
   - venue: Internal conference events
     talk: Architecture and platform sessions
     metric: 50 to 100 in-person, 200+ virtual
-    appears_on: [multipage]
 
-# Reserved for future expansion. Empty arrays are valid; both the LaTeX
-# template and cv.astro must skip the section header when empty.
+# Reserved for future expansion. Empty arrays are valid; cv.astro skips
+# the section header when empty.
 education: []
 
-# Open Source contributions, repos grouped by theme. Each repo can appear
-# on 1page (highlights only), multipage (full list), or both.
+# Open Source contributions, repos grouped by theme.
 open_source:
   - group: Azure Governance & Assessment
     repos:
@@ -302,12 +275,10 @@ open_source:
         lang: PowerShell
         url: https://github.com/martinopedal/azure-analyzer
         summary: "Bundled assessment runner that unifies azqr, PSRule, AzGovViz, and 135 ALZ graph queries into one portable JSON + HTML report"
-        appears_on: [1page, multipage]
       - name: alz-graph-queries
         lang: PowerShell
         url: https://github.com/martinopedal/alz-graph-queries
         summary: "Automated ALZ checklist validation: 135 Azure Resource Graph queries that take coverage from 49 to 135 items"
-        appears_on: [multipage]
 
   - group: GitHub Runners & Private Networking
     repos:
@@ -315,17 +286,14 @@ open_source:
         lang: Terraform
         url: https://github.com/martinopedal/terraform-azurerm-avm-ptn-cicd-agents-and-runners
         summary: "Official AVM pattern module for self-hosted ADO agents and GitHub runners with PAT and UAMI auth, no public IP egress"
-        appears_on: [1page, multipage]
       - name: ghec-vnet-runners-azure
         lang: Terraform
         url: https://github.com/martinopedal/ghec-vnet-runners-azure
         summary: "GitHub-hosted runners with Azure VNet integration for GHE.com, EU data residency and private endpoint connectivity"
-        appears_on: [multipage]
       - name: terraform-azurerm-github-runners-alz-corp
         lang: Terraform
         url: https://github.com/martinopedal/terraform-azurerm-github-runners-alz-corp
         summary: "Self-hosted GitHub Actions runners that run inside ALZ Corp landing zones with central firewall egress"
-        appears_on: [multipage]
 
   - group: Terraform Platform Modules
     repos:
@@ -333,12 +301,10 @@ open_source:
         lang: Terraform
         url: https://github.com/martinopedal/terraform-azapi-aks-automatic
         summary: "AKS Automatic with ALZ Corp networking, BYO VNet, multiple ingress options (AGC/NGINX/Istio), managed identity everywhere"
-        appears_on: [1page, multipage]
       - name: avm-ptn-aiml-ai-foundry
         lang: Terraform
         url: https://github.com/martinopedal/terraform-azurerm-avm-ptn-aiml-ai-foundry
         summary: "Official AVM pattern module for Azure AI Foundry (formerly AI Studio) with network isolation and private endpoints"
-        appears_on: [multipage]
 
   - group: AKS Automation
     repos:
@@ -346,7 +312,6 @@ open_source:
         lang: PowerShell
         url: https://github.com/martinopedal/aks-automatic-ingress-migration
         summary: "Automated migration from NGINX Ingress to Application Gateway for Containers on AKS Automatic clusters"
-        appears_on: [multipage]
 
   - group: Other Tooling
     repos:
@@ -354,4 +319,3 @@ open_source:
         lang: Python
         url: https://github.com/martinopedal/linkedin-auto-poster
         summary: "RSS to LinkedIn pipeline, ingests tech feeds, scores relevance, drafts in your voice, publishes through a GitHub PR approval workflow"
-        appears_on: [1page, multipage]

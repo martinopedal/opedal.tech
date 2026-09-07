@@ -1669,14 +1669,6 @@ section h2 {
   max-width: 820px;
 }
 
-.cv-downloads {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin: 0 0 1.5rem 0;  /* removed top margin to prevent 88px dead gap */
-  flex-wrap: wrap;
-}
-
 /* ---- Experience ---- */
 .cv-experience {
   display: flex;
@@ -2099,11 +2091,6 @@ section h2 {
   .cv-comp-tag {
     background: #f0f0f0 !important;
     color: #333 !important;
-  }
-
-  /* Hide download buttons in print */
-  .cv-downloads {
-    display: none !important;
   }
 
   /* Page breaks */
