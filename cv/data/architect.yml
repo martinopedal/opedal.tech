@@ -9,20 +9,17 @@
 # Editing rules:
 #   - This file is sanitized for public distribution. Apply the redaction rules
 #     in cv/README.md before adding any new field.
-#   - Phone numbers, customer names, and Microsoft-internal phrasing
-#     (Connect-style "revenue contributor", "pipeline ownership", "multi-million
-#     dollar targets", etc.) are NOT permitted here.
+#   - Phone numbers, customer names, employer names, and employer-internal
+#     phrasing (Connect-style "revenue contributor", "pipeline ownership",
+#     "multi-million dollar targets", etc.) are NOT permitted here.
 #   - Section keys map to ATS-friendly HTML headings: Experience, Skills,
 #     Certifications, Speaking, Education. Do not rename without coordinating
 #     with both the LaTeX template and cv.astro.
 
 person:
-  name: Martin Opedal
-  role: Lead Cloud Solution Architect
-  role_short: Lead / Cross
-  employer:
-    name: Microsoft
-    url: https://www.microsoft.com
+  name: Martin
+  role: Cloud Solution Architect
+  role_short: Cloud
   location:
     city: Oslo
     country: Norway
@@ -65,7 +62,7 @@ summary: |
 experience:
   - period: "2025 to Present"
     role: Lead / Cross Cloud Solution Architect
-    employer: Microsoft
+    employer: Global cloud platform vendor
     location: Oslo
     appears_on: [1page, multipage]
     detail: >
@@ -80,7 +77,7 @@ experience:
 
   - period: "2024 to 2025"
     role: Senior Cloud Solution Architect
-    employer: Microsoft
+    employer: Global cloud platform vendor
     location: Oslo
     appears_on: [1page, multipage]
     detail: >
@@ -91,31 +88,31 @@ experience:
       reviews, roadmap influence.
 
   - period: "2024"
-    role: Senior Manager, Microsoft Cloud
-    employer: Sopra Steria
+    role: Senior Manager, Cloud Practice
+    employer: European IT consultancy
     location: Oslo
     appears_on: [1page, multipage]
     detail: >
-      Led Microsoft cloud practice. Carried forward the large European
+      Led the Azure cloud practice. Carried forward the large European
       bank engagement, leading their technical transformation and
       driving consultant expansion sales.
 
   - period: "2022 to 2024"
     role: Group Manager, Cloud Architecture
-    employer: Avanade
+    employer: Global systems integrator
     location: Oslo
     appears_on: [1page, multipage]
     detail: >
-      SI Solution Architect handling sales to Accenture. Infrastructure
-      lead, positioned for Nordics director role. Lead architect for a
-      large European bank, driving their cloud migration. People
-      manager and mentor, 48M+ NOK consultant portfolio, coordinating
-      deliverables across cross-functional teams. Programs: CAF/ESLZ,
-      IaC, security.
+      SI Solution Architect handling partner-channel sales.
+      Infrastructure lead, positioned for Nordics director role. Lead
+      architect for a large European bank, driving their cloud
+      migration. People manager and mentor, 48M+ NOK consultant
+      portfolio, coordinating deliverables across cross-functional
+      teams. Programs: CAF/ESLZ, IaC, security.
 
   - period: "2020 to 2022"
     role: Cloud Solution Architect
-    employer: Advania
+    employer: Nordic managed services provider
     location: Oslo
     appears_on: [1page, multipage]
     detail: >
@@ -125,7 +122,7 @@ experience:
 
   - period: "2011 to 2020"
     role: Senior Systems Consultant / TAM
-    employer: Teknograd
+    employer: Norwegian systems integrator
     location: Oslo
     appears_on: [1page, multipage]
     detail: >
@@ -178,7 +175,7 @@ skills:
     - Stakeholder Management
 
   # Technical skills grouped by category, mirroring LinkedIn taxonomy for ATS alignment.
-  # Source of truth: Martin's LinkedIn profile as of 2026-05.
+  # Source of truth: the maintainer's LinkedIn profile as of 2026-05.
   # Do NOT add numeric ratings. Flat lists match ATS keyword patterns and avoid
   # the self-rating trap where 15 years Azure experience reads as "40%".
   industry_knowledge:
@@ -258,7 +255,7 @@ skills:
 # is rendered as a small superscript label.
 #
 # Certifications listed below are ACTIVE as of the latest renewal cycle.
-# Source of truth: Martin's Microsoft Learn dashboard + HashiCorp + AXELOS.
+# Source of truth: the maintainer's Microsoft Learn dashboard + HashiCorp + AXELOS.
 # Order: Microsoft Expert (by latest renewal) → Microsoft Associate (by latest renewal)
 # → vendor certs (Terraform, ITIL).
 certifications:
@@ -283,11 +280,11 @@ speaking:
     talk: Live-streamed Level 300 session
     metric: 94% approval
     appears_on: [1page, multipage]
-  - venue: Microsoft customer sessions
+  - venue: Customer sessions
     talk: "GHAS, GitHub / Azure DevOps, Azure Arc / Local"
     metric: Enterprise and regulated industries
     appears_on: [multipage]
-  - venue: Microsoft internal events
+  - venue: Internal conference events
     talk: Architecture and platform sessions
     metric: 50 to 100 in-person, 200+ virtual
     appears_on: [multipage]

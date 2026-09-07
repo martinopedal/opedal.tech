@@ -29,7 +29,7 @@ export async function GET(context) {
       description: post.data.description,
       pubDate: post.data.pubDate,
       link: `/blog/${post.slug}/`,
-      author: 'hello@opedal.tech (Martin Opedal)',
+      author: 'hello@opedal.tech (Martin)',
       customData: `<content:encoded><![CDATA[${htmlContent}]]></content:encoded>`,
     };
   });

@@ -10,8 +10,8 @@ const cvPath = 'cv/data/architect.yml';
 const cvYaml = fs.readFileSync(cvPath, 'utf8');
 const data = yaml.load(cvYaml);
 
-const title = 'Martin Opedal, Profile';
-const description = 'Lead Cloud Solution Architect at Microsoft Norway. Designs Azure Landing Zones, AKS platforms, and AI infrastructure for regulated workloads.';
+const title = 'Martin, Profile';
+const description = 'Cloud Solution Architect based in Oslo. Designs Azure Landing Zones, AKS platforms, and AI infrastructure for regulated workloads.';
 const canonicalUrl = 'https://opedal.tech/about/';
 
 // ProfilePage schema referencing the comprehensive Person @id from BaseLayout
@@ -40,7 +40,7 @@ const breadcrumbSchema = {
     {
       '@type': 'ListItem',
       position: 2,
-      name: 'Martin Opedal',
+      name: 'Martin',
       item: 'https://opedal.tech/martin-opedal/',
     },
   ],
@@ -58,9 +58,9 @@ const breadcrumbSchema = {
   <main id="main-content" class="profile-page" tabindex="-1">
     <div class="container">
       <header class="profile-header">
-        <h1>Martin Opedal</h1>
+        <h1>Martin</h1>
         <p class="profile-role">{data.person.role}</p>
-        <p class="profile-location">{data.person.employer.name} · {data.person.location.city}, {data.person.location.country}</p>
+        <p class="profile-location">{data.person.location.city}, {data.person.location.country}</p>
       </header>
 
       <article class="profile-bio">
@@ -92,7 +92,7 @@ const breadcrumbSchema = {
         <h2>Contact</h2>
         <ul role="list">
           <li>Email: <a href="mailto:{data.person.contact.email}">{data.person.contact.email}</a></li>
-          <li>LinkedIn: <a href="{data.person.contact.linkedin_url}" target="_blank" rel="me noopener noreferrer">martin-opedal</a></li>
+          <li>LinkedIn: <a href="{data.person.contact.linkedin_url}" target="_blank" rel="me noopener noreferrer">LinkedIn</a></li>
           <li>GitHub: <a href="{data.person.contact.github_url}" target="_blank" rel="me noopener noreferrer">martinopedal</a></li>
         </ul>
       </section>

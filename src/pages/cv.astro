@@ -11,8 +11,8 @@ const cvPath = 'cv/data/architect.yml';
 const cvYaml = fs.readFileSync(cvPath, 'utf8');
 const data = yaml.load(cvYaml);
 
-const title = 'CV · Martin Opedal';
-const description = 'Cloud Solution Architect at Microsoft with 15+ years leading IT programs across financial services, insurance, government, and technology.';
+const title = 'CV · Martin';
+const description = 'Cloud Solution Architect with 15+ years leading IT programs across financial services, insurance, government, and technology.';
 
 // ProfilePage JSON-LD schema
 const profilePageSchema = {
@@ -24,11 +24,6 @@ const profilePageSchema = {
     '@type': 'Person',
     name: data.person.name,
     jobTitle: data.person.role,
-    worksFor: {
-      '@type': 'Organization',
-      name: data.person.employer.name,
-      url: data.person.employer.url,
-    },
     address: {
       '@type': 'PostalAddress',
       addressLocality: data.person.location.city,
@@ -57,11 +52,6 @@ const profilePageSchema = {
       <header class="cv-header">
         <h1>{data.person.name}</h1>
         <p class="cv-role">{data.person.role}</p>
-        <p class="cv-employer">
-          <a href={data.person.employer.url} target="_blank" rel="noopener noreferrer">
-            {data.person.employer.name}
-          </a>
-        </p>
         <p class="cv-location">{data.person.location.city}, {data.person.location.country}</p>
         
         <dl class="cv-contact">

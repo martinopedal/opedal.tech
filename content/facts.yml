@@ -5,20 +5,19 @@
 # COORDINATION: cv/data/architect.yml is the primary source for career timeline.
 # When both files contain the same fact, prefer architect.yml and mirror here.
 
-current_employer: Microsoft
-current_role: Lead Cloud Solution Architect
+current_role: Cloud Solution Architect
 current_country: Norway
 
 career:
-  # From cv/data/architect.yml experience[0].period: "2025–Present"
-  # Note: Martin transitioned internally at Microsoft from Senior CSA → Lead/Cross CSA in 2025.
-  # His first Microsoft role started in 2024 as Senior CSA (experience[1]).
-  microsoft_start_year: 2024
-  
-  # From cv/data/architect.yml experience[5]: Teknograd 2011–2020
-  teknograd_start_year: 2011
-  
-  # Martin started working with Azure, M365, and Entra ID at Teknograd in 2011.
+  # From cv/data/architect.yml experience[0].period: "2025 to Present"
+  # Note: internal transition from Senior CSA to Lead/Cross CSA in 2025.
+  # The first role at the current employer started in 2024 as Senior CSA (experience[1]).
+  vendor_start_year: 2024
+
+  # From cv/data/architect.yml experience[5]: Norwegian systems integrator, 2011 to 2020
+  first_integrator_start_year: 2011
+
+  # Azure, M365, and Entra ID work started at the first systems integrator in 2011.
   # From experience[5].detail: "Enterprise and distributed applications across Azure, M365, VMware, Citrix."
   azure_first_used_year: 2011
 
@@ -29,17 +28,17 @@ ventures:
   # From About.astro line 111: Named ventures, current status
   brewery_names: [Cervisiam, Krecher]
   bar_names: [Oculus]
-  cervisiam_status: active  # Martin still involved
-  krecher_status: ended     # TODO: add krecher_end_year when Martin provides it from LinkedIn
+  cervisiam_status: active  # still involved
+  krecher_status: ended     # TODO: add krecher_end_year when confirmed
 
 # Derived facts computed at run-time by check-facts.mjs (not authored here):
 #   years_with_azure_entra_m365 = current_year - 2011
-#   years_at_microsoft = current_year - 2024
-#   years_before_microsoft = 2024 - 2011 = 13 (but this includes datacenter work, not purely datacenter)
+#   years_at_current_employer = current_year - 2024
+#   years_before_current_employer = 2024 - 2011 = 13 (includes datacenter work, not purely datacenter)
 #
-# NOTE: The About.astro claim "I ran datacenters for nine years before joining Microsoft"
-# is INCORRECT. Martin worked at Teknograd from 2011–2020 (9 years), but that role was
-# NOT datacenter-only — it was "Systems engineering, technical account management.
-# Datacenter-to-cloud migrations. Enterprise and distributed applications across Azure,
-# M365, VMware, Citrix." He worked WITH datacenters, Azure, M365, and Entra simultaneously.
-# Connell is fixing this in PR content/about-timeline-fix.
+# NOTE: The about page claim "I ran datacenters for nine years" refers to the
+# 2011 to 2020 systems-integrator role (9 years), but that role was NOT
+# datacenter-only. It was "Systems engineering, technical account management.
+# Datacenter-to-cloud migrations. Enterprise and distributed applications across
+# Azure, M365, VMware, Citrix." Datacenter, Azure, M365, and Entra work ran
+# simultaneously. Tracked in PR content/about-timeline-fix.
