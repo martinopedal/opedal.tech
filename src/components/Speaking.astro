@@ -1,7 +1,4 @@
 ---
-import { getSessions, summarise } from '../utils/sessionize';
-
-const sessions = await getSessions();
 ---
 <section id="speaking">
   <div class="container">
@@ -13,24 +10,5 @@ const sessions = await getSessions();
     <p class="speaking-line">
       I have previously spoken at <a href="https://www.nicconf.com" target="_blank" rel="noopener noreferrer">Nordic Infrastructure Conference (NIC)</a> (one Level 300, live-streamed session on Terraform, GitHub Copilot, and IaC security, 94% approval), and at customer sessions on GHAS, GitHub and Azure DevOps, and Azure Arc and Azure Local.
     </p>
-    {sessions.length > 0 && (
-      <div class="sessions">
-        <h3 class="sessions-heading">Session catalog</h3>
-        <p class="sessions-sub">
-          Talks I am currently pitching. Full abstracts on <a href="https://sessionize.com/martin-opedal" target="_blank" rel="noopener noreferrer">Sessionize</a>.
-        </p>
-        <div class="sessions-list">
-          {sessions.map((s) => (
-            <a class="session-card" href={s.sessionUrl} target="_blank" rel="noopener noreferrer">
-              <div class="session-card-meta">
-                <span class="session-lang">{s.language}</span>
-              </div>
-              <h4 class="session-card-title">{s.title}</h4>
-              <p class="session-card-desc">{summarise(s.description)}</p>
-            </a>
-          ))}
-        </div>
-      </div>
-    )}
   </div>
 </section>

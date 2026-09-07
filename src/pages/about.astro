@@ -1,8 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
-import { Image } from 'astro:assets';
-import portrait from '../assets/portrait.jpg';
 import { link } from '../utils/link';
 import { safeJsonLd } from '../utils/jsonld';
 import yaml from 'js-yaml';
@@ -60,15 +58,6 @@ const breadcrumbSchema = {
       <a class="about-back-link" href={link('')}>&larr; Back to home</a>
       
       <header class="about-header">
-        <Image
-          src={portrait}
-          alt="Portrait of Martin, Cloud Solution Architect"
-          widths={[200, 280, 400, 560]}
-          sizes="(min-width: 768px) 280px, 200px"
-          class="about-portrait"
-          loading="eager"
-          decoding="async"
-        />
         <h1>About</h1>
       </header>
 
