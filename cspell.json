@@ -17,13 +17,9 @@
     "dist/**",
     "node_modules/**",
     ".git/**",
-    "cv/architect/build/**",
-    "cv/templates/**",
     "*.lock",
     "package-lock.json",
     "*.pdf",
-    "**/__pycache__/**",
-    "*.j2.from-git",
     "**/*.svg"
   ],
   "ignoreRegExpList": [
