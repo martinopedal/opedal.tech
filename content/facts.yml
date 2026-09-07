@@ -6,7 +6,6 @@
 # When both files contain the same fact, prefer architect.yml and mirror here.
 
 current_role: Cloud Solution Architect
-current_country: Norway
 
 career:
   # From cv/data/architect.yml experience[0].period: "2025 to Present"

@@ -20,11 +20,6 @@ person:
   name: Martin
   role: Cloud Solution Architect
   role_short: Cloud
-  location:
-    city: Oslo
-    country: Norway
-    country_code: NO
-    nationality: Norwegian
   contact:
     # Phone deliberately omitted. Email is the alias forwarded by Domeneshop
     # to the maintainer's real inbox; never paste the underlying address here.
@@ -58,7 +53,6 @@ experience:
   - period: "2025 to Present"
     role: Lead / Cross Cloud Solution Architect
     employer: Global cloud platform vendor
-    location: Oslo
     detail: >
       Technology strategy for strategic enterprise customers. Strategic
       accounts portfolio across regulated Nordic enterprises. Orchestrating
@@ -72,7 +66,6 @@ experience:
   - period: "2024 to 2025"
     role: Senior Cloud Solution Architect
     employer: Global cloud platform vendor
-    location: Oslo
     detail: >
       Technical pre-sales and consulting. Well-Architected assessments,
       reference architectures. Platform migrations for FSI and
@@ -83,7 +76,6 @@ experience:
   - period: "2024"
     role: Senior Manager, Cloud Practice
     employer: European IT consultancy
-    location: Oslo
     detail: >
       Led the Azure cloud practice. Carried forward the large European
       bank engagement, leading their technical transformation and
@@ -92,7 +84,6 @@ experience:
   - period: "2022 to 2024"
     role: Group Manager, Cloud Architecture
     employer: Global systems integrator
-    location: Oslo
     detail: >
       SI Solution Architect handling partner-channel sales.
       Infrastructure lead, positioned for Nordics director role. Lead
@@ -104,7 +95,6 @@ experience:
   - period: "2020 to 2022"
     role: Cloud Solution Architect
     employer: Nordic managed services provider
-    location: Oslo
     detail: >
       Customer relationship management, consulting. Cloud migration for
       mid-market and enterprise. Azure, hybrid cloud, multi-cloud. Cost
@@ -113,7 +103,6 @@ experience:
   - period: "2011 to 2020"
     role: Senior Systems Consultant / TAM
     employer: Norwegian systems integrator
-    location: Oslo
     detail: >
       Systems engineering, technical account management.
       Datacenter-to-cloud migrations. Enterprise and distributed
@@ -250,7 +239,7 @@ certifications:
 # Speaking credibility for the /speaking section on /cv and the homepage line.
 # Verifiable, factual, no embellishment.
 speaking:
-  - venue: "Agentic AI & DevOps Days (Oslo)"
+  - venue: "Agentic AI & DevOps Days"
     talk: "Where does code generation stop and InfraOps start?"
     metric: Upcoming, 16 June 2026
   - venue: Nordic Infrastructure Conference (NIC)

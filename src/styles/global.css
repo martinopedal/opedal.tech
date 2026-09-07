@@ -1573,26 +1573,6 @@ section h2 {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--accent);
-  margin-bottom: 0.25rem;
-}
-
-.cv-employer {
-  font-size: 1rem;
-  color: var(--text-muted);
-  margin-bottom: 0.25rem;
-}
-
-.cv-employer a {
-  color: var(--text-muted);
-}
-
-.cv-employer a:hover {
-  color: var(--accent-hover);
-}
-
-.cv-location {
-  font-size: 0.95rem;
-  color: var(--text-muted);
   margin-bottom: 1.5rem;
 }
 
@@ -2143,8 +2123,6 @@ section h2 {
     color: #333 !important;
   }
 
-  .cv-employer,
-  .cv-location,
   .cv-job-org,
   .cv-job-detail,
   .cv-engagement p,
