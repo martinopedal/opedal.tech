@@ -11,7 +11,7 @@
     "spellcheck:summary": "cspell \"**/*.{md,astro,ts,js,mjs,html,css,json,yml,yaml}\" --no-progress --summary"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.18",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^5.18.1",
     "js-yaml": "^4.1.0"
