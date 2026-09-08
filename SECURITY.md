@@ -57,7 +57,7 @@ This repo will plateau at ~8.5/10 due to unavoidable constraints:
 - **Code-Review (varies)**: Copilot code review provides automated analysis. Human review happens only on Copilot-authored PRs. Solo repos don't have multi-org reviewer diversity that Scorecard weights heavily.
 - **Maintained (0/10)**: Repo < 90 days old (created 2026-02-13). Auto-fixes to 10/10 after 2026-08-11.
 - **Fuzzing (0/10)**: Static site with no server runtime, no binaries, no parsers processing untrusted input. Fuzzing is N/A. Documented below.
-- **CII-Best-Practices (0/10)**: Badge application is manual. Self-assessment checklist exists in `.squad/decisions/inbox/loomis-cii-checklist-2026-05-13.md` but badge requires human submission.
+- **CII-Best-Practices (0/10)**: Badge application is manual. A self-assessment checklist is maintained privately, and the badge requires human submission.
 - **Signed-Releases (-1)**: No releases (continuous deployment from `main`). `-1` means "no signal", not a deduction.
 - **Packaging (-1)**: No package publishing workflow (static site, not a library). `-1` means "no signal", not a deduction.
 - **Vulnerabilities (8/10)**: 2 dismissed Astro alerts (false positives for static output mode). Should clear on next scan.
@@ -106,6 +106,6 @@ Fuzzing targets programs that parse untrusted input at runtime (compilers, parse
 
 ### CII Best Practices Badge (0/10)
 
-This project is working toward the [OpenSSF Best Practices Badge](https://www.bestpractices.dev/). Application is pending. See `.squad/decisions/inbox/loomis-cii-checklist-2026-05-13.md` for the self-assessment checklist.
+This project is working toward the [OpenSSF Best Practices Badge](https://www.bestpractices.dev/). Application is pending, and the self-assessment checklist is maintained privately.
 
 Badge URL (once approved): `https://www.bestpractices.dev/projects/<ID>`
