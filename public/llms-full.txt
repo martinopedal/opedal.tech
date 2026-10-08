@@ -11,7 +11,7 @@
 
 ## About Martin
 
-Cloud Solution Architect. 15+ years across infrastructure, cloud, and platform engineering.
+Cloud Solution Architect at Microsoft. 15+ years across infrastructure, cloud, and platform engineering.
 
 Focus areas:
 - Azure Landing Zones (ALZ) — Corp reference architecture, Terraform/Bicep deployment, governance automation
@@ -22,7 +22,7 @@ Focus areas:
 - AI Infrastructure — Azure AI Foundry, agent platforms, model deployment, RAG architectures
 
 Background:
-- 2024 to present: Cloud Solution Architect, global cloud platform vendor
+- 2024 to present: Cloud Solution Architect, Microsoft
 - 2021 to 2024: Senior Cloud Architect, European IT consultancy
 - 2018 to 2021: Senior Consultant, global systems integrator
 - 2014 to 2018: Senior Consultant, Nordic managed services provider

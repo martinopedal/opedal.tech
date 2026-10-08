@@ -16,7 +16,7 @@ const {
   description,
   canonicalUrl = Astro.url.href,
   ogImage = '/og-default.png',
-  ogImageAlt = 'opedal.tech, Cloud Solution Architect',
+  ogImageAlt = 'opedal.tech, Cloud Solution Architect at Microsoft',
   ogType = 'website',
 } = Astro.props;
 
@@ -63,6 +63,11 @@ const personSchema = {
   image: ogImageUrl,
   email: 'mailto:hello@opedal.tech',
   jobTitle: 'Cloud Solution Architect',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Microsoft',
+    url: 'https://www.microsoft.com',
+  },
   sameAs: [
     'https://www.linkedin.com/in/martin-opedal',
     'https://github.com/martinopedal',
@@ -101,7 +106,7 @@ const personSchema = {
     'ITIL Foundation',
   ],
   description:
-    'Cloud Solution Architect. Designs Azure Landing Zones, AKS platforms, and AI infrastructure for regulated and sovereign workloads. Writes and speaks on Terraform, Bicep, Kubernetes, and platform engineering. Open-source contributor to Azure Verified Modules and the ALZ Terraform module.',
+    'Cloud Solution Architect at Microsoft. Designs Azure Landing Zones, AKS platforms, and AI infrastructure for regulated and sovereign workloads. Writes and speaks on Terraform, Bicep, Kubernetes, and platform engineering. Open-source contributor to Azure Verified Modules and the ALZ Terraform module.',
 };
 ---
 

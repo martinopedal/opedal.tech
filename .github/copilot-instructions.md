@@ -107,10 +107,7 @@ are accepted as public, but nothing else should restate the identity.
 - **First name only.** Write "Martin". Never write the surname in prose, page titles, meta
   descriptions, `alt` text, `aria-label`, footer, JSON-LD, or the CV. Schema.org `Person`
   carries `givenName` only, never `familyName`.
-- **No employer names, past or present.** Never state or imply who Martin works for. The
-  role is "Cloud Solution Architect", full stop. Do not add `worksFor` to JSON-LD.
-  On the CV, employers are generic descriptors ("Global cloud platform vendor",
-  "Norwegian systems integrator"), set in `cv/data/architect.yml`.
+- **Microsoft may be named as the current employer** (Cloud Solution Architect at Microsoft).`n  `worksFor` in JSON-LD is allowed. Previous employers stay generic descriptors`n  ("Norwegian systems integrator") in `cv/data/architect.yml`.
 - Vendor and product names (Microsoft Azure, Microsoft Entra, "Microsoft Certified: ..."
   credentials, Microsoft Learn) are fine. They describe technology and credentials, not
   employment.
