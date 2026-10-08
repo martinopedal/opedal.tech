@@ -22,7 +22,7 @@ jobs:
   decide-runner:
     uses: martinopedal/github-runners-alz-corp-cookbook/.github/workflows/decide-runner.yml@v1
     with:
-      self-hosted-labels: '["self-hosted", "public-linux"]'
+      self-hosted-labels: '["self-hosted", "alz-a1-public"]'
 
   build:
     name: Build Astro site
@@ -75,7 +75,8 @@ jobs:
     name: Validate links
     needs: [decide-runner, build]
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
-    runs-on: ${{ fromJSON(needs.decide-runner.outputs.runner-labels) }}
+    # Link checks hit arbitrary external sites; keep them off the alz-prod runner.
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       contents: read
