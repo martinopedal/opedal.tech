@@ -15,11 +15,13 @@ Cloud Solution Architect at Microsoft. 15+ years across infrastructure, cloud, a
 
 Focus areas:
 - Azure Landing Zones (ALZ) — Corp reference architecture, Terraform/Bicep deployment, governance automation
+- Networking: Virtual WAN and routing intent, hub-and-spoke, private endpoints and DNS, Virtual Network Manager
+- Capacity and resiliency: quota and capacity planning, multi-region and disaster recovery designs
 - Azure Kubernetes Service (AKS) — AKS Automatic, BYO VNet, Application Gateway for Containers, workload identity
 - Infrastructure as Code — Terraform modules, Azure Verified Modules (AVM), PSRule security validation
 - Cloud Security — Sovereign cloud, regulated workloads, zero-trust networking, managed identity patterns
 - Platform Engineering — Developer experience, CI/CD pipelines, GitHub Actions, supply-chain security
-- AI Infrastructure — Azure AI Foundry, agent platforms, model deployment, RAG architectures
+- AI Infrastructure: Microsoft Foundry, agent platforms, MCP, SRE-style operations agents, model deployment, RAG architectures
 
 Background:
 - 2025 to present: Enterprise Cloud Solution Architect, Microsoft
