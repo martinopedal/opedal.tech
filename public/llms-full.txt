@@ -22,7 +22,7 @@ Focus areas:
 - AI Infrastructure — Azure AI Foundry, agent platforms, model deployment, RAG architectures
 
 Background:
-- 2025 to present: Lead / Cross Cloud Solution Architect, Microsoft
+- 2025 to present: Enterprise Cloud Solution Architect, Microsoft
 - 2024 to 2025: Senior Cloud Solution Architect, Microsoft
 - 2024: Senior Manager, Cloud Practice, European IT consultancy
 - 2022 to 2024: Group Manager, Cloud Architecture, global systems integrator
