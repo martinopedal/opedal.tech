@@ -5,6 +5,7 @@
 # COORDINATION: cv/data/architect.yml is the primary source for career timeline.
 # When both files contain the same fact, prefer architect.yml and mirror here.
 
+current_employer: Microsoft
 current_role: Cloud Solution Architect
 
 career:

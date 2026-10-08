@@ -107,7 +107,13 @@ are accepted as public, but nothing else should restate the identity.
 - **First name only.** Write "Martin". Never write the surname in prose, page titles, meta
   descriptions, `alt` text, `aria-label`, footer, JSON-LD, or the CV. Schema.org `Person`
   carries `givenName` only, never `familyName`.
-- **Microsoft may be named as the current employer** (Cloud Solution Architect at Microsoft).`n  `worksFor` in JSON-LD is allowed. Previous employers stay generic descriptors`n  ("Norwegian systems integrator") in `cv/data/architect.yml`.
+- **Microsoft may be named as the current employer** ("Cloud Solution Architect at
+  Microsoft"), including `worksFor` in JSON-LD and `person.employer` in
+  `cv/data/architect.yml`. Previous employers stay generic descriptors
+  ("Norwegian systems integrator") in `cv/data/architect.yml`.
+- **Speaking entries come from public sources only** (the conference agenda or an
+  event page). Never add talks, dates, or events taken from a private calendar.
+  Write talks tense-neutral ("NIC 2026, October: ...") so they do not go stale.
 - Vendor and product names (Microsoft Azure, Microsoft Entra, "Microsoft Certified: ..."
   credentials, Microsoft Learn) are fine. They describe technology and credentials, not
   employment.
@@ -122,7 +128,8 @@ are accepted as public, but nothing else should restate the identity.
   profiles.
 - Quick check before opening a PR:
   `Select-String -Pattern 'Opedal|Microsoft|Oslo' -Path src/**/*.astro,public/*.txt,cv/data/*.yml`
-  Every remaining hit must be a URL, a product name, or a certification name.
+  Every remaining hit must be a URL, a product name, a certification name, or the
+  current employer (Microsoft).
 
 ## Voice rules (apply to all narrative copy in `.astro`, `.md`, `.txt`)
 

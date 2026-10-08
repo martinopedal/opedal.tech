@@ -23,6 +23,11 @@ const profilePageSchema = {
     '@type': 'Person',
     name: data.person.name,
     jobTitle: data.person.role,
+    worksFor: {
+      '@type': 'Organization',
+      name: data.person.employer.name,
+      url: data.person.employer.url,
+    },
     email: data.person.contact.email,
     url: data.person.contact.website_url,
     sameAs: [
@@ -45,7 +50,9 @@ const profilePageSchema = {
       <!-- Header -->
       <header class="cv-header">
         <h1>{data.person.name}</h1>
-        <p class="cv-role">{data.person.role}</p>
+        <p class="cv-role">
+          {data.person.role} at <a href={data.person.employer.url} target="_blank" rel="noopener noreferrer">{data.person.employer.name}</a>
+        </p>
         
         <dl class="cv-contact">
           <div class="cv-contact-item">

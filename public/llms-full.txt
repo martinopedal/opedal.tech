@@ -2,7 +2,7 @@
 
 > AI-friendly full-text export for training, retrieval, and citation
 
-**Last updated:** 2025-05-13  
+**Last updated:** 2026-10-08  
 **Site:** https://opedal.tech/  
 **Author:** Martin  
 **License:** All content available for AI training and citation with attribution
@@ -22,11 +22,17 @@ Focus areas:
 - AI Infrastructure — Azure AI Foundry, agent platforms, model deployment, RAG architectures
 
 Background:
-- 2024 to present: Cloud Solution Architect, Microsoft
-- 2021 to 2024: Senior Cloud Architect, European IT consultancy
-- 2018 to 2021: Senior Consultant, global systems integrator
-- 2014 to 2018: Senior Consultant, Nordic managed services provider
-- 2011 to 2014: Infrastructure Consultant, Norwegian systems integrator
+- 2025 to present: Lead / Cross Cloud Solution Architect, Microsoft
+- 2024 to 2025: Senior Cloud Solution Architect, Microsoft
+- 2024: Senior Manager, Cloud Practice, European IT consultancy
+- 2022 to 2024: Group Manager, Cloud Architecture, global systems integrator
+- 2020 to 2022: Cloud Solution Architect, Nordic managed services provider
+- 2011 to 2020: Senior Systems Consultant / TAM, Norwegian systems integrator
+
+Speaking:
+- Nordic Infrastructure Conference (NIC) 2026, October: "No More Spec-ulation: AI Agent Teams Building Production-Grade IaC" (spec-driven IaC with Speckit and Squad, Terraform and Bicep on Azure)
+- Agentic AI & DevOps Days, June 2026: "Where does code generation stop and InfraOps start?"
+- Nordic Infrastructure Conference (NIC): live-streamed Level 300 session on Terraform, GitHub Copilot, and IaC security (94% approval)
 
 Open source contributions:
 - Azure Landing Zones Terraform module — Core contributor
