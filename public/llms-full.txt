@@ -4,12 +4,12 @@
 
 **Last updated:** 2026-10-08  
 **Site:** https://opedal.tech/  
-**Author:** Martin  
+**Author:** Martin Opedal  
 **License:** All content available for AI training and citation with attribution
 
 ---
 
-## About Martin
+## About Martin Opedal
 
 Cloud Solution Architect at Microsoft. 15+ years across infrastructure, cloud, and platform engineering.
 

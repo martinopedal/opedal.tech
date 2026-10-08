@@ -10,7 +10,7 @@ const cvPath = 'cv/data/architect.yml';
 const cvYaml = fs.readFileSync(cvPath, 'utf8');
 const data = yaml.load(cvYaml);
 
-const title = 'Martin, Profile';
+const title = 'Martin Opedal, Profile';
 const description = 'Cloud Solution Architect at Microsoft. Designs Azure Landing Zones, AKS platforms, and AI infrastructure for regulated workloads.';
 const canonicalUrl = 'https://opedal.tech/about/';
 
@@ -40,7 +40,7 @@ const breadcrumbSchema = {
     {
       '@type': 'ListItem',
       position: 2,
-      name: 'Martin',
+      name: 'Martin Opedal',
       item: 'https://opedal.tech/martin-opedal/',
     },
   ],
@@ -58,7 +58,7 @@ const breadcrumbSchema = {
   <main id="main-content" class="profile-page" tabindex="-1">
     <div class="container">
       <header class="profile-header">
-        <h1>Martin</h1>
+        <h1>Martin Opedal</h1>
         <p class="profile-role">{data.person.role}</p>
       </header>
 
@@ -77,7 +77,7 @@ const breadcrumbSchema = {
       </article>
 
       <section class="profile-links">
-        <h2>More about Martin</h2>
+        <h2>More about Martin Opedal</h2>
         <ul role="list">
           <li><a href="/about/">Full bio and timeline</a></li>
           <li><a href="/cv/">Complete CV</a></li>

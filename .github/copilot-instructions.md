@@ -2,7 +2,7 @@
 
 ## Repository Purpose
 
-Personal website for Martin (opedal.tech), hosted on GitHub Pages.
+Personal website for Martin Opedal (opedal.tech), hosted on GitHub Pages.
 Built with **Astro** (static output) — Markdown-authored blog, component-based pages, zero client-side JS.
 
 ## Stack
@@ -101,12 +101,13 @@ tags: ["Azure", "Terraform"]
 
 ## Identity rules
 
-The site is deliberately semi-anonymous. The domain and the `martinopedal` GitHub handle
-are accepted as public, but nothing else should restate the identity.
+The site is public under the owner's full name. Keep the identity graph small and never
+expose where Martin lives.
 
-- **First name only.** Write "Martin". Never write the surname in prose, page titles, meta
-  descriptions, `alt` text, `aria-label`, footer, JSON-LD, or the CV. Schema.org `Person`
-  carries `givenName` only, never `familyName`.
+- **Full name is fine.** "Martin Opedal" may appear in prose, page titles, meta, `alt`
+  text, `aria-label`, footer, JSON-LD (`givenName` + `familyName`), and the CV.
+- **Portrait is fine.** `src/assets/portrait.jpg` renders on `/about`. Strip EXIF/GPS
+  metadata from any replacement photo before committing it.
 - **Microsoft may be named as the current employer** ("Cloud Solution Architect at
   Microsoft"), including `worksFor` in JSON-LD and `person.employer` in
   `cv/data/architect.yml`. Previous employers stay generic descriptors
@@ -127,9 +128,8 @@ are accepted as public, but nothing else should restate the identity.
   email, GitHub, and LinkedIn only. Do not add X, Instagram, Facebook, or other personal
   profiles.
 - Quick check before opening a PR:
-  `Select-String -Pattern 'Opedal|Microsoft|Oslo' -Path src/**/*.astro,public/*.txt,cv/data/*.yml`
-  Every remaining hit must be a URL, a product name, a certification name, or the
-  current employer (Microsoft).
+  `Select-String -Pattern 'Oslo|addressLocality|homeLocation' -Path src/**/*.astro,public/*.txt,cv/data/*.yml`
+  should return nothing.
 
 ## Voice rules (apply to all narrative copy in `.astro`, `.md`, `.txt`)
 

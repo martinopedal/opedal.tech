@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
+import { Image } from 'astro:assets';
+import portrait from '../assets/portrait.jpg';
 import { link } from '../utils/link';
 import { safeJsonLd } from '../utils/jsonld';
 import yaml from 'js-yaml';
@@ -11,7 +13,7 @@ const cvPath = 'cv/data/architect.yml';
 const cvYaml = fs.readFileSync(cvPath, 'utf8');
 const data = yaml.load(cvYaml);
 
-const title = 'About Martin, Cloud Architect at Microsoft';
+const title = 'About Martin Opedal, Cloud Architect at Microsoft';
 const description = 'Cloud Solution Architect at Microsoft with 15+ years architecting Azure platforms. Datacenter engineer turned Landing Zones specialist, co-founder of two craft breweries.';
 
 // ProfilePage JSON-LD schema (anchored to comprehensive Person @id)
@@ -58,6 +60,15 @@ const breadcrumbSchema = {
       <a class="about-back-link" href={link('')}>&larr; Back to home</a>
       
       <header class="about-header">
+        <Image
+          src={portrait}
+          alt="Portrait of Martin Opedal, Cloud Solution Architect at Microsoft"
+          widths={[200, 280, 400, 560]}
+          sizes="(min-width: 768px) 280px, 200px"
+          class="about-portrait"
+          loading="eager"
+          decoding="async"
+        />
         <h1>About</h1>
       </header>
 
