@@ -115,8 +115,8 @@ experience:
 # 1-page omits the lower-priority entries; the full list ships in multipage
 # and on the /cv HTML page.
 engagements:
-  - sector: Tier-1 Nordic Bank
-    work: Well-Architected, platform migration, AVD, networking, Defender for Cloud
+  - sector: Tier-1 Nordic Banks
+    work: Well-Architected, multi-region platforms, networking, security, AI, platform migration, AVD, Defender for Cloud
   - sector: Leading Nordic Fintech
     work: Executive-level cloud strategy, platform migration & architecture
   - sector: Global Energy / Maritime
