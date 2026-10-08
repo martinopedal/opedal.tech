@@ -62,6 +62,24 @@ const breadcrumbSchema = {
         </ul>
       </section>
 
+      <section class="work-area" id="networking">
+        <h3>Networking, Capacity &amp; Resiliency</h3>
+        <p class="work-claim">
+          The network and capacity groundwork under regulated Azure platforms, where routing, segmentation, and regional capacity decide whether a platform ships.
+        </p>
+        <ul class="evidence">
+          <li>
+            Virtual WAN with routing intent, hub-and-spoke peering, UDRs and NVAs, checked against documented platform limits before design sign-off.
+          </li>
+          <li>
+            Private endpoints, private DNS, and IPAM with Azure Virtual Network Manager and Azure Policy working together instead of fighting over route tables.
+          </li>
+          <li>
+            Capacity and quota planning across regions and subscriptions, quota monitoring, and multi-region and disaster recovery designs.
+          </li>
+        </ul>
+      </section>
+
       <section class="work-area" id="cicd">
         <h3>GitHub Runners on Azure (Private Networking)</h3>
         <p class="work-claim">
@@ -76,6 +94,9 @@ const breadcrumbSchema = {
           </li>
           <li>
             <a href="https://github.com/martinopedal/terraform-azurerm-github-runners-alz-corp" target="_blank" rel="noopener noreferrer">terraform-azurerm-github-runners-alz-corp</a>: self-hosted GitHub Actions runners inside ALZ Corp landing zones with central firewall egress
+          </li>
+          <li>
+            Keyless pipelines: workload identity federation and managed identities from developer machines through CI/CD, with no stored secrets.
           </li>
         </ul>
       </section>
@@ -110,7 +131,7 @@ const breadcrumbSchema = {
         </ul>
       </section>
 
-      <section class="work-area">
+      <section class="work-area" id="ai">
         <h3>AI Platforms in Regulated Industries</h3>
         <p class="work-claim">
           Azure AI Foundry and Azure OpenAI deployments for defense contractors and government bodies with sovereign cloud requirements.
@@ -121,6 +142,9 @@ const breadcrumbSchema = {
           </li>
           <li>
             Government bodies: Azure OpenAI reference architecture with Azure Front Door, Azure Firewall, and Azure Policy guardrails for data residency.
+          </li>
+          <li>
+            Agents for operations: SRE-style agents for incident investigation, scheduled health checks, and controlled remediation, with MCP servers and API Management in front of the models.
           </li>
         </ul>
       </section>

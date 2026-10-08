@@ -120,7 +120,7 @@ engagements:
   - sector: Leading Nordic Fintech
     work: Executive-level cloud strategy, platform migration & architecture
   - sector: Global Energy / Maritime
-    work: Agentic AI reference architecture, AI governance, multi-region migration
+    work: Agentic AI reference architecture, AI governance, multi-region migration, observability
   - sector: Global Shipping & Logistics
     work: AI Foundry, agent orchestration, data platform migration (Fabric)
   - sector: Major Nordic ISV
@@ -130,7 +130,9 @@ engagements:
   - sector: Nordic Insurer
     work: Security architecture, Global Secure Access, VPN migration
   - sector: Government Bodies
-    work: Landing Zone migrations, governance frameworks, GitHub adoption
+    work: Landing Zone migrations, governance frameworks, database modernization, multi-region, GitHub adoption
+  - sector: Financial Services
+    work: Datacenter exit, multi-wave migration, landing zones, private networking
 
 skills:
   # Free-text bullet list rendered as a <ul> on /cv.
@@ -191,6 +193,16 @@ skills:
     - Microsoft Entra ID
     - Microsoft Defender for Cloud
     - Azure Policy
+    - Azure Virtual WAN
+    - Azure Virtual Network Manager
+    - Azure Firewall
+    - Private Link & Private DNS
+    - Microsoft Foundry
+    - Azure API Management
+    - Model Context Protocol (MCP)
+    - Azure Monitor
+    - Workload Identity Federation
+    - Capacity & Quota Management
     - PowerShell
     - Virtualization
     - Network Administration
