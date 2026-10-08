@@ -54,7 +54,7 @@ summary: |
 # `detail` is rendered as a single paragraph on the /cv page.
 experience:
   - period: "2025 to Present"
-    role: Lead / Cross Cloud Solution Architect
+    role: Enterprise Cloud Solution Architect
     employer: Microsoft
     detail: >
       Technology strategy for strategic enterprise customers. Strategic
