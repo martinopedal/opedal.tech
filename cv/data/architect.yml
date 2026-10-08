@@ -20,6 +20,9 @@ person:
   name: Martin
   role: Cloud Solution Architect
   role_short: Cloud
+  employer:
+    name: Microsoft
+    url: https://www.microsoft.com
   contact:
     # Phone deliberately omitted. Email is the alias forwarded by Domeneshop
     # to the maintainer's real inbox; never paste the underlying address here.
@@ -39,7 +42,7 @@ person:
 # with multi-million dollar targets" was removed per the PR B locked
 # content decisions.
 summary: |
-  Cloud Solution Architect with 15+ years leading complex IT programs
+  Cloud Solution Architect at Microsoft with 15+ years leading complex IT programs
   across financial services, insurance, government, and technology.
   Trusted advisor to C-suite executives. Known for rapidly building
   strong customer relationships. Enterprise architecture, cost
@@ -52,7 +55,7 @@ summary: |
 experience:
   - period: "2025 to Present"
     role: Lead / Cross Cloud Solution Architect
-    employer: Global cloud platform vendor
+    employer: Microsoft
     detail: >
       Technology strategy for strategic enterprise customers. Strategic
       accounts portfolio across regulated Nordic enterprises. Orchestrating
@@ -65,7 +68,7 @@ experience:
 
   - period: "2024 to 2025"
     role: Senior Cloud Solution Architect
-    employer: Global cloud platform vendor
+    employer: Microsoft
     detail: >
       Technical pre-sales and consulting. Well-Architected assessments,
       reference architectures. Platform migrations for FSI and
@@ -239,16 +242,19 @@ certifications:
 # Speaking credibility for the /speaking section on /cv and the homepage line.
 # Verifiable, factual, no embellishment.
 speaking:
+  - venue: Nordic Infrastructure Conference (NIC) 2026
+    talk: "No More Spec-ulation: AI Agent Teams Building Production-Grade IaC"
+    metric: October 2026
   - venue: "Agentic AI & DevOps Days"
     talk: "Where does code generation stop and InfraOps start?"
-    metric: Upcoming, 16 June 2026
+    metric: June 2026
   - venue: Nordic Infrastructure Conference (NIC)
     talk: Live-streamed Level 300 session
     metric: 94% approval
-  - venue: Customer sessions
+  - venue: Microsoft customer sessions
     talk: "GHAS, GitHub / Azure DevOps, Azure Arc / Local"
     metric: Enterprise and regulated industries
-  - venue: Internal conference events
+  - venue: Microsoft internal events
     talk: Architecture and platform sessions
     metric: 50 to 100 in-person, 200+ virtual
 
