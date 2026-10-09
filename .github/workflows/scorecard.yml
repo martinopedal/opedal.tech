@@ -9,15 +9,10 @@ on:
 permissions: read-all
 
 jobs:
-  decide-runner:
-    uses: martinopedal/github-runners-alz-corp-cookbook/.github/workflows/decide-runner.yml@v1
-    with:
-      self-hosted-labels: '["self-hosted", "alz-a1-public"]'
-
   analysis:
     name: Scorecard analysis
-    needs: decide-runner
-    runs-on: ${{ fromJSON(needs.decide-runner.outputs.runner-labels) }}
+    # publish_results requires a GitHub-hosted Ubuntu runner (scorecard-action workflow restrictions)
+    runs-on: ubuntu-latest
     permissions:
       security-events: write
       id-token: write
